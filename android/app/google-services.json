@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1026490437548",
+    "project_id": "interior-design-and-ar",
+    "storage_bucket": "interior-design-and-ar.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1026490437548:android:33ae467286b4baaf513409",
+        "android_client_info": {
+          "package_name": "com.example.interior_design_and_ar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1026490437548-caoouak7drjqsqdvicrmipgd80oodaa5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBq8QUrGhyX1DOOG6STigRUF2WhlB9xRIw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1026490437548-caoouak7drjqsqdvicrmipgd80oodaa5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
