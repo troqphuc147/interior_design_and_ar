@@ -28,30 +28,33 @@ class _SignInScreenState extends State<SignInScreen> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            height: getProportionateScreenHeight(70),
-                          ),
-                          Text(
-                            "ARFuNi",
-                            style: TextStyle(
-                              fontSize: getProportionateScreenWidth(54),
-                              fontWeight: FontWeight.bold,
-                              color: kTextColor1,
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 14),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              height: getProportionateScreenHeight(70),
                             ),
-                          ),
-                          Text(
-                            'Sign In',
-                            style: TextStyle(
-                              fontSize: getProportionateScreenWidth(42),
-                              fontWeight: FontWeight.bold,
-                              color: kTextColor1,
+                            Text(
+                              "ARFuNi",
+                              style: TextStyle(
+                                fontSize: getProportionateScreenWidth(54),
+                                fontWeight: FontWeight.bold,
+                                color: kTextColor1,
+                              ),
                             ),
-                          ),
-                          SizedBox(height: getProportionateScreenHeight(32),),
-                        ],
+                            Text(
+                              'Sign In',
+                              style: TextStyle(
+                                fontSize: getProportionateScreenWidth(42),
+                                fontWeight: FontWeight.bold,
+                                color: kTextColor1,
+                              ),
+                            ),
+                            SizedBox(height: getProportionateScreenHeight(32),),
+                          ],
+                        ),
                       ),
 
                       Container(

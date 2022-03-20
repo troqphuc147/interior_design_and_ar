@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:interior_design_and_ar/screens/forgot_password_screen.dart';
 import 'package:interior_design_and_ar/screens/sign_up_screen.dart';
 import 'package:interior_design_and_ar/theme.dart';
 
