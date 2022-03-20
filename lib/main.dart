@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:interior_design_and_ar/screens/sign_up_screen.dart';
 import 'package:interior_design_and_ar/theme.dart';
 
 import 'screens/sign_in_screen.dart';
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: appTheme(),
-      home: SignInScreen(),
+      home: SignUpScreen(),
     );
   }
 }

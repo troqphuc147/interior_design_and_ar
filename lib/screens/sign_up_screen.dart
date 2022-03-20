@@ -3,12 +3,12 @@ import 'package:interior_design_and_ar/size_config.dart';
 
 import '../constants.dart';
 
-class SignInScreen extends StatefulWidget {
+class SignUpScreen extends StatefulWidget {
   @override
-  _SignInScreenState createState() => _SignInScreenState();
+  _SignUpScreenState createState() => _SignUpScreenState();
 }
 
-class _SignInScreenState extends State<SignInScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -43,7 +43,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             ),
                           ),
                           Text(
-                            'Sign In',
+                            'Sign Up',
                             style: TextStyle(
                               fontSize: getProportionateScreenWidth(42),
                               fontWeight: FontWeight.bold,
@@ -65,7 +65,37 @@ class _SignInScreenState extends State<SignInScreen> {
                           ),
                           decoration: InputDecoration(
                             hintStyle: TextStyle(
-                                fontSize: 16,
+                              fontSize: 16,
+                            ),
+                            hintText: 'Your Name',
+                            labelText: 'Name',
+                            labelStyle: TextStyle(
+                              fontSize: 16,
+                            ),
+                            contentPadding: EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+                            border: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                            enabledBorder: InputBorder.none,
+                            errorBorder: InputBorder.none,
+                            disabledBorder: InputBorder.none,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: getProportionateScreenHeight(8),
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius:  BorderRadius.circular(12),
+                        ),
+                        child: const TextField(
+                          style: TextStyle(
+                            fontSize: 18,
+                          ),
+                          decoration: InputDecoration(
+                            hintStyle: TextStyle(
+                              fontSize: 16,
                             ),
                             hintText: 'Your Email',
                             labelText: 'Email',
@@ -126,7 +156,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                   Text(
                                     'Forgot your password?',
                                     style: TextStyle(
-                                      color: kTextColor4
+                                        color: kTextColor4,
                                     ),
                                   ),
                                   Icon(
@@ -148,12 +178,12 @@ class _SignInScreenState extends State<SignInScreen> {
                         child: ElevatedButton(
                           onPressed: () {},
                           style: ElevatedButton.styleFrom(
-                            primary: kSelectedButtonColor,
-                            minimumSize: Size.fromHeight(48),
+                              primary: kSelectedButtonColor,
+                              minimumSize: Size.fromHeight(48),
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24))
                           ),
                           child: Container(
-                            child: Text('LOGIN', style: TextStyle(fontSize: 16),),
+                            child: Text('SIGN UP', style: TextStyle(fontSize: 16),),
                           ),
                         ),
                       ),
@@ -164,7 +194,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                 ),
 
-                SizedBox(height: getProportionateScreenHeight(64),),
+                SizedBox(height: getProportionateScreenHeight(16),),
 
 
                 Container(
