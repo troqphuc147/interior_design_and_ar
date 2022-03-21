@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:interior_design_and_ar/screens/arcore_test.dart';
 import 'package:interior_design_and_ar/theme.dart';
 
 void main() {
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: appTheme(),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: HelloWorld(),
     );
   }
 }
@@ -39,7 +40,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-
+  
   void _incrementCounter() {
     setState(() {
       // This call to setState tells the Flutter framework that something has
