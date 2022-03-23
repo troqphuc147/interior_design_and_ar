@@ -10,6 +10,7 @@ const kPrimaryColor = Color(0xFFDB3022);
 const kTextColor1 = Color(0xFF555555);
 const kTextColor2 =  Color(0xFFAFAFAF);
 const kTextColor3 =  Color(0xFFFFFFFF);
+const kTextColor4 =  Color(0xFF222222);
 const kBackgroundColor = Color(0xFFF9FAFC);
 const kAnimationDuration = Duration(milliseconds: 200);
 
