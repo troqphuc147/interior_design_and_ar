@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:interior_design_and_ar/screens/forgot_password_screen.dart';
+import 'package:interior_design_and_ar/screens/sign_in_screen.dart';
 import 'package:interior_design_and_ar/size_config.dart';
 
 import '../constants.dart';
@@ -152,7 +154,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           Container(
                             // width: getProportionateScreenWidth(180),
                             child: TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ForgotPasswordScreen()));
+                              },
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: const [
@@ -191,55 +198,64 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                       ),
 
-
-
                     ],
                   ),
                 ),
 
                 SizedBox(height: getProportionateScreenHeight(16),),
 
-
-                Container(
-                  child: Column(
-                    children: [
-                      Text('Or login with social account', style: TextStyle(color: kTextColor4),),
-                      SizedBox(height: 12,),
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            // color: Colors.amberAccent,
-                              width: getProportionateScreenWidth(92),
-                              height: getProportionateScreenHeight(64),
-                              child: TextButton(
-                                onPressed: () {},
-                                style: TextButton.styleFrom(
-                                  backgroundColor: Colors.white,
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
-                                ),
-                                child: Image.asset('assets/images/google_logo.png', height: 32,),
-                              )
-                          ),
-                          SizedBox(width: 12,),
-                          Container(
-                            // color: Colors.amberAccent,
-                              width: getProportionateScreenWidth(92),
-                              height: getProportionateScreenHeight(64),
-                              child: TextButton(
-                                onPressed: () {},
-                                style: TextButton.styleFrom(
-                                  backgroundColor: Colors.white,
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
-                                ),
-                                child: Image.asset('assets/images/facebook-icon.jpg', height: 40,),
-                              )
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                TextButton(
+                    onPressed: () {
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SignInScreen()));
+                    },
+                    child: const Text(
+                      "Already account, sign in",
+                      style: TextStyle(
+                          color: kTextColor4,
+                          decoration: TextDecoration.underline),
+                    )),
+                SizedBox(height: getProportionateScreenHeight(24),),
+                Column(
+                  children: [
+                    Text('Or login with social account', style: TextStyle(color: kTextColor4),),
+                    SizedBox(height: 12,),
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          // color: Colors.amberAccent,
+                            width: getProportionateScreenWidth(92),
+                            height: getProportionateScreenHeight(64),
+                            child: TextButton(
+                              onPressed: () {},
+                              style: TextButton.styleFrom(
+                                backgroundColor: Colors.white,
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+                              ),
+                              child: Image.asset('assets/images/google_logo.png', height: 32,),
+                            )
+                        ),
+                        SizedBox(width: 12,),
+                        Container(
+                          // color: Colors.amberAccent,
+                            width: getProportionateScreenWidth(92),
+                            height: getProportionateScreenHeight(64),
+                            child: TextButton(
+                              onPressed: () {},
+                              style: TextButton.styleFrom(
+                                backgroundColor: Colors.white,
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+                              ),
+                              child: Image.asset('assets/images/facebook-icon.jpg', height: 40,),
+                            )
+                        ),
+                      ],
+                    ),
+                  ],
                 )
 
 

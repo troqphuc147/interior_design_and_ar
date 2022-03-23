@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:interior_design_and_ar/screens/forgot_password_screen.dart';
+import 'package:interior_design_and_ar/screens/sign_up_screen.dart';
 import 'package:interior_design_and_ar/size_config.dart';
 
 import '../constants.dart';
@@ -18,7 +20,8 @@ class _SignInScreenState extends State<SignInScreen> {
       body: ListView(
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 0, horizontal: getProportionateScreenWidth(16)),
+            padding: EdgeInsets.symmetric(
+                vertical: 0, horizontal: getProportionateScreenWidth(16)),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -29,7 +32,8 @@ class _SignInScreenState extends State<SignInScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 14),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: getProportionateScreenWidth(14)),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -52,15 +56,16 @@ class _SignInScreenState extends State<SignInScreen> {
                                 color: kTextColor1,
                               ),
                             ),
-                            SizedBox(height: getProportionateScreenHeight(32),),
+                            SizedBox(
+                              height: getProportionateScreenHeight(32),
+                            ),
                           ],
                         ),
                       ),
-
                       Container(
                         decoration: BoxDecoration(
                           color: Colors.white,
-                          borderRadius:  BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(12),
                         ),
                         child: const TextField(
                           style: TextStyle(
@@ -68,14 +73,15 @@ class _SignInScreenState extends State<SignInScreen> {
                           ),
                           decoration: InputDecoration(
                             hintStyle: TextStyle(
-                                fontSize: 16,
+                              fontSize: 16,
                             ),
                             hintText: 'Your Email',
                             labelText: 'Email',
                             labelStyle: TextStyle(
                               fontSize: 16,
                             ),
-                            contentPadding: EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: 16, horizontal: 24),
                             border: InputBorder.none,
                             focusedBorder: InputBorder.none,
                             enabledBorder: InputBorder.none,
@@ -90,7 +96,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       Container(
                         decoration: BoxDecoration(
                           color: Colors.white,
-                          borderRadius:  BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(12),
                         ),
                         child: const TextField(
                           obscureText: true,
@@ -106,7 +112,8 @@ class _SignInScreenState extends State<SignInScreen> {
                             labelStyle: TextStyle(
                               fontSize: 16,
                             ),
-                            contentPadding: EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: 16, horizontal: 24),
                             border: InputBorder.none,
                             focusedBorder: InputBorder.none,
                             enabledBorder: InputBorder.none,
@@ -115,35 +122,35 @@ class _SignInScreenState extends State<SignInScreen> {
                           ),
                         ),
                       ),
-
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Container(
-                            // width: getProportionateScreenWidth(180),
-                            child: TextButton(
-                              onPressed: () {},
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: const [
-                                  Text(
-                                    'Forgot your password?',
-                                    style: TextStyle(
-                                      color: kTextColor4
-                                    ),
-                                  ),
-                                  Icon(
-                                    Icons.arrow_right_alt,
-                                    color: Colors.redAccent,
-                                  )
-                                ],
-                              ),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => ForgotPasswordScreen()));
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: const [
+                                Text(
+                                  'Forgot your password?',
+                                  style: TextStyle(color: kTextColor4),
+                                ),
+                                Icon(
+                                  Icons.arrow_right_alt,
+                                  color: Colors.redAccent,
+                                )
+                              ],
                             ),
                           )
                         ],
                       ),
-
-                      SizedBox(height: 16,),
+                      SizedBox(
+                        height: getProportionateScreenWidth(16),
+                      ),
                       Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(4),
@@ -151,69 +158,89 @@ class _SignInScreenState extends State<SignInScreen> {
                         child: ElevatedButton(
                           onPressed: () {},
                           style: ElevatedButton.styleFrom(
-                            primary: kSelectedButtonColor,
-                            minimumSize: Size.fromHeight(48),
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24))
-                          ),
-                          child: Container(
-                            child: Text('LOGIN', style: TextStyle(fontSize: 16),),
+                              primary: kSelectedButtonColor,
+                              minimumSize: const Size.fromHeight(48),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(24))),
+                          child: Text(
+                            'LOGIN',
+                            style: TextStyle(
+                                fontSize: getProportionateScreenWidth(16)),
                           ),
                         ),
                       ),
-
-
-
                     ],
                   ),
                 ),
-
-                SizedBox(height: getProportionateScreenHeight(64),),
-
-
-                Container(
-                  child: Column(
-                    children: [
-                      Text('Or login with social account', style: TextStyle(color: kTextColor4),),
-                      SizedBox(height: 12,),
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            // color: Colors.amberAccent,
-                              width: getProportionateScreenWidth(92),
-                              height: getProportionateScreenHeight(64),
-                              child: TextButton(
-                                onPressed: () {},
-                                style: TextButton.styleFrom(
-                                  backgroundColor: Colors.white,
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
-                                ),
-                                child: Image.asset('assets/images/google_logo.png', height: 32,),
-                              )
-                          ),
-                          SizedBox(width: 12,),
-                          Container(
-                            // color: Colors.amberAccent,
-                              width: getProportionateScreenWidth(92),
-                              height: getProportionateScreenHeight(64),
-                              child: TextButton(
-                                onPressed: () {},
-                                style: TextButton.styleFrom(
-                                  backgroundColor: Colors.white,
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
-                                ),
-                                child: Image.asset('assets/images/facebook-icon.jpg', height: 40,),
-                              )
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                SizedBox(
+                  height: getProportionateScreenWidth(30),
+                ),
+                TextButton(
+                    onPressed: () {
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SignUpScreen()));
+                    },
+                    child: const Text(
+                      "Create new account",
+                      style: TextStyle(
+                          color: kTextColor4,
+                          decoration: TextDecoration.underline),
+                    )),
+                SizedBox(
+                  height: getProportionateScreenWidth(64),
+                ),
+                Column(
+                  children: [
+                    const Text(
+                      'Or login with social account',
+                      style: TextStyle(color: kTextColor4),
+                    ),
+                    SizedBox(
+                      height: getProportionateScreenWidth(12),
+                    ),
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                            width: getProportionateScreenWidth(92),
+                            height: getProportionateScreenHeight(64),
+                            child: TextButton(
+                              onPressed: () {},
+                              style: TextButton.styleFrom(
+                                backgroundColor: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(24)),
+                              ),
+                              child: Image.asset(
+                                'assets/images/google_logo.png',
+                                height: 32,
+                              ),
+                            )),
+                        SizedBox(
+                          width: getProportionateScreenWidth(12),
+                        ),
+                        SizedBox(
+                            width: getProportionateScreenWidth(92),
+                            height: getProportionateScreenHeight(64),
+                            child: TextButton(
+                              onPressed: () {},
+                              style: TextButton.styleFrom(
+                                backgroundColor: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(24)),
+                              ),
+                              child: Image.asset(
+                                'assets/images/facebook-icon.jpg',
+                                height: 40,
+                              ),
+                            )),
+                      ],
+                    ),
+                  ],
                 )
-
-
-
               ],
             ),
           ),

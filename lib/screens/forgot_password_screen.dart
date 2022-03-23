@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:interior_design_and_ar/screens/sign_in_screen.dart';
 import 'package:interior_design_and_ar/size_config.dart';
 
 import '../constants.dart';
@@ -93,8 +94,23 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         ),
                       ),
 
-                      SizedBox(height: getProportionateScreenHeight(64),),
-
+                      SizedBox(height: getProportionateScreenWidth(20),),
+                      Center(
+                        child: TextButton(
+                            onPressed: () {
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => SignInScreen()));
+                            },
+                            child: const Text(
+                              "Back to sign in",
+                              style: TextStyle(
+                                  color: kTextColor4,
+                                  decoration: TextDecoration.underline),
+                            )),
+                      ),
+                      SizedBox(height: getProportionateScreenWidth(40),),
                       Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(4),
