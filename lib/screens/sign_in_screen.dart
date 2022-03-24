@@ -4,6 +4,7 @@ import 'package:interior_design_and_ar/screens/sign_up_screen.dart';
 import 'package:interior_design_and_ar/size_config.dart';
 
 import '../constants.dart';
+import 'home_sceen.dart';
 
 class SignInScreen extends StatefulWidget {
   @override
@@ -130,7 +131,8 @@ class _SignInScreenState extends State<SignInScreen> {
                               Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => ForgotPasswordScreen()));
+                                      builder: (context) =>
+                                          ForgotPasswordScreen()));
                             },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
@@ -156,7 +158,12 @@ class _SignInScreenState extends State<SignInScreen> {
                           borderRadius: BorderRadius.circular(4),
                         ),
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => HomeScreen()));
+                          },
                           style: ElevatedButton.styleFrom(
                               primary: kSelectedButtonColor,
                               minimumSize: const Size.fromHeight(48),
