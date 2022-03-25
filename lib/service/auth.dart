@@ -1,24 +1,21 @@
 import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
-
+import 'package:flutter/services.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  Stream<User?> streamUser() {
-    try {
-      _auth.authStateChanges().listen((User? user) {
-        if (user == null) {
-          print('User is currently signed out!');
-        } else {
-          print('User is signed in!');
-        }
-      });
-    } catch (e) {
-      print('error' + e.toString());
-    }
+  Stream<User?> get userStream {
+
+    _auth.authStateChanges().listen((user) {
+      if (user == null) {
+        print('User is currently signed out!');
+      } else {
+        print('User is signed in!');
+      }
+    });
     return _auth.authStateChanges();
   }
-
   User? get getCurrentUser => _auth.currentUser;
   Future signUpWithEmailAndPass(
       String email, String password, String name) async {
@@ -76,6 +73,48 @@ class AuthService {
     }
     catch(e){
       print('error' + e.toString());
+    }
+  }
+  Future signInWithGoogleAccount() async {
+    try {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+      if (googleUser == null) return null;
+
+      final GoogleSignInAuthentication googleAuth =
+      await googleUser.authentication;
+
+      final OAuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      await _auth.signInWithCredential(credential);
+      return 'login-success';
+    } on FirebaseAuthException catch (e) {
+      String error = '';
+      switch (e.code) {
+        case 'account-exists-with-different-credential':
+          error =
+          "This account is linked with another provider! Try another provider!";
+          break;
+        case 'email-already-in-use':
+          error = "Your email address has been registered.";
+          break;
+        case 'invalid-credential':
+          error = "Your credential is malformed or has expired.";
+          break;
+        case 'user-disabled':
+          error = "This user has been disable.";
+          break;
+        default:
+          error = e.code;
+      }
+      return error;
+    } on PlatformException catch (e) {
+      return e.code;
+    } on NoSuchMethodError catch (e) {
+      return e;
     }
   }
 }

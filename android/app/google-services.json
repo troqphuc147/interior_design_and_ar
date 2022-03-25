@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1026490437548-mvtq88mrt82qcabc3stprquqtb0un69g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.interior_design_and_ar",
+            "certificate_hash": "de9c0a892bbb3b00bb0c26ad3fd62e436bb5189b"
+          }
+        },
+        {
           "client_id": "1026490437548-caoouak7drjqsqdvicrmipgd80oodaa5.apps.googleusercontent.com",
           "client_type": 3
         }

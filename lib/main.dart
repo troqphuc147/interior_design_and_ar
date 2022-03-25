@@ -8,7 +8,6 @@ import 'package:interior_design_and_ar/service/auth.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
-
 import 'components/wrapper.dart';
 import 'components/wrapper_builder.dart';
 void main() {

@@ -1,6 +1,8 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:interior_design_and_ar/screens/forgot_password_screen.dart';
 import 'package:interior_design_and_ar/screens/sign_up_screen.dart';
+import 'package:interior_design_and_ar/service/auth.dart';
 import 'package:interior_design_and_ar/size_config.dart';
 
 import '../constants.dart';
@@ -11,11 +13,52 @@ class SignInScreen extends StatefulWidget {
   _SignInScreenState createState() => _SignInScreenState();
 }
 
+
 class _SignInScreenState extends State<SignInScreen> {
+  final _formKey = GlobalKey<FormState>();
+  final authService = AuthService();
+  String email = "";
+  String password = "";
+  bool isLoading = false;
+  signIn() async {
+    if (_formKey.currentState!.validate()) {
+      setState(() {
+        isLoading = true;
+      });
+      final res = await authService.signInWithEmailAndPass(email, password);
+      setState(() {
+        isLoading = false;
+      });
+      if (res != 'sign in') {
+       // await showAlertDialog(context, "Incorrect email or password");
+        print("Incorrect email or password");
+      } else {
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => HomeScreen()));
+      }
+    }
+  }
+  Future signInWithGoogleAccount() async {
+    // hiển thị màn hình loading
+    setState(() {
+      isLoading = true;
+    });
+    var res = await authService.signInWithGoogleAccount();
+    // giá trị trả về code của lỗi khi xuất hiện lỗi khi đăng nhập
+    // trả về login-success khi đăng nhập thành công
+    if (res != null && res != 'login-success') {
+      print("error");
+    }
+    // tắt màn hình loading
+    if (this.mounted)
+      setState(() {
+        isLoading = false;
+      });
+  }
+
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-
     return Scaffold(
       backgroundColor: kBackgroundColor,
       body: ListView(
@@ -68,11 +111,11 @@ class _SignInScreenState extends State<SignInScreen> {
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        child: const TextField(
-                          style: TextStyle(
+                        child:  TextFormField(
+                          style: const TextStyle(
                             fontSize: 18,
                           ),
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             hintStyle: TextStyle(
                               fontSize: 16,
                             ),
@@ -89,6 +132,19 @@ class _SignInScreenState extends State<SignInScreen> {
                             errorBorder: InputBorder.none,
                             disabledBorder: InputBorder.none,
                           ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return  'Email not empty';
+                            } else if (EmailValidator.validate(value) == false) {
+                              return 'Email not valid';
+                            }
+                            return null;
+                          },
+                          onChanged: (value){
+                            setState(() {
+                              email = value;
+                            });
+                          },
                         ),
                       ),
                       SizedBox(
@@ -99,7 +155,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        child: const TextField(
+                        child:  TextFormField(
                           obscureText: true,
                           style: TextStyle(
                             fontSize: 18,
@@ -121,6 +177,18 @@ class _SignInScreenState extends State<SignInScreen> {
                             errorBorder: InputBorder.none,
                             disabledBorder: InputBorder.none,
                           ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty)
+                              return 'Password is empty';
+                            else if (value.length < 6)
+                              return 'Password must longer than 6 digits';
+                            return null;
+                          },
+                          onChanged: (value){
+                            setState(() {
+                              password = value;
+                            });
+                          }
                         ),
                       ),
                       Row(
@@ -158,7 +226,8 @@ class _SignInScreenState extends State<SignInScreen> {
                           borderRadius: BorderRadius.circular(4),
                         ),
                         child: ElevatedButton(
-                          onPressed: () {
+                          onPressed: () async {
+                            await signIn();
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
@@ -215,7 +284,9 @@ class _SignInScreenState extends State<SignInScreen> {
                             width: getProportionateScreenWidth(92),
                             height: getProportionateScreenHeight(64),
                             child: TextButton(
-                              onPressed: () {},
+                              onPressed: () async {
+                                await signInWithGoogleAccount();
+                              },
                               style: TextButton.styleFrom(
                                 backgroundColor: Colors.white,
                                 shape: RoundedRectangleBorder(

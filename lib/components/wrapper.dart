@@ -6,7 +6,7 @@ import 'package:interior_design_and_ar/screens/sign_in_screen.dart';
 
 class Wrapper extends StatelessWidget {
   // biến lấy thông tin user từ wrapper_builder
-  final AsyncSnapshot<User> userSnapshot;
+  final AsyncSnapshot<User?> userSnapshot;
   const Wrapper({
     Key? key,
     required this.userSnapshot,
