@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:interior_design_and_ar/screens/error_screen.dart';
 import 'package:interior_design_and_ar/screens/loading_screen.dart';
 import 'package:interior_design_and_ar/service/auth.dart';
+import 'package:interior_design_and_ar/size_config.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -102,7 +103,6 @@ void dispose() {
 
 @override
 Widget build(BuildContext context) {
-  // hiển thị màn hinh lỗi nếu init lỗi
   if (error) {
     return MaterialApp(
         debugShowCheckedModeBanner: false, home: ErrorScreen());

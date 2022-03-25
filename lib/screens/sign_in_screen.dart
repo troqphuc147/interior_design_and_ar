@@ -6,7 +6,7 @@ import 'package:interior_design_and_ar/service/auth.dart';
 import 'package:interior_design_and_ar/size_config.dart';
 
 import '../constants.dart';
-import 'home_sceen.dart';
+import 'home/home_sceen.dart';
 
 class SignInScreen extends StatefulWidget {
   @override
