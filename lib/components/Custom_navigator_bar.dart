@@ -19,7 +19,7 @@ class CustomBottomNavBar extends StatelessWidget {
       child: SafeArea(
           top: false,
           child: Container(
-            height: getProportionateScreenWidth(80),
+            height: getProportionateScreenHeight(68),
             decoration: const BoxDecoration(
               color: Color(0xffffffff),
               boxShadow: [

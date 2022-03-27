@@ -23,7 +23,8 @@ class Wrapper extends StatelessWidget {
           return HomeScreen();
       }
       else
-        return SignInScreen();
+        // return SignInScreen();
+        return HomeScreen();
     }
     // thông tin đang được lấy về
     return LoadingScreen();
