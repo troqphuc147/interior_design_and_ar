@@ -26,7 +26,11 @@ class _HelloWorldState extends State<HelloWorld> {
 
   void _onArCoreViewCreated(ArCoreController controller) {
     arCoreController = controller;
-
+    final toucanNode = ArCoreReferenceNode(
+      name: "Toucano",
+      objectUrl:"",
+      position: vector.Vector3(0, 0, -1.5),
+    );
     _addSphere(arCoreController);
     _addCylindre(arCoreController);
     _addCube(arCoreController);

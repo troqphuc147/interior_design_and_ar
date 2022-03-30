@@ -4,6 +4,8 @@ import 'package:interior_design_and_ar/screens/home/home_sceen.dart';
 import 'package:interior_design_and_ar/screens/loading_screen.dart';
 import 'package:interior_design_and_ar/screens/sign_in_screen.dart';
 
+import '../screens/arcore_test.dart';
+
 class Wrapper extends StatelessWidget {
   // biến lấy thông tin user từ wrapper_builder
   final AsyncSnapshot<User?> userSnapshot;
@@ -20,11 +22,11 @@ class Wrapper extends StatelessWidget {
         // user đã có đầy đủ thông tin
         if (userSnapshot.data?.displayName != null &&
             userSnapshot.data?.displayName != '')
-          return HomeScreen();
+          return HelloWorld();
       }
       else
         // return SignInScreen();
-        return HomeScreen();
+        return HelloWorld();
     }
     // thông tin đang được lấy về
     return LoadingScreen();
