@@ -13,13 +13,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
-
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
-      bottomNavigationBar: CustomBottomNavBar(selectedMenuState: MenuState.home,),
+      bottomNavigationBar: const CustomBottomNavBar(selectedMenuState: MenuState.home,),
       body: ListView(
         children: [
           Padding(
@@ -46,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       fontWeight: FontWeight.bold
                   ),
                 ),
-                SizedBox(height: getProportionateScreenHeight(20),),
+                SizedBox(height: getProportionateScreenWidth(20),),
 
                 Padding(
                   padding: const EdgeInsets.only(right: 30),
@@ -55,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       SizedBox(
                         width: getProportionateScreenWidth(250),
-                        height: getProportionateScreenHeight(64),
+                        height: getProportionateScreenWidth(64),
                         child: Container(
                           decoration: BoxDecoration(
                             color: Colors.white,
@@ -110,19 +108,19 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                 ),
-                SizedBox(height: getProportionateScreenHeight(16),),
+                SizedBox(height: getProportionateScreenWidth(16),),
 
-                Container(
-                  height: getProportionateScreenHeight(48),
+                SizedBox(
+                  height: getProportionateScreenWidth(48),
                   child: ListView(
                     scrollDirection: Axis.horizontal,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 4),
+                        padding:  EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(30)),
                         child: TextButton(
                           onPressed: () {},
                           style: TextButton.styleFrom(
-                            minimumSize: Size(getProportionateScreenWidth(80), getProportionateScreenHeight(48)),
+                            minimumSize: Size(getProportionateScreenWidth(80), getProportionateScreenWidth(48)),
                             backgroundColor: kSelectedButtonColor,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(12)),
@@ -151,7 +149,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: TextButton(
                             onPressed: () {},
                             style: TextButton.styleFrom(
-                              minimumSize: Size(getProportionateScreenWidth(80), getProportionateScreenHeight(48)),
+                              minimumSize: Size(getProportionateScreenWidth(80), getProportionateScreenWidth(48)),
                               backgroundColor: kDefaultButtonColor,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12)),
@@ -302,7 +300,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       ),
                     ),
-                    Container(
+                    SizedBox(
                       height: getProportionateScreenHeight(190),
                       child: ListView(
                         scrollDirection: Axis.horizontal,
@@ -311,7 +309,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             padding: EdgeInsets.only(right: getProportionateScreenWidth(8)),
                             child: Card(
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-                              child: Container(
+                              child: SizedBox(
                                 width: getProportionateScreenWidth(140),
                                 child: Column(
                                   children: [
@@ -468,7 +466,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                         ),
                                       ],
                                     ),
-
                                     Padding(
                                       padding: EdgeInsets.only(left: getProportionateScreenWidth(8)),
                                       child: Row(

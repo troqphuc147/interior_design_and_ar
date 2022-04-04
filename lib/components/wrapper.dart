@@ -22,11 +22,10 @@ class Wrapper extends StatelessWidget {
         // user đã có đầy đủ thông tin
         if (userSnapshot.data?.displayName != null &&
             userSnapshot.data?.displayName != '')
-          return HelloWorld();
+          return HomeScreen();
       }
       else
-        // return SignInScreen();
-        return HelloWorld();
+        return SignInScreen();
     }
     // thông tin đang được lấy về
     return LoadingScreen();
