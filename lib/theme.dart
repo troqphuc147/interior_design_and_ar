@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 ThemeData appTheme() {
   return ThemeData(
-    scaffoldBackgroundColor: const Color(0xFFEBECF1),
+    // scaffoldBackgroundColor: const Color(0xFFEBECF1),
+    scaffoldBackgroundColor: Colors.amberAccent,
     textTheme: lightTextTheme(),
     appBarTheme: lightAppbarTheme(),
     inputDecorationTheme: inputDecorationTheme(),
