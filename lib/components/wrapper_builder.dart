@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:interior_design_and_ar/service/auth.dart';
-import 'package:interior_design_and_ar/service/database.dart';
+import 'package:interior_design_and_ar/core/service/auth.dart';
+import 'package:interior_design_and_ar/core/service/database.dart';
 import 'package:provider/provider.dart';
 
 class WrapperBuilder extends StatelessWidget {

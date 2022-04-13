@@ -2,6 +2,8 @@
     package="com.example.interior_design_and_ar">
     <uses-sdk android:minSdkVersion="24"/>
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-feature android:name="android.hardware.camera.ar" />
 
     <application

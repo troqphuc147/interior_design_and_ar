@@ -5,8 +5,11 @@ import 'package:interior_design_and_ar/components/home/new_product_card.dart';
 import 'package:interior_design_and_ar/components/home/popular_product_card.dart';
 import 'package:interior_design_and_ar/components/home/product_category_button.dart';
 import 'package:interior_design_and_ar/constants.dart';
+import 'package:interior_design_and_ar/core/service/database.dart';
 import 'package:interior_design_and_ar/enums.dart';
+import 'package:provider/provider.dart';
 
+import '../../core/models/product.dart';
 import '../../size_config.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -16,9 +19,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  List<Product> listProduct = [];
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
+    final firestore = Provider.of<DatabaseService>(context);
     return Scaffold(
       bottomNavigationBar: const CustomBottomNavBar(selectedMenuState: MenuState.home,),
       body: SingleChildScrollView(
@@ -164,33 +169,29 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   SizedBox(
                     height: getProportionateScreenWidth(190),
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child:
-                        Row(
-                          children: [
-                            PopularProductCard(
-                              imageUrlString: 'https://sage-shop.com/WebRoot/Sage2/Shops/SageShop09/5C65/76B2/3C10/B652/F377/0A0C/05BC/F3AE/sessel_m.jpg',
-                              productName: 'Light Grey Sofa',
-                              rating: 4.9,
-                              isFavorite: true,
-                            ),
-                            PopularProductCard(
-                              imageUrlString: 'https://sage-shop.com/WebRoot/Sage2/Shops/SageShop09/5C65/76B2/3C10/B652/F377/0A0C/05BC/F3AE/sessel_m.jpg',
-                              productName: 'Light Grey Sofa Sofa Sofa',
-                              rating: 4.9,
-                              isFavorite: false,
-                            ),
-                            PopularProductCard(
-                              imageUrlString: 'https://sage-shop.com/WebRoot/Sage2/Shops/SageShop09/5C65/76B2/3C10/B652/F377/0A0C/05BC/F3AE/sessel_m.jpg',
-                              productName: 'Light Grey Sofa Sofa Sofa',
-                              rating: 4.9,
-                              isFavorite: false,
+                    child: FutureBuilder<List<Product>>(
+                      future: firestore.getListPopularProduct("All"),
+                      builder: (context, snapshot) {
+                        listProduct = snapshot.data??[];
+                        print("listlenght : "+ listProduct.length.toString());
+                        return SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child:
+                            Row(
+                              children: [
+                                ...List.generate(listProduct.length, (index) =>
+                                    PopularProductCard(
+                                      imageUrlString: 'https://sage-shop.com/WebRoot/Sage2/Shops/SageShop09/5C65/76B2/3C10/B652/F377/0A0C/05BC/F3AE/sessel_m.jpg',
+                                      productName: listProduct[index].name,
+                                      rating: listProduct[index].rating,
+                                      isFavorite: false,
+                                    ),
+                                  )
+                              ],
                             ),
 
-                          ],
-                        ),
-
+                        );
+                      }
                     ),
                   )
                 ],
