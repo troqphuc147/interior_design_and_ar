@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:interior_design_and_ar/screens/error_screen.dart';
@@ -70,6 +71,8 @@ class _AppState extends State<App> {
       try {
         // đợi Firebase init và set `initialized` thành true
         await Firebase.initializeApp();
+        FirebaseAppCheck firebaseAppCheck = FirebaseAppCheck.instance;
+        await firebaseAppCheck.activate();
         setState(() {
           initialized = true;
         });

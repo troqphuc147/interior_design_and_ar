@@ -1,15 +1,22 @@
 import 'dart:typed_data';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:interior_design_and_ar/constants.dart';
 import 'package:interior_design_and_ar/size_config.dart';
 
 class PopularProductCard extends StatefulWidget {
-  final Uint8List image;
+  final String imageLink;
   final String productName;
   final String rating;
   bool isFavorite = false;
-  PopularProductCard({Key? key, required this.image, required this.productName, required this.rating, required this.isFavorite}) : super(key: key);
+  PopularProductCard(
+      {Key? key,
+      required this.imageLink,
+      required this.productName,
+      required this.rating,
+      required this.isFavorite})
+      : super(key: key);
 
   @override
   State<PopularProductCard> createState() => _PopularProductCardState();
@@ -23,7 +30,8 @@ class _PopularProductCardState extends State<PopularProductCard> {
       child: SizedBox(
         width: getProportionateScreenWidth(150),
         child: Card(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -31,14 +39,14 @@ class _PopularProductCardState extends State<PopularProductCard> {
                 children: [
                   Center(
                     child: ClipRRect(
-                      borderRadius: BorderRadius.vertical(top: Radius.circular(getProportionateScreenWidth(14))),
-                      child: Image.memory(
-                        widget.image,
-                        height: getProportionateScreenWidth(146),
-                        width: getProportionateScreenWidth(146),
-                        // color: Colors.red,
-                      ),
-                    ),
+                        borderRadius: BorderRadius.vertical(
+                            top: Radius.circular(
+                                getProportionateScreenWidth(14))),
+                        child: CachedNetworkImage(
+                          imageUrl: widget.imageLink,
+                          height: getProportionateScreenWidth(146),
+                          width: getProportionateScreenWidth(146),
+                        )),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -50,7 +58,9 @@ class _PopularProductCardState extends State<PopularProductCard> {
                         child: TextButton(
                           onPressed: () {},
                           child: Icon(
-                            widget.isFavorite ? Icons.favorite : Icons.favorite_outline,
+                            widget.isFavorite
+                                ? Icons.favorite
+                                : Icons.favorite_outline,
                             color: widget.isFavorite ? Colors.red : Colors.grey,
                             size: getProportionateScreenWidth(16),
                           ),
@@ -64,7 +74,6 @@ class _PopularProductCardState extends State<PopularProductCard> {
                   ),
                 ],
               ),
-
               Padding(
                 padding: EdgeInsets.only(left: getProportionateScreenWidth(8)),
                 child: Row(
@@ -82,34 +91,41 @@ class _PopularProductCardState extends State<PopularProductCard> {
                             style: TextStyle(
                                 fontSize: getProportionateScreenWidth(12),
                                 color: kTextColor1,
-                                fontWeight: FontWeight.w700
-                            ),
+                                fontWeight: FontWeight.w700),
                             overflow: TextOverflow.clip,
                             maxLines: 1,
                             softWrap: false,
                           ),
-                          SizedBox(height: getProportionateScreenWidth(4),),
+                          SizedBox(
+                            height: getProportionateScreenWidth(4),
+                          ),
                           Row(
                             mainAxisSize: MainAxisSize.min,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Icon(Icons.star, color: Colors.amber, size: getProportionateScreenWidth(14),),
+                              Icon(
+                                Icons.star,
+                                color: Colors.amber,
+                                size: getProportionateScreenWidth(14),
+                              ),
                               Text(
                                 '  ' + widget.rating.toString(),
                                 style: TextStyle(
                                     fontSize: getProportionateScreenWidth(12),
                                     color: kTextColor1,
-                                    fontWeight: FontWeight.w700
-                                ),
+                                    fontWeight: FontWeight.w700),
                               )
                             ],
                           )
                         ],
                       ),
                     ),
-
                     Padding(
-                      padding: EdgeInsets.fromLTRB(getProportionateScreenWidth(4), 0, getProportionateScreenWidth(4), 0),
+                      padding: EdgeInsets.fromLTRB(
+                          getProportionateScreenWidth(4),
+                          0,
+                          getProportionateScreenWidth(4),
+                          0),
                       child: SizedBox(
                         height: getProportionateScreenWidth(32),
                         width: getProportionateScreenWidth(32),
@@ -130,7 +146,9 @@ class _PopularProductCardState extends State<PopularProductCard> {
                   ],
                 ),
               ),
-              SizedBox(height: getProportionateScreenWidth(4),)
+              SizedBox(
+                height: getProportionateScreenWidth(4),
+              )
             ],
           ),
         ),
