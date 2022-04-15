@@ -10,6 +10,7 @@ import 'package:interior_design_and_ar/components/home/product_category_button.d
 import 'package:interior_design_and_ar/constants.dart';
 import 'package:interior_design_and_ar/enums.dart';
 import 'package:interior_design_and_ar/screens/home/home_controller.dart';
+import 'package:interior_design_and_ar/screens/home/home_loading_screen.dart';
 import 'package:interior_design_and_ar/screens/loading_screen.dart';
 import '../../core/models/product.dart';
 import '../../size_config.dart';
@@ -136,11 +137,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       ProductCategoryButton(
                           onTap: () {
+                            setState(() {
+                              selected = 1;
+                            });
                             homeControler.loadProduct("All");
                             setState(() {
                               listPopular = homeControler.listPopular;
                               listNew = homeControler.listNew;
-                              selected = 1;
                             });
                           },
                           iconData: Icons.widgets,
@@ -148,11 +151,13 @@ class _HomeScreenState extends State<HomeScreen> {
                           selected: selected == 1 ? true : false),
                       ProductCategoryButton(
                           onTap: () {
+                            setState(() {
+                              selected = 2;
+                            });
                             homeControler.loadProduct("Sofa");
                             setState(() {
                               listPopular = homeControler.listPopular;
                               listNew = homeControler.listNew;
-                              selected = 2;
                             });
                           },
                           iconData: Icons.weekend,
@@ -160,11 +165,13 @@ class _HomeScreenState extends State<HomeScreen> {
                           selected: selected == 2 ? true : false),
                       ProductCategoryButton(
                           onTap: () {
+                            setState(() {
+                              selected = 3;
+                            });
                             homeControler.loadProduct("Table");
                             setState(() {
                               listPopular = homeControler.listPopular;
                               listNew = homeControler.listNew;
-                              selected = 3;
                             });
                           },
                           iconData: Icons.table_restaurant,
@@ -172,11 +179,13 @@ class _HomeScreenState extends State<HomeScreen> {
                           selected: selected == 3 ? true : false),
                       ProductCategoryButton(
                           onTap: () {
+                            setState(() {
+                              selected = 4;
+                            });
                             homeControler.loadProduct("Light");
                             setState(() {
                               listPopular = homeControler.listPopular;
                               listNew = homeControler.listNew;
-                              selected = 4;
                             });
                           },
                           iconData: Icons.chair_alt_rounded,
@@ -184,11 +193,13 @@ class _HomeScreenState extends State<HomeScreen> {
                           selected: selected == 4 ? true : false),
                       ProductCategoryButton(
                           onTap: () {
+                            setState(() {
+                              selected = 5;
+                            });
                             homeControler.loadProduct("Bed");
                             setState(() {
                               listPopular = homeControler.listPopular;
                               listNew = homeControler.listNew;
-                              selected = 5;
                             });
                           },
                           iconData: Icons.king_bed_outlined,
@@ -328,6 +339,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       );
-    }, onLoading: LoadingScreen());
+    }, onLoading: HomeLoadingScreen(selected: selected));
   }
 }
