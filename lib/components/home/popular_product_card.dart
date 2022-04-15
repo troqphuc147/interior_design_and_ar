@@ -1,13 +1,15 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:interior_design_and_ar/constants.dart';
 import 'package:interior_design_and_ar/size_config.dart';
 
 class PopularProductCard extends StatefulWidget {
-  final String imageUrlString;
+  final Uint8List image;
   final String productName;
   final String rating;
   bool isFavorite = false;
-  PopularProductCard({Key? key, required this.imageUrlString, required this.productName, required this.rating, required this.isFavorite}) : super(key: key);
+  PopularProductCard({Key? key, required this.image, required this.productName, required this.rating, required this.isFavorite}) : super(key: key);
 
   @override
   State<PopularProductCard> createState() => _PopularProductCardState();
@@ -30,8 +32,8 @@ class _PopularProductCardState extends State<PopularProductCard> {
                   Center(
                     child: ClipRRect(
                       borderRadius: BorderRadius.vertical(top: Radius.circular(getProportionateScreenWidth(14))),
-                      child: Image.network(
-                        widget.imageUrlString,
+                      child: Image.memory(
+                        widget.image,
                         height: getProportionateScreenWidth(146),
                         width: getProportionateScreenWidth(146),
                         // color: Colors.red,

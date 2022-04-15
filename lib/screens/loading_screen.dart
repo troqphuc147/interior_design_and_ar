@@ -13,6 +13,9 @@ class _LoadingScreenState extends State<LoadingScreen> {
       appBar: AppBar(
           title: Text("Loading")
       ),
+      body: Center(
+        child: Text("LOADING...."),
+      ),
     );
   }
 }
