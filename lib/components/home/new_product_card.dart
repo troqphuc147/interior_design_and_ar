@@ -5,7 +5,7 @@ import 'package:interior_design_and_ar/size_config.dart';
 class NewProductCard extends StatefulWidget {
   final String imageUrlString;
   final String productName;
-  final double rating;
+  final String rating;
   bool isFavorite = false;
   NewProductCard({Key? key, required this.imageUrlString, required this.productName, required this.rating, required this.isFavorite}) : super(key: key);
 

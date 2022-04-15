@@ -6,8 +6,9 @@ import '../../constants.dart';
 class ProductCategoryButton extends StatefulWidget {
   final IconData iconData;
   final String categoryName;
-  bool selected = false;
-  ProductCategoryButton({Key? key, required this.iconData, required this.categoryName, required this.selected }) : super(key: key);
+  bool selected;
+  Function()? onTap;
+  ProductCategoryButton({Key? key, required this.iconData, required this.categoryName, required this.selected, this.onTap }) : super(key: key);
 
   @override
   State<ProductCategoryButton> createState() => _ProductCategoryButtonState();
@@ -21,7 +22,7 @@ class _ProductCategoryButtonState extends State<ProductCategoryButton> {
       child: Padding(
         padding: EdgeInsets.only(right: getProportionateScreenWidth(8)),
         child: TextButton(
-            onPressed: () {},
+            onPressed: widget.onTap,
             style: TextButton.styleFrom(
               minimumSize: Size(getProportionateScreenWidth(80), getProportionateScreenWidth(48)),
               backgroundColor: widget.selected ? kSelectedButtonColor : kDefaultButtonColor,

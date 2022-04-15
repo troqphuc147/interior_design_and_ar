@@ -22,6 +22,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  int selected = 1;
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -134,25 +135,65 @@ class _HomeScreenState extends State<HomeScreen> {
                     scrollDirection: Axis.horizontal,
                     children: [
                       ProductCategoryButton(
+                          onTap: () {
+                            homeControler.loadProduct("All");
+                            setState(() {
+                              listPopular = homeControler.listPopular;
+                              listNew = homeControler.listNew;
+                              selected = 1;
+                            });
+                          },
                           iconData: Icons.widgets,
                           categoryName: 'All',
-                          selected: true),
+                          selected: selected == 1 ? true : false),
                       ProductCategoryButton(
+                          onTap: () {
+                            homeControler.loadProduct("Sofa");
+                            setState(() {
+                              listPopular = homeControler.listPopular;
+                              listNew = homeControler.listNew;
+                              selected = 2;
+                            });
+                          },
                           iconData: Icons.weekend,
                           categoryName: 'Sofa',
-                          selected: false),
+                          selected: selected == 2 ? true : false),
                       ProductCategoryButton(
+                          onTap: () {
+                            homeControler.loadProduct("Table");
+                            setState(() {
+                              listPopular = homeControler.listPopular;
+                              listNew = homeControler.listNew;
+                              selected = 3;
+                            });
+                          },
                           iconData: Icons.table_restaurant,
                           categoryName: 'Table',
-                          selected: false),
+                          selected: selected == 3 ? true : false),
                       ProductCategoryButton(
+                          onTap: () {
+                            homeControler.loadProduct("Light");
+                            setState(() {
+                              listPopular = homeControler.listPopular;
+                              listNew = homeControler.listNew;
+                              selected = 4;
+                            });
+                          },
                           iconData: Icons.chair_alt_rounded,
-                          categoryName: 'Chair',
-                          selected: false),
+                          categoryName: 'Light',
+                          selected: selected == 4 ? true : false),
                       ProductCategoryButton(
+                          onTap: () {
+                            homeControler.loadProduct("Bed");
+                            setState(() {
+                              listPopular = homeControler.listPopular;
+                              listNew = homeControler.listNew;
+                              selected = 5;
+                            });
+                          },
                           iconData: Icons.king_bed_outlined,
                           categoryName: 'Bed',
-                          selected: false),
+                          selected: selected == 5 ? true : false),
                     ],
                   ),
                 ),
@@ -267,27 +308,15 @@ class _HomeScreenState extends State<HomeScreen> {
                         scrollDirection: Axis.horizontal,
                         child: Row(
                           children: [
-                            NewProductCard(
-                              imageUrlString:
-                                  'https://sage-shop.com/WebRoot/Sage2/Shops/SageShop09/5C65/76B2/3C10/B652/F377/0A0C/05BC/F3AE/sessel_m.jpg',
-                              productName: 'Light Grey Sofa Sofa Sofa',
-                              rating: 4.9,
-                              isFavorite: true,
-                            ),
-                            NewProductCard(
-                              imageUrlString:
-                                  'https://sage-shop.com/WebRoot/Sage2/Shops/SageShop09/5C65/76B2/3C10/B652/F377/0A0C/05BC/F3AE/sessel_m.jpg',
-                              productName: 'Light Grey Sofa Sofa Sofa',
-                              rating: 4.9,
-                              isFavorite: false,
-                            ),
-                            NewProductCard(
-                              imageUrlString:
-                                  'https://sage-shop.com/WebRoot/Sage2/Shops/SageShop09/5C65/76B2/3C10/B652/F377/0A0C/05BC/F3AE/sessel_m.jpg',
-                              productName: 'Light Grey Sofa Sofa Sofa',
-                              rating: 4.9,
-                              isFavorite: false,
-                            ),
+                            ...List.generate(
+                              listNew.length,
+                              (index) => NewProductCard(
+                                imageUrlString: listNew[index].linkImage,
+                                productName: listNew[index].name,
+                                rating: listNew[index].rating,
+                                isFavorite: false,
+                              ),
+                            )
                           ],
                         ),
                       ),
