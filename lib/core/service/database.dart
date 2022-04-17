@@ -30,6 +30,7 @@ class DatabaseService {
           .limit(5)
           .get()
           .then((value) => value.docs.toList().forEach((element) {
+            print(element.data());
                 listProduct.add(Product.fromMap(element.data() as Map<String, dynamic>));
               }));
     } else {

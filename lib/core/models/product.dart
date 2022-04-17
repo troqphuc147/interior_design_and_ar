@@ -5,7 +5,7 @@ class Product {
   String name;
   String idCategory;
   String nameCategory;
-  String idImage;
+  int idImage;
   String description;
   String linkAr;
   String linkImage;
