@@ -12,6 +12,7 @@ import 'package:interior_design_and_ar/enums.dart';
 import 'package:interior_design_and_ar/screens/home/home_controller.dart';
 import 'package:interior_design_and_ar/screens/home/home_loading_screen.dart';
 import 'package:interior_design_and_ar/screens/loading_screen.dart';
+import 'package:interior_design_and_ar/screens/product/product_detail.dart';
 import '../../core/models/product.dart';
 import '../../size_config.dart';
 
@@ -258,11 +259,17 @@ class _HomeScreenState extends State<HomeScreen> {
                           children: [
                             ...List.generate(
                               listPopular.length,
-                              (index) => PopularProductCard(
-                                imageLink: listPopular[index].linkImage,
-                                productName: listPopular[index].name,
-                                rating: listPopular[index].rating,
-                                isFavorite: false,
+                              (index) => GestureDetector(
+                                onTap: ()
+                                {
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetail(product: listPopular[index])));
+                                },
+                                child: PopularProductCard(
+                                  imageLink: listPopular[index].linkImage,
+                                  productName: listPopular[index].name,
+                                  rating: listPopular[index].rating,
+                                  isFavorite: false,
+                                ),
                               ),
                             )
                           ],
@@ -321,11 +328,17 @@ class _HomeScreenState extends State<HomeScreen> {
                           children: [
                             ...List.generate(
                               listNew.length,
-                              (index) => NewProductCard(
-                                imageUrlString: listNew[index].linkImage,
-                                productName: listNew[index].name,
-                                rating: listNew[index].rating,
-                                isFavorite: false,
+                              (index) => GestureDetector(
+                                onTap: ()
+                                {
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetail(product: listNew[index])));
+                                },
+                                child: NewProductCard(
+                                  imageUrlString: listNew[index].linkImage,
+                                  productName: listNew[index].name,
+                                  rating: listNew[index].rating,
+                                  isFavorite: false,
+                                ),
                               ),
                             )
                           ],
