@@ -250,7 +250,9 @@ class _ProductDetailState extends State<ProductDetail> {
                     width: getProportionateScreenWidth(40),
                     height: getProportionateScreenWidth(40),
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
                       child: Icon(
                         Icons.arrow_back_ios,
                         color: Colors.white,
