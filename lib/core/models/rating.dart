@@ -1,21 +1,19 @@
 import 'dart:core';
 
 class Rating {
-  String id;
-  String userId;
+  String idProduct;
   int star;
 
-  Rating({required this.id, required this.userId, required this.star});
+  Rating({required this.idProduct, required this.star});
 
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
-      'userId': userId,
+      'idProduct': idProduct,
       'star': star,
     };
   }
 
   factory Rating.fromMap(Map<String, dynamic> data) {
-    return Rating(id: data['id'], userId: data['userId'], star: data['star']);
+    return Rating(idProduct: data['idProduct'], star: data['star']);
   }
 }

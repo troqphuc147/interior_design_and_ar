@@ -1,12 +1,12 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:interior_design_and_ar/screens/forgot_password_screen.dart';
-import 'package:interior_design_and_ar/screens/sign_up_screen.dart';
+import 'package:interior_design_and_ar/screens/authentication/forgot_password_screen.dart';
+import 'package:interior_design_and_ar/screens/authentication/sign_up_screen.dart';
 import 'package:interior_design_and_ar/core/service/auth.dart';
 import 'package:interior_design_and_ar/size_config.dart';
 
-import '../constants.dart';
-import 'home/home_sceen.dart';
+import '../../constants.dart';
+import '../home/home_sceen.dart';
 
 class SignInScreen extends StatefulWidget {
   @override

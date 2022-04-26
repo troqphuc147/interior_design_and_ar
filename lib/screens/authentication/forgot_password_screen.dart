@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:interior_design_and_ar/screens/sign_in_screen.dart';
+import 'package:interior_design_and_ar/screens/authentication/sign_in_screen.dart';
 import 'package:interior_design_and_ar/size_config.dart';
 
-import '../constants.dart';
+import '../../constants.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   @override

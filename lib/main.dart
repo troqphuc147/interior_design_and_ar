@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:interior_design_and_ar/screens/error_screen.dart';
-import 'package:interior_design_and_ar/screens/loading_screen.dart';
+import 'package:interior_design_and_ar/components/error_screen.dart';
+import 'package:interior_design_and_ar/components/loading_screen.dart';
 import 'package:interior_design_and_ar/core/service/auth.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -103,18 +103,18 @@ class _AppState extends State<App> {
     @override
     Widget build(BuildContext context) {
       if (error) {
-        return MaterialApp(
+        return const MaterialApp(
             debugShowCheckedModeBanner: false, home: ErrorScreen());
       }
 
       if (connectionStatus == ConnectivityResult.none) {
-        return MaterialApp(
+        return const MaterialApp(
             debugShowCheckedModeBanner: false, home: ErrorScreen());
       }
 
       // hiển thị màn hình loading trong lúc init chưa xong
       if (!initialized) {
-        return MaterialApp(home: LoadingScreen());
+        return MaterialApp(home: const LoadingScreen());
       }
 
       return KeyedSubtree(

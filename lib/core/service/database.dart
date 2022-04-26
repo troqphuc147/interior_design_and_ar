@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:interior_design_and_ar/core/models/product.dart';
+import 'package:interior_design_and_ar/core/models/rating.dart';
 
 class DatabaseService {
   final String uid;
@@ -30,7 +31,8 @@ class DatabaseService {
           .limit(5)
           .get()
           .then((value) => value.docs.toList().forEach((element) {
-                listProduct.add(Product.fromMap(element.data() as Map<String, dynamic>));
+                listProduct.add(
+                    Product.fromMap(element.data() as Map<String, dynamic>));
               }));
     } else {
       await products
@@ -69,6 +71,24 @@ class DatabaseService {
               }));
     }
     return listProduct;
+  }
+
+  Future<Rating> checkUserVoted(String idProduct) async {
+    Rating voted = Rating(idProduct: idProduct, star: 0);
+    await users.doc(uid).collection("Voted").get().then((value) => value.docs.toList().forEach((element) {
+      Rating rating = Rating.fromMap(element.data());
+      if(rating.idProduct == idProduct)
+        {
+          voted.star = rating.star;
+        }
+    }));
+    return voted;
+  }
+
+  Future<void> rating(Product product, int star) async {
+    Rating rating = Rating(idProduct: product.id, star: star);
+    await users.doc(uid).collection("Voted").add(rating.toMap());
+    await products.doc(product.id).update(product.toMap());
   }
   //end==========Product==============
 }

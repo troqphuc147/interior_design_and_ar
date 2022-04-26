@@ -11,7 +11,7 @@ import 'package:interior_design_and_ar/constants.dart';
 import 'package:interior_design_and_ar/enums.dart';
 import 'package:interior_design_and_ar/screens/home/home_controller.dart';
 import 'package:interior_design_and_ar/screens/home/home_loading_screen.dart';
-import 'package:interior_design_and_ar/screens/loading_screen.dart';
+import 'package:interior_design_and_ar/components/loading_screen.dart';
 import 'package:interior_design_and_ar/screens/product/product_detail.dart';
 import '../../core/models/product.dart';
 import '../../size_config.dart';
