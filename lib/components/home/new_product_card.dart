@@ -29,11 +29,14 @@ class _NewProductCardState extends State<NewProductCard> {
                 Center(
                   child: ClipRRect(
                     borderRadius: BorderRadius.horizontal(left: Radius.circular(getProportionateScreenWidth(14))),
-                    child: Image.network(
-                      widget.imageUrlString,
-                      height: getProportionateScreenWidth(100),
-                      width: getProportionateScreenWidth(100),
-                      // color: Colors.red,
+                    child: Hero(
+                      tag: widget.imageUrlString + "false",
+                      child: Image.network(
+                        widget.imageUrlString,
+                        height: getProportionateScreenWidth(100),
+                        width: getProportionateScreenWidth(100),
+                        // color: Colors.red,
+                      ),
                     ),
                   ),
                 ),

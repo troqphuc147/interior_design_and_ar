@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -16,8 +17,9 @@ import 'package:provider/provider.dart';
 import '../../core/models/rating.dart';
 
 class ProductDetail extends StatefulWidget {
+  String isPopular;
   Product product;
-  ProductDetail({Key? key, required this.product}) : super(key: key);
+  ProductDetail({Key? key, required this.product,required this.isPopular}) : super(key: key);
 
   @override
   State<ProductDetail> createState() => _ProductDetailState();
@@ -50,10 +52,13 @@ class _ProductDetailState extends State<ProductDetail> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Image.network(
-                          _product.linkImage,
-                          width: getProportionateScreenWidth(350),
-                          height: getProportionateScreenWidth(350),
+                        Hero(
+                          tag: _product.linkImage + widget.isPopular.toString(),
+                          child: CachedNetworkImage(
+                            imageUrl: _product.linkImage,
+                            width: getProportionateScreenWidth(350),
+                            height: getProportionateScreenWidth(350),
+                          ),
                         ),
                         Padding(
                           padding: EdgeInsets.fromLTRB(

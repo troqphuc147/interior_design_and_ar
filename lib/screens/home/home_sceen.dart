@@ -262,7 +262,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               (index) => GestureDetector(
                                 onTap: ()
                                 {
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetail(product: listPopular[index])));
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetail(product: listPopular[index], isPopular: "true",)));
                                 },
                                 child: PopularProductCard(
                                   imageLink: listPopular[index].linkImage,
@@ -331,7 +331,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               (index) => GestureDetector(
                                 onTap: ()
                                 {
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetail(product: listNew[index])));
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetail(product: listNew[index],isPopular: "false")));
                                 },
                                 child: NewProductCard(
                                   imageUrlString: listNew[index].linkImage,

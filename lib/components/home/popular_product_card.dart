@@ -37,16 +37,19 @@ class _PopularProductCardState extends State<PopularProductCard> {
             children: [
               Stack(
                 children: [
-                  Center(
-                    child: ClipRRect(
-                        borderRadius: BorderRadius.vertical(
-                            top: Radius.circular(
-                                getProportionateScreenWidth(14))),
-                        child: CachedNetworkImage(
-                          imageUrl: widget.imageLink,
-                          height: getProportionateScreenWidth(146),
-                          width: getProportionateScreenWidth(146),
-                        )),
+                  Hero(
+                    tag: widget.imageLink + "true",
+                    child: Center(
+                      child: ClipRRect(
+                          borderRadius: BorderRadius.vertical(
+                              top: Radius.circular(
+                                  getProportionateScreenWidth(14))),
+                          child: CachedNetworkImage(
+                            imageUrl: widget.imageLink,
+                            height: getProportionateScreenWidth(146),
+                            width: getProportionateScreenWidth(146),
+                          )),
+                    ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -56,7 +59,11 @@ class _PopularProductCardState extends State<PopularProductCard> {
                         width: getProportionateScreenWidth(32),
                         height: getProportionateScreenWidth(32),
                         child: TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            setState(() {
+                              widget.isFavorite = !widget.isFavorite;
+                            });
+                          },
                           child: Icon(
                             widget.isFavorite
                                 ? Icons.favorite
