@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:interior_design_and_ar/size_config.dart';
 class LoadingScreen extends StatefulWidget {
   const LoadingScreen({Key? key}) : super(key: key);
 
@@ -10,11 +11,12 @@ class _LoadingScreenState extends State<LoadingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          title: Text("Loading")
-      ),
+      backgroundColor: const Color(0xfff2b533),
       body: Center(
-        child: Text("LOADING...."),
+        child: Image.asset("assets/images/loading.gif",
+        width:300,
+        height: 300,
+        fit: BoxFit.cover,),
       ),
     );
   }

@@ -183,14 +183,14 @@ class _HomeScreenState extends State<HomeScreen> {
                             setState(() {
                               selected = 4;
                             });
-                            homeControler.loadProduct("Light");
+                            homeControler.loadProduct("Lamp");
                             setState(() {
                               listPopular = homeControler.listPopular;
                               listNew = homeControler.listNew;
                             });
                           },
                           iconData: Icons.chair_alt_rounded,
-                          categoryName: 'Light',
+                          categoryName: 'Lamp',
                           selected: selected == 4 ? true : false),
                       ProductCategoryButton(
                           onTap: () {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import '../../components/Custom_navigator_bar.dart';
 import '../../components/home/product_category_button.dart';
 import '../../constants.dart';
@@ -182,9 +182,12 @@ class HomeLoadingScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: getProportionateScreenWidth(100),
+                    height: getProportionateScreenWidth(190),
                     child: const Center(
-                      child: CircularProgressIndicator(),
+                      child: SpinKitPouringHourGlassRefined(
+                        color: kSelectedButtonColor,
+                        size: 40.0,
+                      )
                     ),
                   )
                 ],
@@ -234,7 +237,10 @@ class HomeLoadingScreen extends StatelessWidget {
                   SizedBox(
                     height: getProportionateScreenWidth(100),
                     child: const Center(
-                      child: CircularProgressIndicator(),
+                      child: SpinKitPouringHourGlassRefined(
+                        color: kSelectedButtonColor,
+                        size: 40.0,
+                      )
                     ),
                   )
                 ],
