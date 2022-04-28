@@ -8,8 +8,8 @@ class CustomSplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SplashScreen(
-      useLoader: false,
       backgroundColor: const Color(0xfff2b533),
+      useLoader: false,
       seconds: 5,
       image: Image.asset(
         "assets/images/loading.gif",

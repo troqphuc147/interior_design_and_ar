@@ -1,6 +1,3 @@
-import 'dart:typed_data';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:interior_design_and_ar/components/Custom_navigator_bar.dart';
@@ -11,9 +8,8 @@ import 'package:interior_design_and_ar/constants.dart';
 import 'package:interior_design_and_ar/enums.dart';
 import 'package:interior_design_and_ar/screens/home/home_controller.dart';
 import 'package:interior_design_and_ar/screens/home/home_loading_screen.dart';
-import 'package:interior_design_and_ar/components/loading_screen.dart';
+import 'package:interior_design_and_ar/screens/product/popular_product_screen.dart';
 import 'package:interior_design_and_ar/screens/product/product_detail.dart';
-import '../../core/models/product.dart';
 import '../../size_config.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -25,13 +21,12 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int selected = 1;
+  String category = "All";
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    HomeControler homeControler = Get.put(HomeControler());
-    return homeControler.obx((state) {
-      List<Product> listPopular = homeControler.listPopular;
-      List<Product> listNew = homeControler.listNew;
+    HomeController homeController = Get.put(HomeController());
+    return homeController.obx((state) {
       return Scaffold(
         bottomNavigationBar: const CustomBottomNavBar(
           selectedMenuState: MenuState.home,
@@ -140,12 +135,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           onTap: () {
                             setState(() {
                               selected = 1;
+                              category = "All";
                             });
-                            homeControler.loadProduct("All");
-                            setState(() {
-                              listPopular = homeControler.listPopular;
-                              listNew = homeControler.listNew;
-                            });
+                            homeController.loadProduct("All");
                           },
                           iconData: Icons.widgets,
                           categoryName: 'All',
@@ -154,12 +146,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           onTap: () {
                             setState(() {
                               selected = 2;
+                              category = "Sofa";
                             });
-                            homeControler.loadProduct("Sofa");
-                            setState(() {
-                              listPopular = homeControler.listPopular;
-                              listNew = homeControler.listNew;
-                            });
+                            homeController.loadProduct("Sofa");
                           },
                           iconData: Icons.weekend,
                           categoryName: 'Sofa',
@@ -168,12 +157,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           onTap: () {
                             setState(() {
                               selected = 3;
+                              category = "Table";
                             });
-                            homeControler.loadProduct("Table");
-                            setState(() {
-                              listPopular = homeControler.listPopular;
-                              listNew = homeControler.listNew;
-                            });
+                            homeController.loadProduct("Table");
                           },
                           iconData: Icons.table_restaurant,
                           categoryName: 'Table',
@@ -182,12 +168,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           onTap: () {
                             setState(() {
                               selected = 4;
+                              category = "Lamp";
                             });
-                            homeControler.loadProduct("Lamp");
-                            setState(() {
-                              listPopular = homeControler.listPopular;
-                              listNew = homeControler.listNew;
-                            });
+                            homeController.loadProduct("Lamp");
                           },
                           iconData: Icons.chair_alt_rounded,
                           categoryName: 'Lamp',
@@ -196,12 +179,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           onTap: () {
                             setState(() {
                               selected = 5;
+                              category = "Bed";
                             });
-                            homeControler.loadProduct("Bed");
-                            setState(() {
-                              listPopular = homeControler.listPopular;
-                              listNew = homeControler.listNew;
-                            });
+                            homeController.loadProduct("Bed");
                           },
                           iconData: Icons.king_bed_outlined,
                           categoryName: 'Bed',
@@ -231,7 +211,15 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          PopularProductScreen(
+                                            category: category,
+                                          )));
+                            },
                             child: Row(
                               children: [
                                 Text(
@@ -258,17 +246,27 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Row(
                           children: [
                             ...List.generate(
-                              listPopular.length,
-                              (index) => GestureDetector(
-                                onTap: ()
-                                {
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetail(product: listPopular[index], isPopular: "true",)));
-                                },
-                                child: PopularProductCard(
-                                  imageLink: listPopular[index].linkImage,
-                                  productName: listPopular[index].name,
-                                  rating: listPopular[index].rating,
-                                  isFavorite: false,
+                              homeController.listPopular.length,
+                              (index) => Padding(
+                                padding: EdgeInsets.only(
+                                    right: getProportionateScreenWidth(8)),
+                                child: GestureDetector(
+                                  onTap: () async {
+                                    await Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => ProductDetail(
+                                                  product: homeController
+                                                      .listPopular[index],
+                                                  isPopular: "true",
+                                                )));
+                                    setState(() {
+                                    });
+                                  },
+                                  child: PopularProductCard(
+                                    product: homeController.listPopular[index],
+                                    isFavorite: false,
+                                  ),
                                 ),
                               ),
                             )
@@ -327,16 +325,24 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Row(
                           children: [
                             ...List.generate(
-                              listNew.length,
+                              homeController.listNew.length,
                               (index) => GestureDetector(
-                                onTap: ()
-                                {
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetail(product: listNew[index],isPopular: "false")));
+                                onTap: () async {
+                                  await Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => ProductDetail(
+                                              product:
+                                                  homeController.listNew[index],
+                                              isPopular: "false")));
+                                  homeController.listNew.refresh();
                                 },
                                 child: NewProductCard(
-                                  imageUrlString: listNew[index].linkImage,
-                                  productName: listNew[index].name,
-                                  rating: listNew[index].rating,
+                                  imageUrlString:
+                                      homeController.listNew[index].linkImage,
+                                  productName:
+                                      homeController.listNew[index].name,
+                                  rating: homeController.listNew[index].rating,
                                   isFavorite: false,
                                 ),
                               ),

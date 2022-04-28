@@ -90,5 +90,56 @@ class DatabaseService {
     await users.doc(uid).collection("Voted").add(rating.toMap());
     await products.doc(product.id).update(product.toMap());
   }
+
+  Future<List<Product>> loadPopularProducts(String category)
+  async {
+    List<Product> listProduct = [];
+    if (category == "All") {
+      await products
+          .orderBy('numVote', descending: true)
+          .limit(16)
+          .get()
+          .then((value) => value.docs.toList().forEach((element) {
+        listProduct.add(
+            Product.fromMap(element.data() as Map<String, dynamic>));
+      }));
+    } else {
+      await products
+          .where("nameCategory", isEqualTo: category)
+          .orderBy("numVote", descending: true)
+          .limit(10)
+          .get()
+          .then((value) => value.docs.toList().forEach((element) {
+        listProduct.add(
+            Product.fromMap(element.data() as Map<String, dynamic>));
+      }));
+    }
+    return listProduct;
+  }
+
+  Future<List<Product>> loadNewProducts(String category) async {
+    List<Product> listProduct = [];
+    if (category == "All") {
+      await products
+          .orderBy("idImage", descending: true)
+          .limit(16)
+          .get()
+          .then((value) => value.docs.toList().forEach((element) {
+        listProduct.add(
+            Product.fromMap(element.data() as Map<String, dynamic>));
+      }));
+    } else {
+      await products
+          .where("nameCategory", isEqualTo: category)
+          .orderBy("idImage", descending: true)
+          .limit(10)
+          .get()
+          .then((value) => value.docs.toList().forEach((element) {
+        listProduct.add(
+            Product.fromMap(element.data() as Map<String, dynamic>));
+      }));
+    }
+    return listProduct;
+  }
   //end==========Product==============
 }

@@ -1,42 +1,39 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:get/get.dart';
 import 'package:interior_design_and_ar/components/default_button.dart';
 import 'package:interior_design_and_ar/components/home/FavoriteIconButton.dart';
 import 'package:interior_design_and_ar/components/product/default_color_button.dart';
 import 'package:interior_design_and_ar/components/product/selected_color_button.dart';
 import 'package:interior_design_and_ar/constants.dart';
 import 'package:interior_design_and_ar/core/models/product.dart';
-import 'package:interior_design_and_ar/core/service/auth.dart';
-import 'package:interior_design_and_ar/core/service/database.dart';
+import 'package:interior_design_and_ar/screens/home/home_controller.dart';
 import 'package:interior_design_and_ar/screens/product/ar_view/ar_view_screen.dart';
 import 'package:interior_design_and_ar/size_config.dart';
-import 'package:provider/provider.dart';
-
 import '../../core/models/rating.dart';
 
 class ProductDetail extends StatefulWidget {
-  String isPopular;
-  Product product;
-  ProductDetail({Key? key, required this.product,required this.isPopular}) : super(key: key);
+  final String isPopular;
+  final Product product;
+  const ProductDetail(
+      {Key? key, required this.product, required this.isPopular})
+      : super(key: key);
 
   @override
   State<ProductDetail> createState() => _ProductDetailState();
 }
 
 class _ProductDetailState extends State<ProductDetail> {
-  late Product _product;
+  HomeController homeController = Get.put(HomeController());
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _product = widget.product;
   }
 
   @override
   Widget build(BuildContext context) {
-    var firebase = Provider.of<DatabaseService>(context);
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -53,9 +50,10 @@ class _ProductDetailState extends State<ProductDetail> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Hero(
-                          tag: _product.linkImage + widget.isPopular.toString(),
+                          tag: widget.product.linkImage +
+                              widget.isPopular.toString(),
                           child: CachedNetworkImage(
-                            imageUrl: _product.linkImage,
+                            imageUrl: widget.product.linkImage,
                             width: getProportionateScreenWidth(350),
                             height: getProportionateScreenWidth(350),
                           ),
@@ -77,7 +75,7 @@ class _ProductDetailState extends State<ProductDetail> {
                               ),
                             ]),
                             child: Card(
-                              color: Color(0xFFF6F6F9),
+                              color: const Color(0xFFF6F6F9),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(14)),
                               child: Padding(
@@ -100,7 +98,7 @@ class _ProductDetailState extends State<ProductDetail> {
                                           width:
                                               getProportionateScreenWidth(170),
                                           child: Text(
-                                            _product.nameCategory,
+                                            widget.product.nameCategory,
                                             style: TextStyle(
                                               fontSize:
                                                   getProportionateScreenWidth(
@@ -123,7 +121,7 @@ class _ProductDetailState extends State<ProductDetail> {
                                                   24),
                                             ),
                                             Text(
-                                              '  ' + _product.rating,
+                                              '  ' + widget.product.rating,
                                               style: TextStyle(
                                                   fontSize:
                                                       getProportionateScreenWidth(
@@ -139,7 +137,7 @@ class _ProductDetailState extends State<ProductDetail> {
                                       height: getProportionateScreenWidth(8),
                                     ),
                                     Text(
-                                      _product.name,
+                                      widget.product.name,
                                       style: TextStyle(
                                         fontSize:
                                             getProportionateScreenWidth(24),
@@ -153,7 +151,7 @@ class _ProductDetailState extends State<ProductDetail> {
                                     SizedBox(
                                       height: getProportionateScreenWidth(80),
                                       child: Text(
-                                        _product.description,
+                                        widget.product.description,
                                         style: TextStyle(
                                           fontSize:
                                               getProportionateScreenWidth(12),
@@ -210,11 +208,12 @@ class _ProductDetailState extends State<ProductDetail> {
                                                 MaterialPageRoute(
                                                     builder: (context) =>
                                                         ARViewScreen(
-                                                            linkAR: _product
+                                                            linkAR: widget
+                                                                .product
                                                                 .linkAr)));
                                           },
                                           style: ElevatedButton.styleFrom(
-                                              primary: Color(0xFFFC7566),
+                                              primary: const Color(0xFFFC7566),
                                               fixedSize: Size(
                                                   getProportionateScreenWidth(
                                                       170),
@@ -238,7 +237,7 @@ class _ProductDetailState extends State<ProductDetail> {
                                     Center(
                                       child: TextButton(
                                         onPressed: () {
-                                          show(context, firebase);
+                                          show(context);
                                         },
                                         child: Text(
                                           'Rating for product',
@@ -296,7 +295,7 @@ class _ProductDetailState extends State<ProductDetail> {
     );
   }
 
-  show(BuildContext context, var firebase) {
+  show(BuildContext context) {
     int rate = 1;
     return showModalBottomSheet(
         backgroundColor: Colors.transparent,
@@ -313,116 +312,113 @@ class _ProductDetailState extends State<ProductDetail> {
               child: ButtonTheme(
                   height: getProportionateScreenWidth(280),
                   child: FutureBuilder<Rating>(
-                    future: firebase.checkUserVoted(_product.id),
+                    future: homeController.firebase
+                        .checkUserVoted(widget.product.id),
                     builder: (context, snapshot) {
                       Rating? isVoted = snapshot.data;
                       return isVoted?.star == 0
                           ? Column(
-                            children: [
-                              Container(
-                                width: getProportionateScreenWidth(60),
-                                height: getProportionateScreenWidth(6),
-                                decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.circular(50),
-                                  color: kSelectedButtonColor,
-                                ),
-                              ),
-                              SizedBox(
-                                height: getProportionateScreenWidth(15),
-                              ),
-                              Text(
-                                "What is your rate?",
-                                style: TextStyle(
-                                    fontSize:
-                                        getProportionateScreenWidth(18),
-                                    fontWeight: FontWeight.w600),
-                              ),
-                              SizedBox(
-                                height: getProportionateScreenWidth(8),
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.center,
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  RatingBar(
-                                    initialRating: 1,
-                                    direction: Axis.horizontal,
-                                    allowHalfRating: false,
-                                    itemCount: 5,
-                                    minRating: 1,
-                                    itemSize:
-                                        getProportionateScreenHeight(
-                                            40),
-                                    ratingWidget: RatingWidget(
-                                        full: const Icon(
-                                          Icons.star,
-                                          color: Color(0xffFFBA49),
-                                        ),
-                                        half: const Icon(
-                                          Icons.star_half,
-                                          color: Color(0xffFFBA49),
-                                        ),
-                                        empty: const Icon(
-                                          Icons.star_outline,
-                                          color: Color(0xffFFBA49),
-                                        )),
-                                    onRatingUpdate: (value) {
-                                      rate = value.toInt();
-                                    },
+                              children: [
+                                Container(
+                                  width: getProportionateScreenWidth(60),
+                                  height: getProportionateScreenWidth(6),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(50),
+                                    color: kSelectedButtonColor,
                                   ),
-                                ],
-                              ),
-                              const Spacer(),
-                              DefaultButton(
-                                  content: "Rating",
-                                  onPressed: () async {
-                                    setState(() {
-                                      _product.rating = (((double.parse(
-                                                              _product
-                                                                  .rating) *
-                                                          double.parse(
-                                                              _product
-                                                                  .numVote) +
-                                                      rate) /
-                                                  (double.parse(_product
-                                                          .numVote) +
-                                                      1))
-                                              .toStringAsFixed(1))
-                                          .toString();
-                                      _product.numVote =
-                                          (int.parse(_product.numVote) +
-                                                  1)
-                                              .toString();
-                                    });
-                                    await firebase.rating(
-                                        _product, rate);
-                                    await ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                                      //width: MediaQuery.of(context).size.width ,
-                                      backgroundColor: kSelectedButtonColor,
-                                      content: Text(
-                                        "Cảm ơn bạn đã đánh giá sản phẩm",
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold),
-                                        textAlign: TextAlign.center,
-                                      ),
-                                      duration: Duration(milliseconds: 1500),
-                                    ));
-                                    Navigator.pop(context);
-                                  })
-                            ],
-                          )
+                                ),
+                                SizedBox(
+                                  height: getProportionateScreenWidth(15),
+                                ),
+                                Text(
+                                  "What is your rate?",
+                                  style: TextStyle(
+                                      fontSize: getProportionateScreenWidth(18),
+                                      fontWeight: FontWeight.w600),
+                                ),
+                                SizedBox(
+                                  height: getProportionateScreenWidth(8),
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    RatingBar(
+                                      initialRating: 1,
+                                      direction: Axis.horizontal,
+                                      allowHalfRating: false,
+                                      itemCount: 5,
+                                      minRating: 1,
+                                      itemSize:
+                                          getProportionateScreenHeight(40),
+                                      ratingWidget: RatingWidget(
+                                          full: const Icon(
+                                            Icons.star,
+                                            color: Color(0xffFFBA49),
+                                          ),
+                                          half: const Icon(
+                                            Icons.star_half,
+                                            color: Color(0xffFFBA49),
+                                          ),
+                                          empty: const Icon(
+                                            Icons.star_outline,
+                                            color: Color(0xffFFBA49),
+                                          )),
+                                      onRatingUpdate: (value) {
+                                        rate = value.toInt();
+                                      },
+                                    ),
+                                  ],
+                                ),
+                                const Spacer(),
+                                DefaultButton(
+                                    content: "Rating",
+                                    onPressed: () async {
+                                      setState(() {
+                                        widget.product.rating = (((double.parse(
+                                            widget.product
+                                                .rating) *
+                                            double.parse(widget
+                                                .product
+                                                .numVote) +
+                                            rate) /
+                                            (double.parse(widget
+                                                .product.numVote) +
+                                                1))
+                                            .toStringAsFixed(1))
+                                            .toString();
+                                        widget.product.numVote =
+                                            (int.parse(widget.product.numVote) +
+                                                1)
+                                                .toString();
+                                        homeController.ratingProduct(
+                                            widget.product, rate);
+                                      });
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(const SnackBar(
+                                        //width: MediaQuery.of(context).size.width ,
+                                        backgroundColor: kSelectedButtonColor,
+                                        content: Text(
+                                          "Cảm ơn bạn đã đánh giá sản phẩm",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                        duration: Duration(milliseconds: 1500),
+                                      ));
+                                      Navigator.pop(context);
+                                    })
+                              ],
+                            )
                           : Column(
                               children: [
                                 Container(
                                   width: getProportionateScreenWidth(60),
                                   height: getProportionateScreenWidth(6),
                                   decoration: BoxDecoration(
-                                    borderRadius:
-                                    BorderRadius.circular(50),
+                                    borderRadius: BorderRadius.circular(50),
                                     color: kSelectedButtonColor,
                                   ),
                                 ),
@@ -432,8 +428,7 @@ class _ProductDetailState extends State<ProductDetail> {
                                 Text(
                                   "You rated for this product",
                                   style: TextStyle(
-                                      fontSize:
-                                      getProportionateScreenWidth(18),
+                                      fontSize: getProportionateScreenWidth(18),
                                       fontWeight: FontWeight.w600),
                                 ),
                                 SizedBox(
