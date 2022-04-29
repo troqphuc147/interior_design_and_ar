@@ -21,7 +21,8 @@ class _NewProductCardState extends State<NewProductCard> {
       child: SizedBox(
         width: getProportionateScreenWidth(250),
         child: Card(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          elevation: 4,
           child: Padding(
             padding: const EdgeInsets.all(10.0),
             child: Row(

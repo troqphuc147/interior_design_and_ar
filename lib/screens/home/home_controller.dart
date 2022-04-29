@@ -72,6 +72,7 @@ class HomeController extends GetxController with StateMixin {
           product.rating;
       _listPopular.firstWhere((element) => element.id == product.id).numVote =
           product.numVote;
+      print('set in pp');
     }
     if (_listNew
         .where((element) => element.id == product.id)
@@ -81,6 +82,8 @@ class HomeController extends GetxController with StateMixin {
           product.rating;
       _listNew.firstWhere((element) => element.id == product.id).numVote =
           product.numVote;
+      print('set in  new');
+
     }
     if (_listManyPopular
         .where((element) => element.id == product.id)
@@ -92,17 +95,24 @@ class HomeController extends GetxController with StateMixin {
       _listManyPopular
           .firstWhere((element) => element.id == product.id)
           .numVote = product.numVote;
+      print('set in many pp');
+
     }
     if (_listManyNew
         .where((element) => element.id == product.id)
         .toList()
         .isNotEmpty) {
-      _listManyNew.firstWhere((element) => element.id == product.id).rating =
+      _listManyNew
+          .firstWhere((element) => element.id == product.id)
+          .rating =
           product.rating;
-      _listManyNew.firstWhere((element) => element.id == product.id).numVote =
+      _listManyNew
+          .firstWhere((element) => element.id == product.id)
+          .numVote =
           product.numVote;
+      print('set in many new');
     }
-
+    update();
     await database.rating(product, rate);
   }
 }

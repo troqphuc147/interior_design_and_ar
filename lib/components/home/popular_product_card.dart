@@ -23,7 +23,8 @@ class _PopularProductCardState extends State<PopularProductCard> {
     return SizedBox(
       width: getProportionateScreenWidth(150),
       child: Card(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        elevation: 5.0,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -125,20 +126,18 @@ class _PopularProductCardState extends State<PopularProductCard> {
                     child: SizedBox(
                       height: getProportionateScreenWidth(32),
                       width: getProportionateScreenWidth(32),
-                      child: TextButton(
-                        onPressed: () {},
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(50),
+                        ),
                         child: Icon(
                           Icons.arrow_forward_ios,
                           color: kPrimaryColor,
                           size: getProportionateScreenWidth(14),
                         ),
-                        style: TextButton.styleFrom(
-                          shape: const CircleBorder(),
-                          // backgroundColor: kPrimaryColor,
                         ),
                       ),
                     ),
-                  ),
                 ],
               ),
             ),
