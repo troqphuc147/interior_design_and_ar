@@ -23,6 +23,7 @@ class DatabaseService {
     return listProduct;
   }
 
+  //TODO implement getListPopularProduct
   Future<List<Product>> getListPopularProduct(String category) async {
     List<Product> listProduct = [];
     if (category == "All") {
@@ -69,6 +70,31 @@ class DatabaseService {
                 listProduct.add(
                     Product.fromMap(element.data() as Map<String, dynamic>));
               }));
+    }
+    return listProduct;
+  }
+
+  Future<List<Product>> getListFavoriteProduct(String category) async {
+    List<Product> listProduct = [];
+    if (category == "All") {
+      await products
+          .orderBy("idImage", descending: true)
+          .limit(5)
+          .get()
+          .then((value) => value.docs.toList().forEach((element) {
+        listProduct.add(
+            Product.fromMap(element.data() as Map<String, dynamic>));
+      }));
+    } else {
+      await products
+          .where("nameCategory", isEqualTo: category)
+          .orderBy("idImage", descending: true)
+          .limit(5)
+          .get()
+          .then((value) => value.docs.toList().forEach((element) {
+        listProduct.add(
+            Product.fromMap(element.data() as Map<String, dynamic>));
+      }));
     }
     return listProduct;
   }
