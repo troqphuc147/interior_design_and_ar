@@ -29,7 +29,6 @@ class MainController extends GetxController with StateMixin {
     // TODO: implement onInit
     super.onInit();
     database = DatabaseService(uid: authService.getCurrentUser?.uid ?? "");
-    change(null, status: RxStatus.loading());
     _listNew.value = [];
     _listPopular.value = [];
     _listManyPopular.value = [];
@@ -37,10 +36,10 @@ class MainController extends GetxController with StateMixin {
     _listFavoriteId.value = [];
     await getListFavoriteId();
     await loadProduct("All");
-    change(null, status: RxStatus.success());
   }
 
   loadProduct(String category) async {
+    change(null, status: RxStatus.loading());
     _listNew.clear();
     _listPopular.clear();
     await database
@@ -49,6 +48,7 @@ class MainController extends GetxController with StateMixin {
     await database
         .getListNewProduct(category)
         .then((value) => _listNew.value = value);
+    change(null, status: RxStatus.success());
   }
 
   loadPopularProducts(String category) async {
