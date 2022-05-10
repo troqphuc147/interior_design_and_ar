@@ -39,7 +39,6 @@ class Product {
   }
 
   factory Product.fromMap(Map<String, dynamic> data) {
-    print('convert');
     return Product(
         id: data['id'],
         name: data['name'],

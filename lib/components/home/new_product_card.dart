@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:interior_design_and_ar/constants.dart';
+import 'package:interior_design_and_ar/controller/main_controller.dart';
 import 'package:interior_design_and_ar/size_config.dart';
+import '../../core/models/product.dart';
 
 class NewProductCard extends StatefulWidget {
-  final String imageUrlString;
-  final String productName;
-  final String rating;
+  final Product product;
   bool isFavorite = false;
-  NewProductCard({Key? key, required this.imageUrlString, required this.productName, required this.rating, required this.isFavorite}) : super(key: key);
+  NewProductCard({Key? key, required this.product, required this.isFavorite})
+      : super(key: key);
 
   @override
   State<NewProductCard> createState() => _NewProductCardState();
@@ -16,12 +19,14 @@ class NewProductCard extends StatefulWidget {
 class _NewProductCardState extends State<NewProductCard> {
   @override
   Widget build(BuildContext context) {
+    MainController mainController = Get.put(MainController());
     return Padding(
       padding: EdgeInsets.only(right: getProportionateScreenWidth(8)),
       child: SizedBox(
         width: getProportionateScreenWidth(250),
         child: Card(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
           elevation: 4,
           child: Padding(
             padding: const EdgeInsets.all(10.0),
@@ -29,11 +34,12 @@ class _NewProductCardState extends State<NewProductCard> {
               children: [
                 Center(
                   child: ClipRRect(
-                    borderRadius: BorderRadius.horizontal(left: Radius.circular(getProportionateScreenWidth(14))),
+                    borderRadius: BorderRadius.horizontal(
+                        left: Radius.circular(getProportionateScreenWidth(14))),
                     child: Hero(
-                      tag: widget.imageUrlString + "false",
+                      tag: widget.product.linkImage + "false",
                       child: Image.network(
-                        widget.imageUrlString,
+                        widget.product.linkImage,
                         height: getProportionateScreenWidth(100),
                         width: getProportionateScreenWidth(100),
                         // color: Colors.red,
@@ -43,7 +49,8 @@ class _NewProductCardState extends State<NewProductCard> {
                 ),
                 Expanded(
                   child: Padding(
-                    padding: EdgeInsets.only(left: getProportionateScreenWidth(8)),
+                    padding:
+                        EdgeInsets.only(left: getProportionateScreenWidth(8)),
                     child: Stack(
                       children: [
                         Row(
@@ -57,30 +64,36 @@ class _NewProductCardState extends State<NewProductCard> {
                                 SizedBox(
                                   width: getProportionateScreenWidth(100),
                                   child: Text(
-                                    widget.productName,
+                                    widget.product.name,
                                     style: TextStyle(
-                                        fontSize: getProportionateScreenWidth(12),
+                                        fontSize:
+                                            getProportionateScreenWidth(12),
                                         color: kTextColor1,
-                                        fontWeight: FontWeight.w700
-                                    ),
+                                        fontWeight: FontWeight.w700),
                                     overflow: TextOverflow.clip,
                                     maxLines: 1,
                                     softWrap: false,
                                   ),
                                 ),
-                                SizedBox(height: getProportionateScreenWidth(4),),
+                                SizedBox(
+                                  height: getProportionateScreenWidth(4),
+                                ),
                                 Row(
                                   mainAxisSize: MainAxisSize.min,
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    Icon(Icons.star, color: Colors.amber, size: getProportionateScreenWidth(14),),
+                                    Icon(
+                                      Icons.star,
+                                      color: Colors.amber,
+                                      size: getProportionateScreenWidth(14),
+                                    ),
                                     Text(
-                                      '  ' + widget.rating.toString(),
+                                      '  ' + widget.product.rating.toString(),
                                       style: TextStyle(
-                                          fontSize: getProportionateScreenWidth(12),
+                                          fontSize:
+                                              getProportionateScreenWidth(12),
                                           color: kTextColor1,
-                                          fontWeight: FontWeight.w700
-                                      ),
+                                          fontWeight: FontWeight.w700),
                                     )
                                   ],
                                 )
@@ -97,10 +110,23 @@ class _NewProductCardState extends State<NewProductCard> {
                               width: getProportionateScreenWidth(32),
                               height: getProportionateScreenWidth(32),
                               child: TextButton(
-                                onPressed: () {},
+                                onPressed: () async {
+                                  setState(() {
+                                    widget.isFavorite = !widget.isFavorite;
+                                  });
+                                  if (widget.isFavorite == true) {
+                                    mainController.addToFavoriteList(widget.product.id);
+                                  } else {
+                                    mainController.deleteInFavoriteList(widget.product.id);
+                                  }
+                                },
                                 child: Icon(
-                                  widget.isFavorite ? Icons.favorite : Icons.favorite_outline,
-                                  color: widget.isFavorite ? Colors.red : Colors.grey,
+                                  widget.isFavorite
+                                      ? Icons.favorite
+                                      : Icons.favorite_outline,
+                                  color: widget.isFavorite
+                                      ? Colors.red
+                                      : Colors.grey,
                                   size: getProportionateScreenWidth(16),
                                 ),
                                 style: TextButton.styleFrom(

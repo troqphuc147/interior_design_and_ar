@@ -6,7 +6,7 @@ import 'package:interior_design_and_ar/components/home/popular_product_card.dart
 import 'package:interior_design_and_ar/components/home/product_category_button.dart';
 import 'package:interior_design_and_ar/constants.dart';
 import 'package:interior_design_and_ar/enums.dart';
-import 'package:interior_design_and_ar/screens/home/home_controller.dart';
+import 'package:interior_design_and_ar/controller/main_controller.dart';
 import 'package:interior_design_and_ar/screens/home/home_loading_screen.dart';
 import 'package:interior_design_and_ar/screens/product/loading_plash_screen.dart';
 import 'package:interior_design_and_ar/screens/product/popular_product_screen.dart';
@@ -26,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    HomeController homeController = Get.put(HomeController());
+    MainController homeController = Get.put(MainController());
     return homeController.obx((state) {
       return SafeArea(
         child: Scaffold(
@@ -259,16 +259,26 @@ class _HomeScreenState extends State<HomeScreen> {
                                           MaterialPageRoute(
                                               builder: (context) =>
                                                   ProductDetail(
-                                                    product: homeController
-                                                        .listPopular[index],
-                                                    isPopular: "true",
-                                                  )));
+                                                      product:
+                                                          homeController
+                                                                  .listPopular[
+                                                              index],
+                                                      isPopular: "true",
+                                                      isFavorite: homeController
+                                                          .listFavoriteId
+                                                          .contains(
+                                                              homeController
+                                                                  .listPopular[
+                                                                      index]
+                                                                  .id))));
                                       setState(() {});
                                     },
                                     child: PopularProductCard(
                                       product:
                                           homeController.listPopular[index],
-                                      isFavorite: false,
+                                      isFavorite: homeController.listFavoriteId
+                                          .contains(homeController
+                                              .listPopular[index].id),
                                     ),
                                   ),
                                 ),
@@ -340,22 +350,26 @@ class _HomeScreenState extends State<HomeScreen> {
                                 (index) => GestureDetector(
                                   onTap: () async {
                                     await Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => ProductDetail(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => ProductDetail(
                                                 product: homeController
                                                     .listNew[index],
-                                                isPopular: "false")));
+                                                isPopular: "false",
+                                                isFavorite: homeController
+                                                    .listFavoriteId
+                                                    .contains(homeController
+                                                        .listNew[index].id),
+                                              )),
+                                    );
                                     homeController.listNew.refresh();
+                                    setState(() {});
                                   },
                                   child: NewProductCard(
-                                    imageUrlString:
-                                        homeController.listNew[index].linkImage,
-                                    productName:
-                                        homeController.listNew[index].name,
-                                    rating:
-                                        homeController.listNew[index].rating,
-                                    isFavorite: false,
+                                    product: homeController.listNew[index],
+                                    isFavorite: homeController.listFavoriteId
+                                        .contains(
+                                            homeController.listNew[index].id),
                                   ),
                                 ),
                               )

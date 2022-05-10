@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:interior_design_and_ar/components/default_button.dart';
-import 'package:interior_design_and_ar/components/home/FavoriteIconButton.dart';
 import 'package:interior_design_and_ar/components/product/default_color_button.dart';
 import 'package:interior_design_and_ar/components/product/selected_color_button.dart';
 import 'package:interior_design_and_ar/constants.dart';
 import 'package:interior_design_and_ar/core/models/product.dart';
-import 'package:interior_design_and_ar/screens/home/home_controller.dart';
+import 'package:interior_design_and_ar/controller/main_controller.dart';
 import 'package:interior_design_and_ar/screens/product/ar_view/ar_view_screen.dart';
 import 'package:interior_design_and_ar/size_config.dart';
 import '../../core/models/rating.dart';
@@ -16,8 +15,12 @@ import '../../core/models/rating.dart';
 class ProductDetail extends StatefulWidget {
   final String isPopular;
   final Product product;
-  const ProductDetail(
-      {Key? key, required this.product, required this.isPopular})
+  bool isFavorite;
+  ProductDetail(
+      {Key? key,
+      required this.product,
+      required this.isPopular,
+      required this.isFavorite})
       : super(key: key);
 
   @override
@@ -25,7 +28,7 @@ class ProductDetail extends StatefulWidget {
 }
 
 class _ProductDetailState extends State<ProductDetail> {
-  HomeController homeController = Get.put(HomeController());
+  MainController mainController = Get.put(MainController());
   @override
   void initState() {
     // TODO: implement initState
@@ -200,7 +203,37 @@ class _ProductDetailState extends State<ProductDetail> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        FavoriteIconButton(isFavorite: true),
+                                        TextButton(
+                                          onPressed: () {
+                                            if (widget.isFavorite == false) {
+                                              mainController.addToFavoriteList(
+                                                  widget.product.id);
+                                            } else {
+                                              mainController
+                                                  .deleteInFavoriteList(
+                                                      widget.product.id);
+                                            }
+                                            setState(() {
+                                              widget.isFavorite =
+                                              !widget.isFavorite;
+                                            });
+                                          },
+                                          child: Icon(
+                                            widget.isFavorite
+                                                ? Icons.favorite
+                                                : Icons.favorite_outline,
+                                            color: widget.isFavorite
+                                                ? Colors.redAccent
+                                                : Colors.grey,
+                                            size:
+                                                getProportionateScreenWidth(24),
+                                          ),
+                                          style: TextButton.styleFrom(
+                                            shape: const CircleBorder(),
+                                            primary: kPrimaryColor,
+                                            backgroundColor: Colors.white,
+                                          ),
+                                        ),
                                         ElevatedButton(
                                           onPressed: () {
                                             Navigator.push(
@@ -312,7 +345,7 @@ class _ProductDetailState extends State<ProductDetail> {
               child: ButtonTheme(
                   height: getProportionateScreenWidth(280),
                   child: FutureBuilder<Rating>(
-                    future: homeController.firebase
+                    future: mainController.firebase
                         .checkUserVoted(widget.product.id),
                     builder: (context, snapshot) {
                       Rating? isVoted = snapshot.data;
@@ -376,22 +409,22 @@ class _ProductDetailState extends State<ProductDetail> {
                                     onPressed: () async {
                                       setState(() {
                                         widget.product.rating = (((double.parse(
-                                            widget.product
-                                                .rating) *
-                                            double.parse(widget
-                                                .product
-                                                .numVote) +
-                                            rate) /
-                                            (double.parse(widget
-                                                .product.numVote) +
-                                                1))
-                                            .toStringAsFixed(1))
+                                                                widget.product
+                                                                    .rating) *
+                                                            double.parse(widget
+                                                                .product
+                                                                .numVote) +
+                                                        rate) /
+                                                    (double.parse(widget
+                                                            .product.numVote) +
+                                                        1))
+                                                .toStringAsFixed(1))
                                             .toString();
                                         widget.product.numVote =
                                             (int.parse(widget.product.numVote) +
-                                                1)
+                                                    1)
                                                 .toString();
-                                        homeController.ratingProduct(
+                                        mainController.ratingProduct(
                                             widget.product, rate);
                                       });
                                       ScaffoldMessenger.of(context)

@@ -211,6 +211,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                               product: favoriteController
                                                   .listFavorite[index],
                                               isPopular: "true",
+                                              isFavorite: false,
                                             )));
                                 setState(() {});
                               },

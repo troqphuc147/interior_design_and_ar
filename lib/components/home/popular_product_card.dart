@@ -2,9 +2,14 @@ import 'dart:typed_data';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:interior_design_and_ar/constants.dart';
+import 'package:interior_design_and_ar/controller/main_controller.dart';
 import 'package:interior_design_and_ar/core/models/product.dart';
+import 'package:interior_design_and_ar/core/service/database.dart';
 import 'package:interior_design_and_ar/size_config.dart';
+import 'package:provider/provider.dart';
 
 class PopularProductCard extends StatefulWidget {
   Product product;
@@ -20,6 +25,7 @@ class PopularProductCard extends StatefulWidget {
 class _PopularProductCardState extends State<PopularProductCard> {
   @override
   Widget build(BuildContext context) {
+    MainController mainController = Get.put(MainController());
     return SizedBox(
       width: getProportionateScreenWidth(150),
       child: Card(
@@ -52,10 +58,16 @@ class _PopularProductCardState extends State<PopularProductCard> {
                       width: getProportionateScreenWidth(32),
                       height: getProportionateScreenWidth(32),
                       child: TextButton(
-                        onPressed: () {
+                        onPressed: () async {
                           setState(() {
                             widget.isFavorite = !widget.isFavorite;
                           });
+                          if (widget.isFavorite == true) {
+                            mainController.addToFavoriteList(widget.product.id);
+                          } else {
+                            mainController
+                                .deleteInFavoriteList(widget.product.id);
+                          }
                         },
                         child: Icon(
                           widget.isFavorite
@@ -135,9 +147,9 @@ class _PopularProductCardState extends State<PopularProductCard> {
                           color: kPrimaryColor,
                           size: getProportionateScreenWidth(14),
                         ),
-                        ),
                       ),
                     ),
+                  ),
                 ],
               ),
             ),

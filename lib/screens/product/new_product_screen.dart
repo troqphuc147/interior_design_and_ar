@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:interior_design_and_ar/components/home/popular_product_card.dart';
 import 'package:interior_design_and_ar/components/loading_screen.dart';
-import 'package:interior_design_and_ar/screens/home/home_controller.dart';
+import 'package:interior_design_and_ar/controller/main_controller.dart';
 import 'package:interior_design_and_ar/screens/product/product_detail.dart';
 import 'package:interior_design_and_ar/size_config.dart';
 import '../../constants.dart';
@@ -12,7 +12,7 @@ import '../../core/models/product.dart';
 class NewProductScreen extends StatelessWidget {
   NewProductScreen({Key? key}) : super(key: key);
 
-  final HomeController homeController = Get.put(HomeController());
+  final MainController homeController = Get.put(MainController());
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +63,8 @@ class NewProductScreen extends StatelessWidget {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) => ProductDetail(
-                                                product: product, isPopular: "true")));
+                                                product: product, isPopular: "true",
+                                            isFavorite: false,),));
                                   },
                                   child: PopularProductCard(
                                     product: product,

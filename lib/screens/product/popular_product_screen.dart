@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:interior_design_and_ar/components/home/popular_product_card.dart';
-import 'package:interior_design_and_ar/screens/home/home_controller.dart';
+import 'package:interior_design_and_ar/controller/main_controller.dart';
 import 'package:interior_design_and_ar/screens/product/product_detail.dart';
 import 'package:interior_design_and_ar/size_config.dart';
 import '../../constants.dart';
@@ -16,7 +16,7 @@ class PopularProductScreen extends StatefulWidget {
 }
 
 class _PopularProductScreenState extends State<PopularProductScreen> {
-  final HomeController homeController = Get.put(HomeController());
+  final MainController homeController = Get.put(MainController());
 
   @override
   Widget build(BuildContext context) {
@@ -65,10 +65,13 @@ class _PopularProductScreenState extends State<PopularProductScreen> {
                             await Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => ProductDetail(
-                                        product: homeController
-                                            .listManyPopular[index],
-                                        isPopular: "true")));
+                                  builder: (context) => ProductDetail(
+                                    product:
+                                        homeController.listManyPopular[index],
+                                    isPopular: "true",
+                                    isFavorite: false,
+                                  ),
+                                ));
                           },
                           child: PopularProductCard(
                             product: homeController.listManyPopular[index],
