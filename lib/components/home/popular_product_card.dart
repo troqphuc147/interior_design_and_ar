@@ -154,7 +154,7 @@ class _PopularProductCardState extends State<PopularProductCard> {
               ),
             ),
             SizedBox(
-              height: getProportionateScreenWidth(4),
+              height: getProportionateScreenWidth(3),
             )
           ],
         ),

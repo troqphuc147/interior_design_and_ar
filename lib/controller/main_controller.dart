@@ -118,7 +118,7 @@ class MainController extends GetxController with StateMixin {
 
   getListFavoriteId() {
     firebase
-        .getListFavoriteProduct()
+        .getListFavoriteProductId()
         .then((value) => value.toList().forEach((element) {
           _listFavoriteId.add(element);
     }));

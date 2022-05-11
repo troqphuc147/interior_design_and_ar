@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:interior_design_and_ar/constants.dart';
 
 ThemeData appTheme() {
   return ThemeData(
     // scaffoldBackgroundColor: const Color(0xFFEBECF1),
-    scaffoldBackgroundColor: Colors.amberAccent,
+    scaffoldBackgroundColor: kBackgroundColor,
     textTheme: lightTextTheme(),
     appBarTheme: lightAppbarTheme(),
     inputDecorationTheme: inputDecorationTheme(),
@@ -28,11 +29,11 @@ InputDecorationTheme inputDecorationTheme() {
 TextTheme lightTextTheme(){
   return const TextTheme(
     bodyText1:  TextStyle(
-      fontFamily: "Roboto",
+      fontFamily: "Reem Kufi",
       color: Color(0xff555555),
     ),
     bodyText2:  TextStyle(
-      fontFamily: "Roboto",
+      fontFamily: "Reem Kufi",
       color: Color(0xffafafaf),
     ),
   );

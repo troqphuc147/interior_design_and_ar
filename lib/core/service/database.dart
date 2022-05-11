@@ -77,6 +77,21 @@ class DatabaseService {
     return listProduct;
   }
 
+  Future<List<Product>> getListFavoriteProduct() async {
+    List<Product> listProduct = [];
+    List<String> listId = [];
+
+    await getListFavoriteProductId().then((value) => listId = value);
+    await products
+        .where('id', whereIn: listId)
+        .get()
+        .then((value) => value.docs.toList().forEach((element) {
+              listProduct
+                  .add(Product.fromMap(element.data() as Map<String, dynamic>));
+            }));
+    return listProduct;
+  }
+
   Future<Rating> checkUserVoted(String idProduct) async {
     Rating voted = Rating(idProduct: idProduct, star: 0);
     await users
@@ -163,15 +178,17 @@ class DatabaseService {
         (value) => print("liked product"));
   }
 
-  Future<List<dynamic>> getListFavoriteProduct() async {
-    List<dynamic> listFavoriteID = [];
+  Future<List<String>> getListFavoriteProductId() async {
+    List<String> listFavoriteID = [];
     await users
         .doc(uid)
         .get()
         .then((value) => listFavoriteID = value.get('favoriteList'))
         .onError((error, stackTrace) async => {
-              await users.doc(uid).set({'favoriteList': listFavoriteID}).onError(
-                  (error, stackTrace) => print(error)),
+              await users
+                  .doc(uid)
+                  .set({'favoriteList': listFavoriteID}).onError(
+                      (error, stackTrace) => print(error)),
             });
     return listFavoriteID;
   }

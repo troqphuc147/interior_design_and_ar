@@ -4,7 +4,7 @@ import 'package:interior_design_and_ar/components/home/favorite_product_card.dar
 import 'package:interior_design_and_ar/components/home/product_category_button.dart';
 import 'package:interior_design_and_ar/constants.dart';
 import 'package:interior_design_and_ar/enums.dart';
-import 'package:interior_design_and_ar/screens/favorite/favorite_controller.dart';
+import 'package:interior_design_and_ar/controller/favorite_controller.dart';
 import 'package:interior_design_and_ar/screens/favorite/favorite_loading_screen.dart';
 import 'package:interior_design_and_ar/screens/product/product_detail.dart';
 import 'package:interior_design_and_ar/size_config.dart';
@@ -134,7 +134,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                         selected = 1;
                                         category = "All";
                                       });
-                                      favoriteController.loadProduct("All");
+                                      favoriteController.loadProduct();
                                     },
                                     iconData: Icons.widgets,
                                     categoryName: 'All',
@@ -145,7 +145,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                         selected = 2;
                                         category = "Sofa";
                                       });
-                                      favoriteController.loadProduct("Sofa");
+                                      favoriteController.loadProduct();
                                     },
                                     iconData: Icons.weekend,
                                     categoryName: 'Sofa',
@@ -156,7 +156,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                         selected = 3;
                                         category = "Table";
                                       });
-                                      favoriteController.loadProduct("Table");
+                                      favoriteController.loadProduct();
                                     },
                                     iconData: Icons.table_restaurant,
                                     categoryName: 'Table',
@@ -167,7 +167,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                         selected = 4;
                                         category = "Lamp";
                                       });
-                                      favoriteController.loadProduct("Lamp");
+                                      favoriteController.loadProduct();
                                     },
                                     iconData: Icons.chair_alt_rounded,
                                     categoryName: 'Lamp',
@@ -178,7 +178,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                         selected = 5;
                                         category = "Bed";
                                       });
-                                      favoriteController.loadProduct("Bed");
+                                      favoriteController.loadProduct();
                                     },
                                     iconData: Icons.king_bed_outlined,
                                     categoryName: 'Bed',

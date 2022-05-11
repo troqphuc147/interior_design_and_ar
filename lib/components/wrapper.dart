@@ -1,13 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:interior_design_and_ar/components/splash_screen.dart';
-import 'package:interior_design_and_ar/screens/home/home_sceen.dart';
+import 'package:interior_design_and_ar/screens/authentication/login_screen.dart';
 import 'package:interior_design_and_ar/components/loading_screen.dart';
-import 'package:interior_design_and_ar/screens/product/product_detail.dart';
-import 'package:interior_design_and_ar/screens/authentication/sign_in_screen.dart';
-import 'package:splashscreen/splashscreen.dart';
 
-import '../screens/arcore_test.dart';
 
 class Wrapper extends StatelessWidget {
   // biến lấy thông tin user từ wrapper_builder
@@ -29,7 +25,7 @@ class Wrapper extends StatelessWidget {
         }
       }
       else {
-        return SignInScreen();
+        return const LoginScreen();
       }
     }
     // thông tin đang được lấy về

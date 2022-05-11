@@ -98,7 +98,12 @@ flutter:
          - asset: assets/fonts/Roboto-Light.ttf
          - asset: assets/fonts/Roboto-Medium.ttf
          - asset: assets/fonts/Roboto-Regular.ttf
-
+     - family: Reem Kufi
+       fonts:
+         - asset: assets/fonts/ReemKufi-Bold.ttf
+         - asset: assets/fonts/ReemKufi-Medium.ttf
+         - asset: assets/fonts/ReemKufi-Regular.ttf
+         - asset: assets/fonts/ReemKufi-SemiBold.ttf
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

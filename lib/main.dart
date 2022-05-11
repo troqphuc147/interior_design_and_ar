@@ -1,11 +1,12 @@
 import 'dart:async';
-
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:interior_design_and_ar/components/error_screen.dart';
 import 'package:interior_design_and_ar/components/loading_screen.dart';
+import 'package:interior_design_and_ar/constants.dart';
 import 'package:interior_design_and_ar/core/service/auth.dart';
+import 'package:interior_design_and_ar/theme.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -13,6 +14,10 @@ import 'components/wrapper.dart';
 import 'components/wrapper_builder.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    statusBarColor: kBackgroundColor,
+  ));
+
   runApp(App());
 }
 
@@ -86,18 +91,21 @@ class _AppState extends State<App> {
 
     @override
     void initState() {
+      super.initState();
       initConnectivity();
+
       connectivitySubscription =
           connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
 
       initializeFlutterFire();
-      super.initState();
     }
 
     @override
     void dispose() {
       super.dispose();
       connectivitySubscription.cancel();
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);  // to re-show bars
+
     }
 
     @override
@@ -129,6 +137,7 @@ class _AppState extends State<App> {
             builder: (context, userSnapshot) {
               return MaterialApp(
                 debugShowCheckedModeBanner: false,
+                theme: appTheme(),
                 home: SafeArea(
                   child: Wrapper(
                     userSnapshot: userSnapshot,
