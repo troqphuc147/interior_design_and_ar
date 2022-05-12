@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:interior_design_and_ar/components/error_screen.dart';
 import 'package:interior_design_and_ar/components/loading_screen.dart';
-import 'package:interior_design_and_ar/constants.dart';
 import 'package:interior_design_and_ar/core/service/auth.dart';
 import 'package:interior_design_and_ar/theme.dart';
 import 'package:provider/provider.dart';
@@ -16,7 +15,7 @@ import 'components/wrapper_builder.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-    statusBarColor: kBackgroundColor,
+    statusBarColor: Colors.transparent,
   ));
 
   runApp(App());

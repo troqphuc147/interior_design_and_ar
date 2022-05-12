@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:interior_design_and_ar/components/home/popular_product_card.dart';
@@ -6,10 +5,9 @@ import 'package:interior_design_and_ar/controller/main_controller.dart';
 import 'package:interior_design_and_ar/screens/product/product_detail.dart';
 import 'package:interior_design_and_ar/size_config.dart';
 import '../../constants.dart';
-import '../../core/models/product.dart';
 
 class PopularProductScreen extends StatefulWidget {
-  PopularProductScreen({Key? key}) : super(key: key);
+  const PopularProductScreen({Key? key}) : super(key: key);
 
   @override
   State<PopularProductScreen> createState() => _PopularProductScreenState();

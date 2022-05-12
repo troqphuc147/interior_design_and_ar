@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:interior_design_and_ar/constants.dart';
+import 'package:interior_design_and_ar/controller/main_controller.dart';
+import 'package:interior_design_and_ar/screens/home/components/flash_card_screen.dart';
 import 'package:interior_design_and_ar/size_config.dart';
 
 class CategoryLine extends StatelessWidget {
@@ -19,6 +22,7 @@ class CategoryLine extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
+    MainController mainController = Get.put(MainController());
     return SizedBox(
       height: getProportionateScreenWidth(71),
       child: SingleChildScrollView(
@@ -27,40 +31,51 @@ class CategoryLine extends StatelessWidget {
           children: [
             ...List.generate(
                 nameCategorys.length,
-                (index) => Container(
-                      margin: EdgeInsets.only(
-                        right: getProportionateScreenWidth(15),
-                      ),
-                      padding: EdgeInsets.symmetric(
-                        horizontal: getProportionateScreenWidth(10),
-                      ),
-                      height: getProportionateScreenWidth(68),
-                      width: getProportionateScreenWidth(110),
-                      decoration: BoxDecoration(
-                          color: colors[index],
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.45),
-                              offset: const Offset(0, 2),
+                (index) => GestureDetector(
+                      onTap: () async => {
+                        await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LoadingSplashScreen(
+                                      category: nameCategorys[index],
+                                    ))),
+                        mainController.loadNewProducts(nameCategorys[index])
+                      },
+                      child: Container(
+                        margin: EdgeInsets.only(
+                          right: getProportionateScreenWidth(15),
+                        ),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: getProportionateScreenWidth(10),
+                        ),
+                        height: getProportionateScreenWidth(68),
+                        width: getProportionateScreenWidth(110),
+                        decoration: BoxDecoration(
+                            color: colors[index],
+                            borderRadius: BorderRadius.circular(10),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.45),
+                                offset: const Offset(0, 2),
+                              )
+                            ]),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              nameCategorys[index],
+                              style: TextStyle(
+                                  color: kTextColor4,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: getProportionateScreenWidth(14)),
+                            ),
+                            SizedBox(
+                              height: getProportionateScreenWidth(40),
+                              width: getProportionateScreenWidth(50),
+                              child: Image.asset(images[index]),
                             )
-                          ]),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            nameCategorys[index],
-                            style: TextStyle(
-                                color: kTextColor4,
-                                fontWeight: FontWeight.w600,
-                                fontSize: getProportionateScreenWidth(14)),
-                          ),
-                          SizedBox(
-                            height: getProportionateScreenWidth(40),
-                            width: getProportionateScreenWidth(50),
-                            child: Image.asset(images[index]),
-                          )
-                        ],
+                          ],
+                        ),
                       ),
                     ))
           ],
