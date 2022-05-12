@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 
 import '../constants.dart';
 import '../size_config.dart';
+
 class DefaultButton extends StatefulWidget {
-  String content;
-  Function()? onPressed;
-  DefaultButton({Key? key, required this.content, required this.onPressed}) : super(key: key);
+  final String content;
+  final Function()? onPressed;
+  const DefaultButton(
+      {Key? key, required this.content, required this.onPressed})
+      : super(key: key);
 
   @override
   State<DefaultButton> createState() => _DefaultButtonState();
@@ -27,8 +30,7 @@ class _DefaultButtonState extends State<DefaultButton> {
                 borderRadius: BorderRadius.circular(24))),
         child: Text(
           widget.content,
-          style: TextStyle(
-              fontSize: getProportionateScreenWidth(16)),
+          style: TextStyle(fontSize: getProportionateScreenWidth(16)),
         ),
       ),
     );

@@ -1,16 +1,12 @@
-import 'dart:typed_data';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:interior_design_and_ar/constants.dart';
 import 'package:interior_design_and_ar/controller/main_controller.dart';
 import 'package:interior_design_and_ar/core/models/product.dart';
-import 'package:interior_design_and_ar/core/service/database.dart';
 import 'package:interior_design_and_ar/size_config.dart';
-import 'package:provider/provider.dart';
 
+// ignore: must_be_immutable
 class PopularProductCard extends StatefulWidget {
   Product product;
   bool isFavorite = false;

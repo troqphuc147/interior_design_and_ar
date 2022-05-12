@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import '../../components/home/product_category_button.dart';
-import '../../constants.dart';
-import '../../size_config.dart';
+import '../../../components/home/product_category_button.dart';
+import '../../../constants.dart';
+import '../../../size_config.dart';
 
 class HomeLoadingScreen extends StatelessWidget {
   final int selected;
