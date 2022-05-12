@@ -30,6 +30,7 @@ class _PopularProductCardState extends State<PopularProductCard> {
       width: getProportionateScreenWidth(150),
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        color: kBackgroundChipColor,
         elevation: 5.0,
         child: Column(
           mainAxisSize: MainAxisSize.min,

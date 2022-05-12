@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:interior_design_and_ar/components/Custom_navigator_bar.dart';
 import 'package:interior_design_and_ar/components/home/new_product_card.dart';
 import 'package:interior_design_and_ar/components/home/popular_product_card.dart';
 import 'package:interior_design_and_ar/components/home/product_category_button.dart';
 import 'package:interior_design_and_ar/constants.dart';
-import 'package:interior_design_and_ar/enums.dart';
 import 'package:interior_design_and_ar/controller/main_controller.dart';
 import 'package:interior_design_and_ar/screens/home/home_loading_screen.dart';
 import 'package:interior_design_and_ar/screens/product/loading_plash_screen.dart';
-import 'package:interior_design_and_ar/screens/product/popular_product_screen.dart';
 import 'package:interior_design_and_ar/screens/product/product_detail.dart';
 import '../../size_config.dart';
 
@@ -30,9 +27,6 @@ class _HomeScreenState extends State<HomeScreen> {
     return homeController.obx((state) {
       return SafeArea(
         child: Scaffold(
-          bottomNavigationBar: const CustomBottomNavBar(
-            selectedMenuState: MenuState.home,
-          ),
           body: SingleChildScrollView(
             child: Padding(
               padding: EdgeInsets.fromLTRB(
@@ -62,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   SizedBox(
                     height: getProportionateScreenWidth(20),
                   ),
-                  Padding(
+                  /*Padding(
                     padding: const EdgeInsets.only(right: 30),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -124,7 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ],
                     ),
-                  ),
+                  ),*/
                   SizedBox(
                     height: getProportionateScreenWidth(16),
                   ),

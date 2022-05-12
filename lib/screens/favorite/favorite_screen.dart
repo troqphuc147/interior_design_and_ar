@@ -3,14 +3,12 @@ import 'package:get/get.dart';
 import 'package:interior_design_and_ar/components/home/favorite_product_card.dart';
 import 'package:interior_design_and_ar/components/home/product_category_button.dart';
 import 'package:interior_design_and_ar/constants.dart';
-import 'package:interior_design_and_ar/enums.dart';
 import 'package:interior_design_and_ar/controller/favorite_controller.dart';
 import 'package:interior_design_and_ar/screens/favorite/favorite_loading_screen.dart';
 import 'package:interior_design_and_ar/screens/product/product_detail.dart';
 import 'package:interior_design_and_ar/size_config.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 
-import '../../components/Custom_navigator_bar.dart';
 class FavoriteScreen extends StatefulWidget {
   const FavoriteScreen({Key? key}) : super(key: key);
 
@@ -27,9 +25,6 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
     return favoriteController.obx((state) {
       return SafeArea(
         child: Scaffold(
-          bottomNavigationBar: const CustomBottomNavBar(
-            selectedMenuState: MenuState.favorite,
-          ),
           body: SingleChildScrollView(
             child: Padding(
               padding: EdgeInsets.fromLTRB(
@@ -74,19 +69,21 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                       data: ThemeData(
                                         colorScheme: ThemeData()
                                             .colorScheme
-                                            .copyWith(primary: kSelectedButtonColor),
+                                            .copyWith(
+                                                primary: kSelectedButtonColor),
                                       ),
                                       child: TextFormField(
                                         style: TextStyle(
-                                          fontSize: getProportionateScreenWidth(16),
+                                          fontSize:
+                                              getProportionateScreenWidth(16),
                                         ),
                                         decoration: const InputDecoration(
                                           hintStyle: TextStyle(
                                             fontSize: 16,
                                           ),
                                           hintText: 'Search furniture',
-                                          contentPadding:
-                                          EdgeInsets.fromLTRB(24, 16, 12, 16),
+                                          contentPadding: EdgeInsets.fromLTRB(
+                                              24, 16, 12, 16),
                                           border: InputBorder.none,
                                           focusedBorder: InputBorder.none,
                                           enabledBorder: InputBorder.none,
@@ -108,7 +105,8 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                     style: TextButton.styleFrom(
                                       backgroundColor: kPrimaryColor,
                                       shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(12)),
+                                          borderRadius:
+                                              BorderRadius.circular(12)),
                                     ),
                                     child: Icon(
                                       Icons.filter_list,
@@ -199,15 +197,15 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                         //TODO implement List.generate after rewrite database.getFavoriteList
                         ...List.generate(
                           favoriteController.listFavorite.length,
-                              (index) => Padding(
-                            padding: EdgeInsets.symmetric(vertical: getProportionateScreenWidth(4)),
+                          (index) => Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: getProportionateScreenWidth(4)),
                             child: GestureDetector(
                               onTap: () async {
                                 await Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) =>
-                                            ProductDetail(
+                                        builder: (context) => ProductDetail(
                                               product: favoriteController
                                                   .listFavorite[index],
                                               isPopular: "true",
@@ -216,18 +214,19 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                 setState(() {});
                               },
                               child: FavoriteProductCard(
-                                imageUrlString: favoriteController.listFavorite[index].linkImage,
-                                productName: favoriteController.listFavorite[index].name,
-                                rating: favoriteController.listFavorite[index].rating,
+                                imageUrlString: favoriteController
+                                    .listFavorite[index].linkImage,
+                                productName:
+                                    favoriteController.listFavorite[index].name,
+                                rating: favoriteController
+                                    .listFavorite[index].rating,
                               ),
                             ),
                           ),
                         )
                       ],
-                    ),),
-
-
-
+                    ),
+                  ),
                 ],
               ),
             ),

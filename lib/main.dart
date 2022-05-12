@@ -12,6 +12,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'components/wrapper.dart';
 import 'components/wrapper_builder.dart';
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -29,6 +30,7 @@ class App extends StatefulWidget {
   @override
   _AppState createState() => _AppState();
 }
+
 class _AppState extends State<App> {
   Key key = UniqueKey();
 
@@ -45,110 +47,111 @@ class _AppState extends State<App> {
   // khai báo các biến hỗ trợ việc check internet
   ConnectivityResult connectionStatus = ConnectivityResult.none;
   final Connectivity connectivity = Connectivity();
-    Future<void> initConnectivity() async {
-      ConnectivityResult result;
-      // Platform messages may fail, so we use a try/catch PlatformException.
-      try {
-        result = await connectivity.checkConnectivity();
-      } on PlatformException catch (e) {
-        print(e.toString());
-        return;
-      }
-
-      // If the widget was removed from the tree while the asynchronous platform
-      // message was in flight, we want to discard the reply rather than calling
-      // setState to update our non-existent appearance.
-      if (!mounted) {
-        return Future.value(null);
-      }
-
-      return _updateConnectionStatus(result);
+  Future<void> initConnectivity() async {
+    ConnectivityResult result;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      result = await connectivity.checkConnectivity();
+    } on PlatformException catch (e) {
+      print(e.toString());
+      return;
     }
 
-    Future<void> _updateConnectionStatus(ConnectivityResult result) async {
-      setState(() {
-        connectionStatus = result;
-      });
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) {
+      return Future.value(null);
     }
+
+    return _updateConnectionStatus(result);
+  }
+
+  Future<void> _updateConnectionStatus(ConnectivityResult result) async {
+    setState(() {
+      connectionStatus = result;
+    });
+  }
 
   // hàm initialize FlutterFire
-    void initializeFlutterFire() async {
-      try {
-        // đợi Firebase init và set `initialized` thành true
-        await Firebase.initializeApp();
-        FirebaseAppCheck firebaseAppCheck = FirebaseAppCheck.instance;
-        await firebaseAppCheck.activate();
-        setState(() {
-          initialized = true;
-        });
-      } catch (e) {
-        // Set `error` thành true if Firebase init lỗi
-        setState(() {
-          error = true;
-        });
-      }
+  void initializeFlutterFire() async {
+    try {
+      // đợi Firebase init và set `initialized` thành true
+      await Firebase.initializeApp();
+      FirebaseAppCheck firebaseAppCheck = FirebaseAppCheck.instance;
+      await firebaseAppCheck.activate();
+      setState(() {
+        initialized = true;
+      });
+    } catch (e) {
+      // Set `error` thành true if Firebase init lỗi
+      setState(() {
+        error = true;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    initConnectivity();
+
+    connectivitySubscription =
+        connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
+
+    initializeFlutterFire();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    connectivitySubscription.cancel();
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+        overlays: SystemUiOverlay.values); // to re-show bars
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (error) {
+      return const MaterialApp(
+          debugShowCheckedModeBanner: false, home: ErrorScreen());
     }
 
-    @override
-    void initState() {
-      super.initState();
-      initConnectivity();
-
-      connectivitySubscription =
-          connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
-
-      initializeFlutterFire();
+    if (connectionStatus == ConnectivityResult.none) {
+      return const MaterialApp(
+          debugShowCheckedModeBanner: false, home: ErrorScreen());
     }
 
-    @override
-    void dispose() {
-      super.dispose();
-      connectivitySubscription.cancel();
-      SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);  // to re-show bars
-
+    // hiển thị màn hình loading trong lúc init chưa xong
+    if (!initialized) {
+      return MaterialApp(home: const LoadingScreen());
     }
 
-    @override
-    Widget build(BuildContext context) {
-      if (error) {
-        return const MaterialApp(
-            debugShowCheckedModeBanner: false, home: ErrorScreen());
-      }
-
-      if (connectionStatus == ConnectivityResult.none) {
-        return const MaterialApp(
-            debugShowCheckedModeBanner: false, home: ErrorScreen());
-      }
-
-      // hiển thị màn hình loading trong lúc init chưa xong
-      if (!initialized) {
-        return MaterialApp(home: const LoadingScreen());
-      }
-
-      return KeyedSubtree(
-        key: key,
-        child: MultiProvider(
-          providers: [
-            Provider(create: (_) {
-              return AuthService();
-            }),
-          ],
-          child: WrapperBuilder(
-            builder: (context, userSnapshot) {
-              return MaterialApp(
-                debugShowCheckedModeBanner: false,
-                theme: appTheme(),
-                home: SafeArea(
-                  child: Wrapper(
-                    userSnapshot: userSnapshot,
-                  ),
+    return KeyedSubtree(
+      key: key,
+      child: MultiProvider(
+        providers: [
+          Provider(create: (_) {
+            return AuthService();
+          }),
+        ],
+        child: WrapperBuilder(
+          builder: (context, userSnapshot) {
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              theme: appTheme(),
+              home: SafeArea(
+                child: Wrapper(
+                  userSnapshot: userSnapshot,
                 ),
-              );
-            },
-          ),
+              ),
+            );
+          },
         ),
-      );
-    }
+      ),
+    );
+  }
+
   late StreamSubscription<ConnectivityResult> connectivitySubscription;
 
   // thực hiện tạo connection với internet để chec

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:interior_design_and_ar/custom_nav_bar.dart';
 import 'package:interior_design_and_ar/screens/home/home_sceen.dart';
 import 'package:splashscreen/splashscreen.dart';
 
@@ -15,7 +16,7 @@ class CustomSplashScreen extends StatelessWidget {
         "assets/images/loading.gif",
       ),
       photoSize: 200,
-      navigateAfterSeconds: const HomeScreen(),
+      navigateAfterSeconds: const CustomNavBar(),
     );
   }
 }

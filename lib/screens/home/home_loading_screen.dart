@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import '../../components/Custom_navigator_bar.dart';
 import '../../components/home/product_category_button.dart';
 import '../../constants.dart';
-import '../../enums.dart';
 import '../../size_config.dart';
 
 class HomeLoadingScreen extends StatelessWidget {
@@ -14,9 +12,6 @@ class HomeLoadingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        bottomNavigationBar: const CustomBottomNavBar(
-          selectedMenuState: MenuState.home,
-        ),
         body: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.fromLTRB(
@@ -149,8 +144,8 @@ class HomeLoadingScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding:
-                          EdgeInsets.only(right: getProportionateScreenWidth(10)),
+                      padding: EdgeInsets.only(
+                          right: getProportionateScreenWidth(10)),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -185,11 +180,10 @@ class HomeLoadingScreen extends StatelessWidget {
                     SizedBox(
                       height: getProportionateScreenWidth(190),
                       child: const Center(
-                        child: SpinKitPouringHourGlassRefined(
-                          color: kSelectedButtonColor,
-                          size: 40.0,
-                        )
-                      ),
+                          child: SpinKitPouringHourGlassRefined(
+                        color: kSelectedButtonColor,
+                        size: 40.0,
+                      )),
                     )
                   ],
                 ),
@@ -202,8 +196,8 @@ class HomeLoadingScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding:
-                          EdgeInsets.only(right: getProportionateScreenWidth(10)),
+                      padding: EdgeInsets.only(
+                          right: getProportionateScreenWidth(10)),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -238,11 +232,10 @@ class HomeLoadingScreen extends StatelessWidget {
                     SizedBox(
                       height: getProportionateScreenWidth(100),
                       child: const Center(
-                        child: SpinKitPouringHourGlassRefined(
-                          color: kSelectedButtonColor,
-                          size: 40.0,
-                        )
-                      ),
+                          child: SpinKitPouringHourGlassRefined(
+                        color: kSelectedButtonColor,
+                        size: 40.0,
+                      )),
                     )
                   ],
                 )

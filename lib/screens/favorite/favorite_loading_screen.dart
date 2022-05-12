@@ -1,23 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:interior_design_and_ar/components/Custom_navigator_bar.dart';
 import 'package:interior_design_and_ar/components/home/product_category_button.dart';
 import 'package:interior_design_and_ar/constants.dart';
-import 'package:interior_design_and_ar/enums.dart';
 import 'package:interior_design_and_ar/size_config.dart';
 
 class FavoriteLoadingScreen extends StatelessWidget {
   final int selected;
 
-  const FavoriteLoadingScreen({Key? key, required this.selected}) : super(key: key);
+  const FavoriteLoadingScreen({Key? key, required this.selected})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        bottomNavigationBar: const CustomBottomNavBar(
-          selectedMenuState: MenuState.favorite,
-        ),
         body: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.fromLTRB(
@@ -69,7 +65,7 @@ class FavoriteLoadingScreen extends StatelessWidget {
                                 ),
                                 hintText: 'Search furniture',
                                 contentPadding:
-                                EdgeInsets.fromLTRB(24, 16, 12, 16),
+                                    EdgeInsets.fromLTRB(24, 16, 12, 16),
                                 border: InputBorder.none,
                                 focusedBorder: InputBorder.none,
                                 enabledBorder: InputBorder.none,
@@ -146,10 +142,9 @@ class FavoriteLoadingScreen extends StatelessWidget {
                   height: getProportionateScreenWidth(100),
                   child: const Center(
                       child: SpinKitPouringHourGlassRefined(
-                        color: kSelectedButtonColor,
-                        size: 64.0,
-                      )
-                  ),
+                    color: kSelectedButtonColor,
+                    size: 64.0,
+                  )),
                 )
               ],
             ),

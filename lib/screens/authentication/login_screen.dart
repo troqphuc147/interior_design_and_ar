@@ -95,7 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           await signInWithGoogleAccount();
                         },
                         style: TextButton.styleFrom(
-                          backgroundColor: Colors.white,
+                          backgroundColor: kBackgroundChipColor,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(18)),
                         ),
@@ -113,7 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: TextButton(
                         onPressed: () {},
                         style: TextButton.styleFrom(
-                          backgroundColor: Colors.white,
+                          backgroundColor: kBackgroundChipColor,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(18)),
                         ),
