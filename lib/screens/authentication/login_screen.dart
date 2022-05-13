@@ -54,7 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 )),
               ),
               SizedBox(
-                height: getProportionateScreenWidth(20),
+                height: getProportionateScreenWidth(35),
               ),
               Text(
                 "Modern  Furnitures",

@@ -12,6 +12,7 @@ class CustomSplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return SplashScreen(
+      backgroundColor: const Color(0xfff2b533),
       useLoader: false,
       seconds: 5,
       image: Image.asset(

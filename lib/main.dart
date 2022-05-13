@@ -139,10 +139,8 @@ class _AppState extends State<App> {
             return MaterialApp(
               debugShowCheckedModeBanner: false,
               theme: appTheme(),
-              home: SafeArea(
-                child: Wrapper(
-                  userSnapshot: userSnapshot,
-                ),
+              home: Wrapper(
+                userSnapshot: userSnapshot,
               ),
             );
           },

@@ -39,9 +39,10 @@ class _ListProductCategoryScreenState extends State<ListProductCategoryScreen> {
         return Scaffold(
           appBar: AppBar(
             backgroundColor: kBackgroundColor,
-            title: SizedBox(
+            title: Container(
               width: getProportionateScreenWidth(375),
-              height: getProportionateScreenWidth(48),
+              height: getProportionateScreenWidth(58),
+              padding: EdgeInsets.only(top: getProportionateScreenWidth(5)),
               child: Card(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12)),

@@ -317,6 +317,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       );
-    }, onLoading: HomeLoadingScreen(selected: selected));
+    }, onLoading: const HomeLoadingScreen());
   }
 }
