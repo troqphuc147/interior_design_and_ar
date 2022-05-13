@@ -81,7 +81,14 @@ class DatabaseService {
     List<Product> listProduct = [];
     List<String> listId = [];
 
-    await getListFavoriteProductId().then((value) => listId = value);
+    await getListFavoriteProductId().then((value) => {
+          listId.addAll(value),
+          print(value.length),
+        });
+
+    if (listId.isEmpty) {
+      return listProduct;
+    }
     await products
         .where('id', whereIn: listId)
         .get()
@@ -178,19 +185,18 @@ class DatabaseService {
         (value) => print("liked product"));
   }
 
+  userFromMap() {}
+
   Future<List<String>> getListFavoriteProductId() async {
-    List<String> listFavoriteID = [];
-    await users
-        .doc(uid)
-        .get()
-        .then((value) => listFavoriteID = value.get('favoriteList'))
-        .onError((error, stackTrace) async => {
-              await users
-                  .doc(uid)
-                  .set({'favoriteList': listFavoriteID}).onError(
-                      (error, stackTrace) => print(error)),
-            });
-    return listFavoriteID;
+    List<dynamic> listFavoriteID = [];
+    await users.doc(uid).get().then((value) => {
+          listFavoriteID = value.get('favoriteList'),
+        });
+    List<String> rs = [];
+    for (var element in listFavoriteID) {
+      rs.add(element.toString());
+    }
+    return rs;
   }
 
   unLikeProduct(String productId) async {

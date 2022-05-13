@@ -22,7 +22,7 @@ class CategoryLine extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
-    MainController mainController = Get.put(MainController());
+    MainController mainController = Get.find<MainController>();
     return SizedBox(
       height: getProportionateScreenWidth(71),
       child: SingleChildScrollView(

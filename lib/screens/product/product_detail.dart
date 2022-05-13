@@ -28,7 +28,7 @@ class ProductDetail extends StatefulWidget {
 }
 
 class _ProductDetailState extends State<ProductDetail> {
-  MainController mainController = Get.put(MainController());
+  MainController mainController = Get.find<MainController>();
   @override
   void initState() {
     // TODO: implement initState

@@ -24,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    MainController homeController = Get.put(MainController());
+    MainController homeController = Get.put(MainController(), permanent: true);
     return homeController.obx((state) {
       return Scaffold(
         body: SingleChildScrollView(

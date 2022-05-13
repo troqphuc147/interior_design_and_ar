@@ -14,7 +14,7 @@ class PopularProductScreen extends StatefulWidget {
 }
 
 class _PopularProductScreenState extends State<PopularProductScreen> {
-  final MainController homeController = Get.put(MainController());
+  final MainController homeController = Get.find<MainController>();
 
   @override
   Widget build(BuildContext context) {

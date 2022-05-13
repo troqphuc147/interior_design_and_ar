@@ -20,7 +20,7 @@ class ListProductCategoryScreen extends StatefulWidget {
 }
 
 class _ListProductCategoryScreenState extends State<ListProductCategoryScreen> {
-  final MainController homeController = Get.put(MainController());
+  final MainController homeController = Get.find<MainController>();
   String ratingGroup = "All";
   List<String> rating = ["Exellent", "Very Good", "Good", "Satisfactory"];
   double min = 30;
@@ -151,14 +151,20 @@ class _ListProductCategoryScreenState extends State<ListProductCategoryScreen> {
                                         product:
                                             homeController.listManyNew[index],
                                         isPopular: "true",
-                                        isFavorite: false,
+                                        isFavorite: homeController
+                                            .listFavoriteId
+                                            .contains(
+                                          homeController.listManyNew[index].id,
+                                        ),
                                       ),
                                     ));
                               },
                               child: PopularProductCard(
-                                product: homeController.listManyNew[index],
-                                isFavorite: false,
-                              ),
+                                  product: homeController.listManyNew[index],
+                                  isFavorite:
+                                      homeController.listFavoriteId.contains(
+                                    homeController.listManyNew[index].id,
+                                  )),
                             );
                           }),
                         ],
