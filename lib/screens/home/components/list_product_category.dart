@@ -191,7 +191,7 @@ class _ListProductCategoryScreenState extends State<ListProductCategoryScreen> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 SizedBox(
-                  height: getProportionateScreenWidth(10),
+                  height: getProportionateScreenWidth(30),
                 ),
                 Text(
                   "Filter",
@@ -234,7 +234,7 @@ class _ListProductCategoryScreenState extends State<ListProductCategoryScreen> {
                   height: getProportionateScreenWidth(15),
                 ),
                 Text(
-                  "Ratings",
+                  "Cost",
                   style: TextStyle(
                       color: kTextColor2,
                       fontSize: getProportionateScreenWidth(16),
