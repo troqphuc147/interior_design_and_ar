@@ -141,30 +141,33 @@ class _ListProductCategoryScreenState extends State<ListProductCategoryScreen> {
                         children: [
                           ...List.generate(homeController.listManyNew.length,
                               (index) {
-                            return GestureDetector(
-                              onTap: () async {
-                                await Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => ProductDetail(
-                                        product:
-                                            homeController.listManyNew[index],
-                                        category: "category",
-                                        isFavorite: homeController
-                                            .listFavoriteId
-                                            .contains(
-                                          homeController.listManyNew[index].id,
+                            return Obx(
+                              () => GestureDetector(
+                                onTap: () async {
+                                  await Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => ProductDetail(
+                                          product:
+                                              homeController.listManyNew[index],
+                                          category: "category",
+                                          isFavorite: homeController
+                                              .listFavoriteId
+                                              .contains(
+                                            homeController
+                                                .listManyNew[index].id,
+                                          ),
                                         ),
-                                      ),
-                                    ));
-                              },
-                              child: PopularProductCard(
-                                  product: homeController.listManyNew[index],
-                                  category: "category",
-                                  isFavorite:
-                                      homeController.listFavoriteId.contains(
-                                    homeController.listManyNew[index].id,
-                                  )),
+                                      ));
+                                },
+                                child: PopularProductCard(
+                                    product: homeController.listManyNew[index],
+                                    category: "category",
+                                    isFavorite:
+                                        homeController.listFavoriteId.contains(
+                                      homeController.listManyNew[index].id,
+                                    )),
+                              ),
                             );
                           }),
                         ],

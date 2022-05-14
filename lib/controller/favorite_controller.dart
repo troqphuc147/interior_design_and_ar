@@ -29,7 +29,7 @@ class FavoriteController extends GetxController with StateMixin {
     _listFavorite.clear();
     await firebase.getListFavoriteProduct().then((value) => {
           _listFavorite.value = value,
-          _listShowedProduct.value = value,
+          _listShowedProduct.value.addAll(value),
         });
     change(null, status: RxStatus.success());
   }
@@ -49,5 +49,11 @@ class FavoriteController extends GetxController with StateMixin {
     _listShowedProduct.addAllIf((e) {
       e.nameCategory == category;
     }, _listFavorite);
+  }
+
+  updateItemInList(Product product) {
+    int index = _listFavorite.indexWhere((element) => element.id == product.id);
+    _listFavorite.removeAt(index);
+    _listFavorite.insert(index, product);
   }
 }

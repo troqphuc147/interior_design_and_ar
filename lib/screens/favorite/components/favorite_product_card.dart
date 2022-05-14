@@ -1,8 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:interior_design_and_ar/constants.dart';
 import 'package:interior_design_and_ar/core/models/product.dart';
 import 'package:interior_design_and_ar/size_config.dart';
+
+import '../../../controller/favorite_controller.dart';
+import '../../../controller/main_controller.dart';
 
 class FavoriteProductCard extends StatefulWidget {
   final Product product;
@@ -14,6 +18,8 @@ class FavoriteProductCard extends StatefulWidget {
 }
 
 class _FavoriteProductCardState extends State<FavoriteProductCard> {
+  MainController mainController = Get.find<MainController>();
+  FavoriteController favoriteController = Get.find<FavoriteController>();
   @override
   Widget build(BuildContext context) {
     return Padding(

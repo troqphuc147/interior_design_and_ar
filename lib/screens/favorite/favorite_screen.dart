@@ -188,36 +188,38 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                     ],
                   ),
                 ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ...List.generate(
-                      favoriteController.listFavorite.length,
-                      (index) => Padding(
-                        padding: EdgeInsets.symmetric(
-                            vertical: getProportionateScreenWidth(4)),
-                        child: GestureDetector(
-                          onTap: () async {
-                            await Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ProductDetail(
-                                          product: favoriteController
-                                              .listShowedProduct[index],
-                                          category: "favorite",
-                                          isFavorite: true,
-                                        )));
-                            setState(() {});
-                          },
-                          child: FavoriteProductCard(
-                            product:
-                                favoriteController.listShowedProduct[index],
+                Obx(
+                  () => Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ...List.generate(
+                        favoriteController.listShowedProduct.length,
+                        (index) => Padding(
+                          padding: EdgeInsets.symmetric(
+                              vertical: getProportionateScreenWidth(4)),
+                          child: GestureDetector(
+                            onTap: () async {
+                              await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => ProductDetail(
+                                            product: favoriteController
+                                                .listShowedProduct[index],
+                                            category: "favorite",
+                                            isFavorite: true,
+                                          )));
+                              setState(() {});
+                            },
+                            child: FavoriteProductCard(
+                              product:
+                                  favoriteController.listShowedProduct[index],
+                            ),
                           ),
                         ),
-                      ),
-                    )
-                  ],
+                      )
+                    ],
+                  ),
                 ),
               ],
             ),

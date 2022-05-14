@@ -120,19 +120,17 @@ class MainController extends GetxController with StateMixin {
     firebase
         .getListFavoriteProductId()
         .then((value) => value.toList().forEach((element) {
-          _listFavoriteId.add(element);
-    }));
+              _listFavoriteId.add(element);
+            }));
   }
-  addToFavoriteList(String productId)
-  async {
+
+  addToFavoriteList(String productId) async {
     _listFavoriteId.add(productId);
-    await firebase
-        .likeProduct(productId);
+    await firebase.likeProduct(productId);
   }
-  deleteInFavoriteList(String productId)
-  async {
+
+  deleteInFavoriteList(String productId) async {
     _listFavoriteId.remove(productId);
-    await firebase
-        .unLikeProduct(productId);
+    await firebase.unLikeProduct(productId);
   }
 }

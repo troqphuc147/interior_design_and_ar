@@ -6,6 +6,7 @@ import 'package:interior_design_and_ar/components/default_button.dart';
 import 'package:interior_design_and_ar/components/product/default_color_button.dart';
 import 'package:interior_design_and_ar/components/product/selected_color_button.dart';
 import 'package:interior_design_and_ar/constants.dart';
+import 'package:interior_design_and_ar/controller/favorite_controller.dart';
 import 'package:interior_design_and_ar/core/models/product.dart';
 import 'package:interior_design_and_ar/controller/main_controller.dart';
 import 'package:interior_design_and_ar/screens/product/ar_view/ar_view_screen.dart';
@@ -29,6 +30,8 @@ class ProductDetail extends StatefulWidget {
 
 class _ProductDetailState extends State<ProductDetail> {
   MainController mainController = Get.find<MainController>();
+  FavoriteController favoriteController = Get.find<FavoriteController>();
+
   @override
   void initState() {
     // TODO: implement initState
@@ -201,9 +204,14 @@ class _ProductDetailState extends State<ProductDetail> {
                                           if (widget.isFavorite == false) {
                                             mainController.addToFavoriteList(
                                                 widget.product.id);
+                                            favoriteController.addItemsIntoList(
+                                                widget.product);
                                           } else {
                                             mainController.deleteInFavoriteList(
                                                 widget.product.id);
+                                            favoriteController
+                                                .deleteItemsInList(
+                                                    widget.product);
                                           }
                                           setState(() {
                                             widget.isFavorite =
@@ -413,6 +421,8 @@ class _ProductDetailState extends State<ProductDetail> {
                                                 .toString();
                                         mainController.ratingProduct(
                                             widget.product, rate);
+                                        favoriteController
+                                            .updateItemInList(widget.product);
                                       });
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(const SnackBar(

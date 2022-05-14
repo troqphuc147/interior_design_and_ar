@@ -11,16 +11,9 @@ import 'package:interior_design_and_ar/screens/product/product_detail.dart';
 import '../../components/home/product_card.dart';
 import '../../size_config.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
-
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  int selected = 1;
-  String category = "All";
+  final category = "All";
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -190,30 +183,33 @@ class _HomeScreenState extends State<HomeScreen> {
                                   (index) => Padding(
                                     padding: EdgeInsets.only(
                                         right: getProportionateScreenWidth(8)),
-                                    child: GestureDetector(
-                                      onTap: () async {
-                                        await Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) => ProductDetail(
-                                                    product: homeController
-                                                        .listPopular[index],
-                                                    category: "popular",
-                                                    isFavorite: homeController
-                                                        .listFavoriteId
-                                                        .contains(homeController
-                                                            .listPopular[index]
-                                                            .id))));
-                                        setState(() {});
-                                      },
-                                      child: PopularProductCard(
-                                        product:
-                                            homeController.listPopular[index],
-                                        category: "popular",
-                                        isFavorite: homeController
-                                            .listFavoriteId
-                                            .contains(homeController
-                                                .listPopular[index].id),
+                                    child: Obx(
+                                      () => GestureDetector(
+                                        onTap: () async {
+                                          await Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) => ProductDetail(
+                                                      product: homeController
+                                                          .listPopular[index],
+                                                      category: "popular",
+                                                      isFavorite: homeController
+                                                          .listFavoriteId
+                                                          .contains(
+                                                              homeController
+                                                                  .listPopular[
+                                                                      index]
+                                                                  .id))));
+                                        },
+                                        child: PopularProductCard(
+                                          product:
+                                              homeController.listPopular[index],
+                                          category: "popular",
+                                          isFavorite: homeController
+                                              .listFavoriteId
+                                              .contains(homeController
+                                                  .listPopular[index].id),
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -281,30 +277,32 @@ class _HomeScreenState extends State<HomeScreen> {
                               children: [
                                 ...List.generate(
                                   homeController.listNew.length,
-                                  (index) => GestureDetector(
-                                    onTap: () async {
-                                      await Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => ProductDetail(
-                                                  product: homeController
-                                                      .listNew[index],
-                                                  category: "new",
-                                                  isFavorite: homeController
-                                                      .listFavoriteId
-                                                      .contains(homeController
-                                                          .listNew[index].id),
-                                                )),
-                                      );
-                                      homeController.listNew.refresh();
-                                      setState(() {});
-                                    },
-                                    child: NewProductCard(
-                                      product: homeController.listNew[index],
-                                      category: "new",
-                                      isFavorite: homeController.listFavoriteId
-                                          .contains(
-                                              homeController.listNew[index].id),
+                                  (index) => Obx(
+                                    () => GestureDetector(
+                                      onTap: () async {
+                                        await Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ProductDetail(
+                                                    product: homeController
+                                                        .listNew[index],
+                                                    category: "new",
+                                                    isFavorite: homeController
+                                                        .listFavoriteId
+                                                        .contains(homeController
+                                                            .listNew[index].id),
+                                                  )),
+                                        );
+                                      },
+                                      child: NewProductCard(
+                                        product: homeController.listNew[index],
+                                        category: "new",
+                                        isFavorite: homeController
+                                            .listFavoriteId
+                                            .contains(homeController
+                                                .listNew[index].id),
+                                      ),
                                     ),
                                   ),
                                 )
