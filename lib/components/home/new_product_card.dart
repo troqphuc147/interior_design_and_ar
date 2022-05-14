@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:interior_design_and_ar/constants.dart';
+import 'package:interior_design_and_ar/controller/favorite_controller.dart';
 import 'package:interior_design_and_ar/controller/main_controller.dart';
 import 'package:interior_design_and_ar/size_config.dart';
 import '../../core/models/product.dart';
@@ -8,8 +9,13 @@ import '../../core/models/product.dart';
 // ignore: must_be_immutable
 class NewProductCard extends StatefulWidget {
   final Product product;
+  final String category;
   bool isFavorite = false;
-  NewProductCard({Key? key, required this.product, required this.isFavorite})
+  NewProductCard(
+      {Key? key,
+      required this.product,
+      required this.isFavorite,
+      required this.category})
       : super(key: key);
 
   @override
@@ -19,7 +25,8 @@ class NewProductCard extends StatefulWidget {
 class _NewProductCardState extends State<NewProductCard> {
   @override
   Widget build(BuildContext context) {
-    MainController mainController = Get.put(MainController());
+    MainController mainController = Get.find<MainController>();
+    FavoriteController favoriteController = Get.find<FavoriteController>();
     return Padding(
       padding: EdgeInsets.only(right: getProportionateScreenWidth(8)),
       child: SizedBox(
@@ -37,7 +44,7 @@ class _NewProductCardState extends State<NewProductCard> {
                     borderRadius: BorderRadius.horizontal(
                         left: Radius.circular(getProportionateScreenWidth(14))),
                     child: Hero(
-                      tag: widget.product.linkImage + "false",
+                      tag: widget.product.linkImage + widget.category,
                       child: Image.network(
                         widget.product.linkImage,
                         height: getProportionateScreenWidth(100),
@@ -117,9 +124,13 @@ class _NewProductCardState extends State<NewProductCard> {
                                   if (widget.isFavorite == true) {
                                     mainController
                                         .addToFavoriteList(widget.product.id);
+                                    favoriteController
+                                        .addItemsIntoList(widget.product);
                                   } else {
                                     mainController.deleteInFavoriteList(
                                         widget.product.id);
+                                    favoriteController
+                                        .deleteItemsInList(widget.product);
                                   }
                                 },
                                 child: Icon(

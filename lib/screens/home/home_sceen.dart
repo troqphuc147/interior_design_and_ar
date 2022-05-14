@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:interior_design_and_ar/components/home/new_product_card.dart';
-import 'package:interior_design_and_ar/components/home/popular_product_card.dart';
-import 'package:interior_design_and_ar/components/home/product_category_button.dart';
 import 'package:interior_design_and_ar/constants.dart';
+import 'package:interior_design_and_ar/controller/favorite_controller.dart';
 import 'package:interior_design_and_ar/controller/main_controller.dart';
 import 'package:interior_design_and_ar/screens/home/components/category_line.dart';
 import 'package:interior_design_and_ar/screens/home/components/home_loading_screen.dart';
 import 'package:interior_design_and_ar/screens/product/loading_plash_screen.dart';
 import 'package:interior_design_and_ar/screens/product/product_detail.dart';
+import '../../components/home/product_card.dart';
 import '../../size_config.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -25,6 +25,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     MainController homeController = Get.put(MainController(), permanent: true);
+    FavoriteController favoriteController =
+        Get.put(FavoriteController(), permanent: true);
     return homeController.obx((state) {
       return Scaffold(
         body: SingleChildScrollView(
@@ -196,7 +198,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 builder: (context) => ProductDetail(
                                                     product: homeController
                                                         .listPopular[index],
-                                                    isPopular: "true",
+                                                    category: "popular",
                                                     isFavorite: homeController
                                                         .listFavoriteId
                                                         .contains(homeController
@@ -207,6 +209,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       child: PopularProductCard(
                                         product:
                                             homeController.listPopular[index],
+                                        category: "popular",
                                         isFavorite: homeController
                                             .listFavoriteId
                                             .contains(homeController
@@ -286,7 +289,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             builder: (context) => ProductDetail(
                                                   product: homeController
                                                       .listNew[index],
-                                                  isPopular: "false",
+                                                  category: "new",
                                                   isFavorite: homeController
                                                       .listFavoriteId
                                                       .contains(homeController
@@ -298,6 +301,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     },
                                     child: NewProductCard(
                                       product: homeController.listNew[index],
+                                      category: "new",
                                       isFavorite: homeController.listFavoriteId
                                           .contains(
                                               homeController.listNew[index].id),

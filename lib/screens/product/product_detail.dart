@@ -13,13 +13,13 @@ import 'package:interior_design_and_ar/size_config.dart';
 import '../../core/models/rating.dart';
 
 class ProductDetail extends StatefulWidget {
-  final String isPopular;
+  final String category;
   final Product product;
   bool isFavorite;
   ProductDetail(
       {Key? key,
       required this.product,
-      required this.isPopular,
+      required this.category,
       required this.isFavorite})
       : super(key: key);
 
@@ -40,7 +40,7 @@ class _ProductDetailState extends State<ProductDetail> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
-          physics: const NeverScrollableScrollPhysics(),
+          padding: EdgeInsets.only(top: getProportionateScreenWidth(15)),
           child: Stack(
             children: [
               Padding(
@@ -52,8 +52,7 @@ class _ProductDetailState extends State<ProductDetail> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Hero(
-                        tag: widget.product.linkImage +
-                            widget.isPopular.toString(),
+                        tag: widget.product.linkImage + widget.category,
                         child: CachedNetworkImage(
                           imageUrl: widget.product.linkImage,
                           width: getProportionateScreenWidth(350),

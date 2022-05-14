@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:interior_design_and_ar/constants.dart';
+import 'package:interior_design_and_ar/controller/favorite_controller.dart';
 import 'package:interior_design_and_ar/controller/main_controller.dart';
 import 'package:interior_design_and_ar/core/models/product.dart';
 import 'package:interior_design_and_ar/size_config.dart';
@@ -9,9 +10,13 @@ import 'package:interior_design_and_ar/size_config.dart';
 // ignore: must_be_immutable
 class PopularProductCard extends StatefulWidget {
   Product product;
+  String category;
   bool isFavorite = false;
   PopularProductCard(
-      {Key? key, required this.product, required this.isFavorite})
+      {Key? key,
+      required this.product,
+      required this.category,
+      required this.isFavorite})
       : super(key: key);
 
   @override
@@ -21,7 +26,8 @@ class PopularProductCard extends StatefulWidget {
 class _PopularProductCardState extends State<PopularProductCard> {
   @override
   Widget build(BuildContext context) {
-    MainController mainController = Get.put(MainController());
+    MainController mainController = Get.find<MainController>();
+    FavoriteController favoriteController = Get.find<FavoriteController>();
     return SizedBox(
       width: getProportionateScreenWidth(150),
       child: Card(
@@ -34,7 +40,7 @@ class _PopularProductCardState extends State<PopularProductCard> {
             Stack(
               children: [
                 Hero(
-                  tag: widget.product.linkImage + "true",
+                  tag: widget.product.linkImage + widget.category,
                   child: Center(
                     child: ClipRRect(
                         borderRadius: BorderRadius.vertical(
@@ -42,8 +48,8 @@ class _PopularProductCardState extends State<PopularProductCard> {
                                 getProportionateScreenWidth(14))),
                         child: CachedNetworkImage(
                           imageUrl: widget.product.linkImage,
-                          height: getProportionateScreenWidth(146),
-                          width: getProportionateScreenWidth(146),
+                          height: getProportionateScreenWidth(145),
+                          width: getProportionateScreenWidth(145),
                         )),
                   ),
                 ),
@@ -61,9 +67,12 @@ class _PopularProductCardState extends State<PopularProductCard> {
                           });
                           if (widget.isFavorite == true) {
                             mainController.addToFavoriteList(widget.product.id);
+                            favoriteController.addItemsIntoList(widget.product);
                           } else {
                             mainController
                                 .deleteInFavoriteList(widget.product.id);
+                            favoriteController
+                                .deleteItemsInList(widget.product);
                           }
                         },
                         child: Icon(

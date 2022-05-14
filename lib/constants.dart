@@ -14,7 +14,12 @@ const kTextColor4 = Color(0xFF222222);
 const kBackgroundColor = Color(0xFFF9FAFC);
 const kBackgroundChipColor = Color(0xFFFFFFFF);
 const kAnimationDuration = Duration(milliseconds: 200);
-
+const Map<String, int> kCategoryColors = {
+  'Chair': 0xFFDADADA,
+  'Table': 0xFFC4C4C4,
+  'Lamp': 0xFFE7DCCB,
+  'Bed': 0xFFDADADA
+};
 final headingStyle = TextStyle(
   fontSize: getProportionateScreenWidth(34),
   fontWeight: FontWeight.bold,

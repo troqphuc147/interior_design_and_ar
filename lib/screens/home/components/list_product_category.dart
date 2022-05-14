@@ -1,12 +1,11 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:group_radio_button/group_radio_button.dart';
-import 'package:interior_design_and_ar/components/home/popular_product_card.dart';
 import 'package:interior_design_and_ar/controller/main_controller.dart';
 import 'package:interior_design_and_ar/screens/product/product_detail.dart';
 import 'package:interior_design_and_ar/size_config.dart';
 
+import '../../../components/home/product_card.dart';
 import '../../../constants.dart';
 
 class ListProductCategoryScreen extends StatefulWidget {
@@ -150,7 +149,7 @@ class _ListProductCategoryScreenState extends State<ListProductCategoryScreen> {
                                       builder: (context) => ProductDetail(
                                         product:
                                             homeController.listManyNew[index],
-                                        isPopular: "true",
+                                        category: "category",
                                         isFavorite: homeController
                                             .listFavoriteId
                                             .contains(
@@ -161,6 +160,7 @@ class _ListProductCategoryScreenState extends State<ListProductCategoryScreen> {
                               },
                               child: PopularProductCard(
                                   product: homeController.listManyNew[index],
+                                  category: "category",
                                   isFavorite:
                                       homeController.listFavoriteId.contains(
                                     homeController.listManyNew[index].id,

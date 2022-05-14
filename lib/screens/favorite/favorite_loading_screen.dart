@@ -46,7 +46,7 @@ class FavoriteLoadingScreen extends StatelessWidget {
                         height: getProportionateScreenWidth(48),
                         child: Container(
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: Colors.yellow,
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Theme(

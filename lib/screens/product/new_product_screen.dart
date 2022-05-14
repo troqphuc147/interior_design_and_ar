@@ -1,10 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:interior_design_and_ar/components/home/popular_product_card.dart';
 import 'package:interior_design_and_ar/controller/main_controller.dart';
 import 'package:interior_design_and_ar/screens/product/product_detail.dart';
 import 'package:interior_design_and_ar/size_config.dart';
+import '../../components/home/product_card.dart';
 import '../../constants.dart';
 import '../../core/models/product.dart';
 
@@ -63,12 +62,13 @@ class NewProductScreen extends StatelessWidget {
                                 MaterialPageRoute(
                                   builder: (context) => ProductDetail(
                                     product: product,
-                                    isPopular: "true",
+                                    category: "new",
                                     isFavorite: false,
                                   ),
                                 ));
                           },
                           child: PopularProductCard(
+                            category: "new",
                             product: product,
                             isFavorite: false,
                           ),
