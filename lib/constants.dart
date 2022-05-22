@@ -24,3 +24,12 @@ final headingStyle = TextStyle(
   fontSize: getProportionateScreenWidth(34),
   fontWeight: FontWeight.bold,
 );
+final List<String> kListCategory = ['Chair', 'Table', 'Lamp', 'Bed'];
+final List<String> kListRating = [
+  "All",
+  "Exellent",
+  "Very Good",
+  "Good",
+  "Satisfactory",
+  "Bad"
+];

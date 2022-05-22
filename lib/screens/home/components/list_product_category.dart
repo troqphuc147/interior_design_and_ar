@@ -41,12 +41,14 @@ class _ListProductCategoryScreenState extends State<ListProductCategoryScreen> {
             title: Container(
               width: getProportionateScreenWidth(375),
               height: getProportionateScreenWidth(58),
-              padding: EdgeInsets.only(top: getProportionateScreenWidth(5)),
+              padding: EdgeInsets.only(
+                  top: getProportionateScreenWidth(5),
+                  bottom: getProportionateScreenWidth(3)),
               child: Card(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12)),
                 color: Colors.white,
-                elevation: 5.0,
+                elevation: 3.5,
                 child: Theme(
                   data: ThemeData(
                     colorScheme: ThemeData()
@@ -129,54 +131,57 @@ class _ListProductCategoryScreenState extends State<ListProductCategoryScreen> {
                 ),
                 Expanded(
                   child: SingleChildScrollView(
+                      physics: const BouncingScrollPhysics(),
                       child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Wrap(
-                        crossAxisAlignment: WrapCrossAlignment.center,
-                        alignment: WrapAlignment.spaceAround,
-                        runAlignment: WrapAlignment.spaceAround,
-                        spacing: getProportionateScreenWidth(24),
-                        runSpacing: getProportionateScreenWidth(10),
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          ...List.generate(homeController.listManyNew.length,
-                              (index) {
-                            return Obx(
-                              () => GestureDetector(
-                                onTap: () async {
-                                  await Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => ProductDetail(
-                                          product:
-                                              homeController.listManyNew[index],
-                                          category: "category",
-                                          isFavorite: homeController
-                                              .listFavoriteId
-                                              .contains(
-                                            homeController
-                                                .listManyNew[index].id,
-                                          ),
-                                        ),
-                                      ));
-                                },
-                                child: PopularProductCard(
-                                    product: homeController.listManyNew[index],
-                                    category: "category",
-                                    isFavorite:
-                                        homeController.listFavoriteId.contains(
-                                      homeController.listManyNew[index].id,
-                                    )),
-                              ),
-                            );
-                          }),
+                          Wrap(
+                            crossAxisAlignment: WrapCrossAlignment.center,
+                            alignment: WrapAlignment.spaceAround,
+                            runAlignment: WrapAlignment.spaceAround,
+                            spacing: getProportionateScreenWidth(24),
+                            runSpacing: getProportionateScreenWidth(10),
+                            children: [
+                              ...List.generate(
+                                  homeController.listManyNew.length, (index) {
+                                return Obx(
+                                  () => GestureDetector(
+                                    onTap: () async {
+                                      await Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => ProductDetail(
+                                              product: homeController
+                                                  .listManyNew[index],
+                                              category: "category",
+                                              isFavorite: homeController
+                                                  .listFavoriteId
+                                                  .contains(
+                                                homeController
+                                                    .listManyNew[index].id,
+                                              ),
+                                            ),
+                                          ));
+                                    },
+                                    child: PopularProductCard(
+                                        product:
+                                            homeController.listManyNew[index],
+                                        category: "category",
+                                        isFavorite: homeController
+                                            .listFavoriteId
+                                            .contains(
+                                          homeController.listManyNew[index].id,
+                                        )),
+                                  ),
+                                );
+                              }),
+                            ],
+                          ),
+                          SizedBox(
+                            height: getProportionateScreenWidth(25),
+                          ),
                         ],
-                      ),
-                      SizedBox(
-                        height: getProportionateScreenWidth(25),
-                      ),
-                    ],
-                  )),
+                      )),
                 ),
               ],
             ),

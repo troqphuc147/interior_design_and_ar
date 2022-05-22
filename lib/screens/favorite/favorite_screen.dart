@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:group_radio_button/group_radio_button.dart';
-import 'package:grouped_buttons/grouped_buttons.dart';
 import 'package:interior_design_and_ar/screens/favorite/components/favorite_product_card.dart';
 import 'package:interior_design_and_ar/components/loading_screen.dart';
 import 'package:interior_design_and_ar/constants.dart';
@@ -18,18 +17,20 @@ class FavoriteScreen extends StatefulWidget {
 }
 
 class _FavoriteScreenState extends State<FavoriteScreen> {
-  String category = "All";
+  String rating = "All";
   String ratingGroup = "All";
-  List<String> rating = ["Exellent", "Very Good", "Good", "Satisfactory"];
-  List<String> categories = ["Chair", "Table", "Lamp", "Bed"];
-  List<String> selectedCategories = ["Chair", "Table", "Lamp", "Bed"];
   double min = 30;
   double max = 200;
   late RangeValues values;
+  late RangeValues fakeValues;
+  List<String> listCategorySelected = [];
+  List<String> fakeListCategory = [];
   @override
   void initState() {
     super.initState();
+    listCategorySelected.addAll(kListCategory);
     values = RangeValues(min, max);
+    fakeValues = const RangeValues(0, 0);
   }
 
   @override
@@ -123,8 +124,16 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                     children: [
                       Builder(builder: (context) {
                         return GestureDetector(
-                          onTap: () => Scaffold.of(context).openDrawer(),
+                          onTap: () => {
+                            setState(() {
+                              rating = ratingGroup;
+                              fakeValues = RangeValues(min, max);
+                              fakeListCategory.addAll(listCategorySelected);
+                            }),
+                            Scaffold.of(context).openDrawer(),
+                          },
                           child: Row(
+                            mainAxisSize: MainAxisSize.max,
                             children: [
                               SvgPicture.asset(
                                 "assets/icons/filter.svg",
@@ -145,6 +154,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                         return GestureDetector(
                           onTap: () => Scaffold.of(context).openEndDrawer(),
                           child: Row(
+                            mainAxisSize: MainAxisSize.max,
                             children: [
                               SvgPicture.asset(
                                 "assets/icons/sort.svg",
@@ -168,6 +178,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
               ),
               Expanded(
                 child: SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
                   scrollDirection: Axis.vertical,
                   padding: EdgeInsets.only(
                       left: getProportionateScreenWidth(3),
@@ -211,159 +222,201 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
           ),
         ),
         drawer: Drawer(
-            child: Container(
-          padding: EdgeInsets.symmetric(
-            horizontal: getProportionateScreenWidth(20),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              SizedBox(
-                height: getProportionateScreenWidth(30),
-              ),
-              Text(
-                "Filter",
-                style: TextStyle(
-                    color: kTextColor1,
-                    fontSize: getProportionateScreenWidth(24),
-                    fontWeight: FontWeight.w500),
-              ),
-              SizedBox(
-                height: getProportionateScreenWidth(20),
-              ),
-              Text(
-                "Ratings",
-                style: TextStyle(
-                    color: kTextColor2,
-                    fontSize: getProportionateScreenWidth(16),
-                    fontWeight: FontWeight.w400),
-              ),
-              SizedBox(
-                height: getProportionateScreenHeight(10),
-              ),
-              RadioGroup<String>.builder(
-                groupValue: ratingGroup,
-                onChanged: (value) => setState(() {
-                  ratingGroup = value!;
-                }),
-                items: rating,
-                itemBuilder: (item) => RadioButtonBuilder(item,
-                    textPosition: RadioButtonTextPosition.left),
-                textStyle: TextStyle(
-                    color: kTextColor1,
-                    fontSize: getProportionateScreenWidth(18),
-                    fontWeight: FontWeight.w500),
-                activeColor: kSelectedButtonColor,
-              ),
-              Divider(
-                thickness: getProportionateScreenWidth(1),
-              ),
-              SizedBox(
-                height: getProportionateScreenWidth(15),
-              ),
-              Text(
-                "Cost",
-                style: TextStyle(
-                    color: kTextColor2,
-                    fontSize: getProportionateScreenWidth(16),
-                    fontWeight: FontWeight.w400),
-              ),
-              SizedBox(
-                height: getProportionateScreenWidth(15),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: getProportionateScreenWidth(15)),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      "Min: \$" + min.toInt().toString(),
-                      style: TextStyle(
-                        fontSize: getProportionateScreenWidth(14),
-                      ),
-                    ),
-                    Text(
-                      "Max: \$" + max.toInt().toString(),
-                      style: TextStyle(
-                        fontSize: getProportionateScreenWidth(14),
-                      ),
-                    ),
-                  ],
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: getProportionateScreenWidth(20),
+            ),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: getProportionateScreenWidth(30),
                 ),
-              ),
-              RangeSlider(
-                divisions: 500,
-                inactiveColor: kTextColor2,
-                activeColor: kSelectedButtonColor,
-                min: 0,
-                max: 500,
-                values: values,
-                onChanged: (RangeValues v) {
-                  setState(() {
-                    if (v.end - v.start >= 20) {
-                      values = v;
-                    } else {
-                      if (v.start == values.start) {
-                        values = RangeValues(values.start, values.start + 20);
-                      } else {
-                        values = RangeValues(values.end - 20, values.end);
-                      }
-                    }
-                    min = values.start;
-                    max = values.end;
-                  });
-                },
-              ),
-              Divider(
-                thickness: getProportionateScreenWidth(1),
-              ),
-              SizedBox(
-                height: getProportionateScreenWidth(15),
-              ),
-              Text(
-                "Category",
-                style: TextStyle(
-                    color: kTextColor2,
-                    fontSize: getProportionateScreenWidth(16),
-                    fontWeight: FontWeight.w400),
-              ),
-              SizedBox(
-                height: getProportionateScreenWidth(15),
-              ),
-              CheckboxGroup(
-                  labels: categories,
-                  activeColor: kSelectedButtonColor,
-                  margin: EdgeInsets.all(30),
-                  onSelected: (List<String> checked) {
-                    setState(() {
-                      selectedCategories = checked;
-                    });
-                  }),
-              const Spacer(),
-              Container(
-                height: getProportionateScreenWidth(40),
-                width: getProportionateScreenWidth(375),
-                margin:
-                    EdgeInsets.only(bottom: getProportionateScreenWidth(30)),
-                decoration: BoxDecoration(
-                  color: kSelectedButtonColor,
-                  borderRadius: BorderRadius.circular(5),
+                Text(
+                  "Filter",
+                  style: TextStyle(
+                      color: kTextColor1,
+                      fontSize: getProportionateScreenWidth(24),
+                      fontWeight: FontWeight.w500),
                 ),
-                child: TextButton(
-                    onPressed: () {},
-                    child: Text("Apply",
+                Expanded(
+                  child: ListView(
+                    physics: const BouncingScrollPhysics(),
+                    children: [
+                      Text(
+                        "Ratings",
                         style: TextStyle(
-                          color: kTextColor3,
-                          fontSize: getProportionateScreenWidth(18),
-                          fontWeight: FontWeight.w600,
-                        ))),
-              ),
-            ],
+                            color: kTextColor2,
+                            fontSize: getProportionateScreenWidth(16),
+                            fontWeight: FontWeight.w400),
+                      ),
+                      SizedBox(
+                        height: getProportionateScreenHeight(10),
+                      ),
+                      RadioGroup<String>.builder(
+                        groupValue: rating,
+                        onChanged: (value) => setState(() {
+                          rating = value!;
+                        }),
+                        items: kListRating,
+                        itemBuilder: (item) => RadioButtonBuilder(item,
+                            textPosition: RadioButtonTextPosition.left),
+                        textStyle: TextStyle(
+                            color: kTextColor1,
+                            fontSize: getProportionateScreenWidth(18),
+                            fontWeight: FontWeight.w500),
+                        activeColor: kSelectedButtonColor,
+                      ),
+                      Divider(
+                        thickness: getProportionateScreenWidth(1),
+                      ),
+                      SizedBox(
+                        height: getProportionateScreenWidth(15),
+                      ),
+                      Text(
+                        "Cost",
+                        style: TextStyle(
+                            color: kTextColor2,
+                            fontSize: getProportionateScreenWidth(16),
+                            fontWeight: FontWeight.w400),
+                      ),
+                      SizedBox(
+                        height: getProportionateScreenWidth(15),
+                      ),
+                      Container(
+                        height: getProportionateScreenWidth(40),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: getProportionateScreenWidth(15)),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Text(
+                              "Min: \$" + min.toInt().toString(),
+                              style: TextStyle(
+                                  fontSize: getProportionateScreenWidth(14),
+                                  color: kTextColor1),
+                            ),
+                            Text(
+                              "Max: \$" + max.toInt().toString(),
+                              style: TextStyle(
+                                  fontSize: getProportionateScreenWidth(14),
+                                  color: kTextColor1),
+                            ),
+                          ],
+                        ),
+                      ),
+                      RangeSlider(
+                        divisions: 500,
+                        inactiveColor: kTextColor2,
+                        activeColor: kSelectedButtonColor,
+                        min: 0,
+                        max: 500,
+                        values: fakeValues,
+                        onChanged: (RangeValues v) {
+                          setState(() {
+                            if (v.end - v.start >= 20) {
+                              fakeValues = v;
+                            } else {
+                              if (v.start == values.start) {
+                                fakeValues = RangeValues(
+                                    fakeValues.start, fakeValues.start + 20);
+                              } else {
+                                fakeValues = RangeValues(
+                                    fakeValues.end - 20, fakeValues.end);
+                              }
+                            }
+                          });
+                        },
+                      ),
+                      Divider(
+                        thickness: getProportionateScreenWidth(1),
+                      ),
+                      SizedBox(
+                        height: getProportionateScreenWidth(15),
+                      ),
+                      Text(
+                        "Category",
+                        style: TextStyle(
+                            color: kTextColor2,
+                            fontSize: getProportionateScreenWidth(16),
+                            fontWeight: FontWeight.w400),
+                      ),
+                      SizedBox(
+                        height: getProportionateScreenWidth(15),
+                      ),
+                      Column(children: [
+                        ...List.generate(
+                            kListCategory.length,
+                            (index) => SizedBox(
+                                  height: getProportionateScreenWidth(35),
+                                  child: CheckboxListTile(
+                                    value: fakeListCategory
+                                        .contains(kListCategory[index]),
+                                    onChanged: (value) {
+                                      setState(() {
+                                        if (value != null) {
+                                          if (value) {
+                                            fakeListCategory
+                                                .add(kListCategory[index]);
+                                          } else {
+                                            fakeListCategory
+                                                .remove(kListCategory[index]);
+                                          }
+                                        }
+                                      });
+                                    },
+                                    title: Text(
+                                      kListCategory[index],
+                                      style: TextStyle(
+                                          color: kTextColor1,
+                                          fontSize:
+                                              getProportionateScreenWidth(18),
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                    activeColor: kSelectedButtonColor,
+                                  ),
+                                ))
+                      ]),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: getProportionateScreenWidth(40),
+                ),
+                Container(
+                  height: getProportionateScreenWidth(40),
+                  width: getProportionateScreenWidth(375),
+                  margin:
+                      EdgeInsets.only(bottom: getProportionateScreenWidth(30)),
+                  decoration: BoxDecoration(
+                    color: kSelectedButtonColor,
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: TextButton(
+                      onPressed: () async {
+                        setState(() {
+                          listCategorySelected.clear();
+                          listCategorySelected.addAll(fakeListCategory);
+                          values = fakeValues;
+                          min = fakeValues.start;
+                          max = fakeValues.end;
+                          ratingGroup = rating;
+                        });
+                        await favoriteController.filterProduct(
+                            rating, values, fakeListCategory);
+                        Navigator.pop(context);
+                      },
+                      child: Text("Apply",
+                          style: TextStyle(
+                            color: kTextColor3,
+                            fontSize: getProportionateScreenWidth(18),
+                            fontWeight: FontWeight.w600,
+                          ))),
+                ),
+              ],
+            ),
           ),
-        )),
+        ),
         endDrawer: Drawer(
           child: Container(),
         ),

@@ -23,6 +23,7 @@ class HomeScreen extends StatelessWidget {
     return homeController.obx((state) {
       return Scaffold(
         body: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           child: Column(
             children: [
               Container(
@@ -175,6 +176,7 @@ class HomeScreen extends StatelessWidget {
                         SizedBox(
                           height: getProportionateScreenWidth(190),
                           child: SingleChildScrollView(
+                            physics: const BouncingScrollPhysics(),
                             scrollDirection: Axis.horizontal,
                             child: Row(
                               children: [
@@ -272,6 +274,7 @@ class HomeScreen extends StatelessWidget {
                         SizedBox(
                           height: getProportionateScreenWidth(100),
                           child: SingleChildScrollView(
+                            physics: const BouncingScrollPhysics(),
                             scrollDirection: Axis.horizontal,
                             child: Row(
                               children: [

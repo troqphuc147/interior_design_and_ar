@@ -13,7 +13,7 @@ class CategoryLine extends StatelessWidget {
     "assets/images/lamp.png",
     "assets/images/bed.png"
   ];
-  final List nameCategorys = ["Chair", "Table", "Lamp", "Bed"];
+  final List nameCategorys = kListCategory;
   final List colors = [
     const Color(0xFFDADADA),
     const Color(0xFFC4C4C4),
@@ -26,6 +26,7 @@ class CategoryLine extends StatelessWidget {
     return SizedBox(
       height: getProportionateScreenWidth(71),
       child: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
         child: Row(
           children: [
