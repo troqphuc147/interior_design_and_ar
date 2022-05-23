@@ -62,6 +62,8 @@ class MainController extends GetxController with StateMixin {
   loadPopularProducts(String category) async {
     change(null, status: RxStatus.loading());
     _listManyPopular.clear();
+    _listManyShowedPopular.clear();
+
     await database
         .loadPopularProducts(category)
         .then((v) => _listManyPopular.value = v);
@@ -73,6 +75,7 @@ class MainController extends GetxController with StateMixin {
   loadNewProducts(String category) async {
     change(null, status: RxStatus.loading());
     _listManyNew.clear();
+    _listManyShowedNew.clear();
     await database
         .loadNewProducts(category)
         .then((v) => _listManyNew.value = v);

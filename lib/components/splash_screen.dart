@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:interior_design_and_ar/custom_nav_bar.dart';
-import 'package:interior_design_and_ar/screens/home/home_sceen.dart';
 import 'package:splashscreen/splashscreen.dart';
-
 import '../size_config.dart';
 
 class CustomSplashScreen extends StatelessWidget {
@@ -11,15 +9,19 @@ class CustomSplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    return SplashScreen(
-      backgroundColor: const Color(0xfff2b533),
-      useLoader: false,
-      seconds: 5,
-      image: Image.asset(
-        "assets/images/loading.gif",
+    return Container(
+      color: const Color(0xffffffff),
+      padding: EdgeInsets.only(top: getProportionateScreenWidth(160)),
+      child: SplashScreen(
+        backgroundColor: const Color(0xffffffff),
+        useLoader: false,
+        seconds: 5,
+        image: Image.asset(
+          "assets/images/startApp.gif",
+        ),
+        photoSize: getProportionateScreenWidth(180),
+        navigateAfterSeconds: const CustomNavBar(),
       ),
-      photoSize: 200,
-      navigateAfterSeconds: const CustomNavBar(),
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:interior_design_and_ar/screens/home/components/list_product_category_screen.dart';
 import 'package:splashscreen/splashscreen.dart';
+import '../../../size_config.dart';
 
 class LoadingSplashScreen extends StatelessWidget {
   final String category;
@@ -9,16 +10,20 @@ class LoadingSplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SplashScreen(
-      backgroundColor: const Color(0xfff2b533),
-      useLoader: true,
-      seconds: 5,
-      image: Image.asset(
-        "assets/images/loading.gif",
-      ),
-      photoSize: 200,
-      navigateAfterSeconds: ListProductCategoryScreen(
-        category: category,
+    return Container(
+      color: const Color(0xffffffff),
+      padding: EdgeInsets.only(top: getProportionateScreenWidth(160)),
+      child: SplashScreen(
+        backgroundColor: const Color(0xffffffff),
+        useLoader: false,
+        seconds: 5,
+        image: Image.asset(
+          "assets/images/loading.gif",
+        ),
+        photoSize: getProportionateScreenWidth(180),
+        navigateAfterSeconds: ListProductCategoryScreen(
+          category: category,
+        ),
       ),
     );
   }

@@ -153,11 +153,14 @@ class HomeLoadingScreen extends StatelessWidget {
                       ),
                       SizedBox(
                         height: getProportionateScreenWidth(190),
-                        child: const Center(
-                            child: SpinKitPouringHourGlassRefined(
-                          color: kSelectedButtonColor,
-                          size: 40.0,
-                        )),
+                        child: Center(
+                          child: Image.asset(
+                            "assets/images/loadingList.gif",
+                            width: 100,
+                            height: 100,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
                       )
                     ],
                   ),
@@ -202,11 +205,14 @@ class HomeLoadingScreen extends StatelessWidget {
                       ),
                       SizedBox(
                         height: getProportionateScreenWidth(100),
-                        child: const Center(
-                            child: SpinKitPouringHourGlassRefined(
-                          color: kSelectedButtonColor,
-                          size: 40.0,
-                        )),
+                        child: Center(
+                          child: Image.asset(
+                            "assets/images/loadingList.gif",
+                            width: 100,
+                            height: 100,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
                       )
                     ],
                   )
