@@ -69,7 +69,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
                 color: currentScreen == 2 ? kSelectedButtonColor : kTextColor1,
               ),
               title: const Text(
-                "Profiles",
+                "Profile",
                 style: TextStyle(fontSize: 18),
               ),
               activeColor: kSelectedButtonColor,

@@ -38,7 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
-      backgroundColor: kBackgroundColor,
+      // backgroundColor: kBackgroundColor,
       body: Padding(
           padding: EdgeInsets.symmetric(
               vertical: 0, horizontal: getProportionateScreenWidth(16)),
@@ -59,7 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
               Text(
                 "Modern  Furnitures",
                 style: TextStyle(
-                  fontSize: getProportionateScreenWidth(45),
+                  fontSize: getProportionateScreenWidth(36),
                   fontWeight: FontWeight.w700,
                   color: kTextColor1,
                 ),
@@ -67,7 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
               Text(
                 "For  Your  House",
                 style: TextStyle(
-                  fontSize: getProportionateScreenWidth(45),
+                  fontSize: getProportionateScreenWidth(36),
                   fontWeight: FontWeight.w700,
                   color: kTextColor1,
                 ),
