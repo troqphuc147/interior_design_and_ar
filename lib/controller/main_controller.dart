@@ -1,8 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:interior_design_and_ar/core/models/product.dart';
 import 'package:interior_design_and_ar/core/service/database.dart';
 import 'package:interior_design_and_ar/core/service/storage.dart';
 
+import '../constants.dart';
 import '../core/service/auth.dart';
 
 class MainController extends GetxController with StateMixin {
@@ -18,8 +20,12 @@ class MainController extends GetxController with StateMixin {
 
   final RxList<Product> _listManyPopular = <Product>[].obs;
   final RxList<Product> _listManyNew = <Product>[].obs;
+  final RxList<Product> _listManyShowedPopular = <Product>[].obs;
+  final RxList<Product> _listManyShowedNew = <Product>[].obs;
   RxList get listManyPopular => _listManyPopular;
   RxList get listManyNew => _listManyNew;
+  RxList get listManyShowedPopular => _listManyShowedPopular;
+  RxList get listManyShowedNew => _listManyShowedNew;
 
   final RxList<String> _listFavoriteId = <String>[].obs;
   RxList get listFavoriteId => _listFavoriteId;
@@ -34,6 +40,8 @@ class MainController extends GetxController with StateMixin {
     _listManyPopular.value = [];
     _listManyNew.value = [];
     _listFavoriteId.value = [];
+    _listManyShowedNew.value = [];
+    _listManyShowedPopular.value = [];
     await getListFavoriteId();
     await loadProduct("All");
   }
@@ -57,6 +65,8 @@ class MainController extends GetxController with StateMixin {
     await database
         .loadPopularProducts(category)
         .then((v) => _listManyPopular.value = v);
+    _listManyShowedPopular.addAll(_listManyPopular);
+
     change(null, status: RxStatus.success());
   }
 
@@ -66,10 +76,30 @@ class MainController extends GetxController with StateMixin {
     await database
         .loadNewProducts(category)
         .then((v) => _listManyNew.value = v);
+    _listManyShowedNew.addAll(_listManyNew);
+
     change(null, status: RxStatus.success());
   }
 
   ratingProduct(Product product, int rate) async {
+    if (_listManyShowedPopular
+        .where((element) => element.id == product.id)
+        .toList()
+        .isNotEmpty) {
+      _listPopular.firstWhere((element) => element.id == product.id).rating =
+          product.rating;
+      _listPopular.firstWhere((element) => element.id == product.id).numVote =
+          product.numVote;
+    }
+    if (_listManyShowedNew
+        .where((element) => element.id == product.id)
+        .toList()
+        .isNotEmpty) {
+      _listPopular.firstWhere((element) => element.id == product.id).rating =
+          product.rating;
+      _listPopular.firstWhere((element) => element.id == product.id).numVote =
+          product.numVote;
+    }
     if (_listPopular
         .where((element) => element.id == product.id)
         .toList()
@@ -78,7 +108,6 @@ class MainController extends GetxController with StateMixin {
           product.rating;
       _listPopular.firstWhere((element) => element.id == product.id).numVote =
           product.numVote;
-      print('set in pp');
     }
     if (_listNew
         .where((element) => element.id == product.id)
@@ -88,7 +117,6 @@ class MainController extends GetxController with StateMixin {
           product.rating;
       _listNew.firstWhere((element) => element.id == product.id).numVote =
           product.numVote;
-      print('set in  new');
     }
     if (_listManyPopular
         .where((element) => element.id == product.id)
@@ -100,7 +128,6 @@ class MainController extends GetxController with StateMixin {
       _listManyPopular
           .firstWhere((element) => element.id == product.id)
           .numVote = product.numVote;
-      print('set in many pp');
     }
     if (_listManyNew
         .where((element) => element.id == product.id)
@@ -110,7 +137,6 @@ class MainController extends GetxController with StateMixin {
           product.rating;
       _listManyNew.firstWhere((element) => element.id == product.id).numVote =
           product.numVote;
-      print('set in many new');
     }
     update();
     await database.rating(product, rate);
@@ -132,5 +158,41 @@ class MainController extends GetxController with StateMixin {
   deleteInFavoriteList(String productId) async {
     _listFavoriteId.remove(productId);
     await firebase.unLikeProduct(productId);
+  }
+
+  filterNewProduct(
+      String rating, RangeValues rangeCostValues, List<String> category) {
+    double maxRating = 0;
+    double minRating = 0;
+    if (rating == kListRating[0]) {
+      maxRating = 5;
+      minRating = 1;
+    } else if (rating == kListRating[1]) {
+      maxRating = 5;
+      minRating = 4.5;
+    } else if (rating == kListRating[2]) {
+      maxRating = 4.4;
+      minRating = 3.6;
+    } else if (rating == kListRating[1]) {
+      maxRating = 3.5;
+      minRating = 2.6;
+    } else if (rating == kListRating[1]) {
+      maxRating = 2.5;
+      minRating = 2.0;
+    } else if (rating == kListRating[1]) {
+      maxRating = 2.0;
+      minRating = 1.0;
+    }
+
+    _listManyShowedNew.clear();
+    for (int i = 0; i < _listManyNew.length; i++) {
+      if (double.parse(_listManyNew[i].rating) >= minRating &&
+          double.parse(_listManyNew[i].rating) <= maxRating &&
+          double.parse(_listManyNew[i].cost) >= rangeCostValues.start &&
+          double.parse(_listManyNew[i].cost) <= rangeCostValues.end &&
+          category.contains(_listManyNew[i].nameCategory)) {
+        _listManyShowedNew.add(_listManyNew[i]);
+      }
+    }
   }
 }

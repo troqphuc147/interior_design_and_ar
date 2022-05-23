@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:group_radio_button/group_radio_button.dart';
@@ -23,8 +25,8 @@ class _ListProductCategoryScreenState extends State<ListProductCategoryScreen> {
   final MainController homeController = Get.find<MainController>();
   String rating = "All";
   String ratingGroup = "All";
-  double min = 30;
-  double max = 200;
+  double min = 1;
+  double max = 500;
   late RangeValues values;
   late RangeValues fakeValues;
   List<String> listCategorySelected = [];
@@ -98,7 +100,13 @@ class _ListProductCategoryScreenState extends State<ListProductCategoryScreen> {
             actions: [
               Builder(
                   builder: (context) => IconButton(
-                      onPressed: () => Scaffold.of(context).openEndDrawer(),
+                      onPressed: () {
+                        setState(() {
+                          fakeValues = RangeValues(min, max);
+                          rating = ratingGroup;
+                        });
+                        Scaffold.of(context).openEndDrawer();
+                      },
                       icon: Icon(
                         Icons.filter_alt,
                         color: kTextColor1,
@@ -149,7 +157,8 @@ class _ListProductCategoryScreenState extends State<ListProductCategoryScreen> {
                             runSpacing: getProportionateScreenWidth(10),
                             children: [
                               ...List.generate(
-                                  homeController.listManyNew.length, (index) {
+                                  homeController.listManyShowedNew.length,
+                                  (index) {
                                 return Obx(
                                   () => GestureDetector(
                                     onTap: () async {
@@ -158,25 +167,27 @@ class _ListProductCategoryScreenState extends State<ListProductCategoryScreen> {
                                           MaterialPageRoute(
                                             builder: (context) => ProductDetail(
                                               product: homeController
-                                                  .listManyNew[index],
+                                                  .listManyShowedNew[index],
                                               category: "category",
                                               isFavorite: homeController
                                                   .listFavoriteId
                                                   .contains(
                                                 homeController
-                                                    .listManyNew[index].id,
+                                                    .listManyShowedNew[index]
+                                                    .id,
                                               ),
                                             ),
                                           ));
                                     },
                                     child: PopularProductCard(
-                                        product:
-                                            homeController.listManyNew[index],
+                                        product: homeController
+                                            .listManyShowedNew[index],
                                         category: "category",
                                         isFavorite: homeController
                                             .listFavoriteId
                                             .contains(
-                                          homeController.listManyNew[index].id,
+                                          homeController
+                                              .listManyShowedNew[index].id,
                                         )),
                                   ),
                                 );
@@ -322,6 +333,11 @@ class _ListProductCategoryScreenState extends State<ListProductCategoryScreen> {
                             max = fakeValues.end;
                             ratingGroup = rating;
                           });
+                          List<String> list = [];
+                          list.add(widget.category);
+                          await homeController.filterNewProduct(
+                              rating, values, list);
+                          Navigator.pop(context);
                         },
                         child: Text("Apply",
                             style: TextStyle(

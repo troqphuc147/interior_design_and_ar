@@ -19,8 +19,8 @@ class FavoriteScreen extends StatefulWidget {
 class _FavoriteScreenState extends State<FavoriteScreen> {
   String rating = "All";
   String ratingGroup = "All";
-  double min = 30;
-  double max = 200;
+  double min = 1;
+  double max = 500;
   late RangeValues values;
   late RangeValues fakeValues;
   List<String> listCategorySelected = [];
@@ -306,7 +306,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                         ),
                       ),
                       RangeSlider(
-                        divisions: 500,
+                        divisions: 250,
                         inactiveColor: kTextColor2,
                         activeColor: kSelectedButtonColor,
                         min: 0,

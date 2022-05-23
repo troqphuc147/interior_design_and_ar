@@ -137,13 +137,28 @@ class _ProductDetailState extends State<ProductDetail> {
                                   SizedBox(
                                     height: getProportionateScreenWidth(8),
                                   ),
-                                  Text(
-                                    widget.product.name,
-                                    style: TextStyle(
-                                      fontSize: getProportionateScreenWidth(24),
-                                      fontWeight: FontWeight.bold,
-                                      color: kTextColor1,
-                                    ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        widget.product.name,
+                                        style: TextStyle(
+                                          fontSize:
+                                              getProportionateScreenWidth(24),
+                                          fontWeight: FontWeight.bold,
+                                          color: kTextColor1,
+                                        ),
+                                      ),
+                                      Text(
+                                        '\$ ' + widget.product.cost,
+                                        style: TextStyle(
+                                            fontSize:
+                                                getProportionateScreenWidth(18),
+                                            color: kTextColor1,
+                                            fontWeight: FontWeight.w700),
+                                      )
+                                    ],
                                   ),
                                   SizedBox(
                                     height: getProportionateScreenWidth(12),
