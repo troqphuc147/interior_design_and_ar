@@ -18,18 +18,11 @@ class FavoriteScreen extends StatefulWidget {
 
 class _FavoriteScreenState extends State<FavoriteScreen> {
   String rating = "All";
-  String ratingGroup = "All";
-  double min = 1;
-  double max = 500;
-  late RangeValues values;
   late RangeValues fakeValues;
-  List<String> listCategorySelected = [];
   List<String> fakeListCategory = [];
   @override
   void initState() {
     super.initState();
-    listCategorySelected.addAll(kListCategory);
-    values = RangeValues(min, max);
     fakeValues = const RangeValues(0, 0);
   }
 
@@ -126,9 +119,12 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                         return GestureDetector(
                           onTap: () => {
                             setState(() {
-                              rating = ratingGroup;
-                              fakeValues = RangeValues(min, max);
-                              fakeListCategory.addAll(listCategorySelected);
+                              rating = favoriteController.ratingGroup.value;
+                              fakeValues = RangeValues(
+                                  favoriteController.minCost.value,
+                                  favoriteController.maxCost.value);
+                              fakeListCategory.addAll(
+                                  favoriteController.listCategorySelected);
                             }),
                             Scaffold.of(context).openDrawer(),
                           },
@@ -317,7 +313,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                             if (v.end - v.start >= 20) {
                               fakeValues = v;
                             } else {
-                              if (v.start == values.start) {
+                              if (v.start == fakeValues.start) {
                                 fakeValues = RangeValues(
                                     fakeValues.start, fakeValues.start + 20);
                               } else {
@@ -394,16 +390,8 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                   ),
                   child: TextButton(
                       onPressed: () async {
-                        setState(() {
-                          listCategorySelected.clear();
-                          listCategorySelected.addAll(fakeListCategory);
-                          values = fakeValues;
-                          min = fakeValues.start;
-                          max = fakeValues.end;
-                          ratingGroup = rating;
-                        });
                         await favoriteController.filterProduct(
-                            rating, values, fakeListCategory);
+                            rating, fakeValues, fakeListCategory);
                         Navigator.pop(context);
                       },
                       child: Text("Apply",

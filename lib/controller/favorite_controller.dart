@@ -4,7 +4,6 @@ import 'package:interior_design_and_ar/constants.dart';
 import 'package:interior_design_and_ar/core/models/category.dart';
 import 'package:interior_design_and_ar/core/models/product.dart';
 import 'package:interior_design_and_ar/core/service/database.dart';
-
 import '../core/service/auth.dart';
 
 class FavoriteController extends GetxController with StateMixin {
@@ -18,12 +17,26 @@ class FavoriteController extends GetxController with StateMixin {
   late DatabaseService database;
   DatabaseService get firebase => database;
 
+  final RxString _ratingGroup = "".obs;
+  RxString get ratingGroup => _ratingGroup;
+  final RxDouble _minCost = 1.0.obs;
+  RxDouble get minCost => _minCost;
+  final RxDouble _maxCost = 1.0.obs;
+  RxDouble get maxCost => _maxCost;
+  final RxList<String> _listCategorySelected = <String>[].obs;
+  RxList<String> get listCategorySelected => _listCategorySelected;
+
   @override
   Future<void> onInit() async {
     super.onInit();
     database = DatabaseService(uid: authService.getCurrentUser?.uid ?? "");
     _listFavorite.value = [];
     _listShowedProduct.value = [];
+    _ratingGroup.value = "All";
+    _minCost.value = 0;
+    _maxCost.value = 500;
+    _listCategorySelected.value = [];
+    listCategorySelected.addAll(kListCategory);
     await loadProduct();
   }
 
@@ -62,6 +75,11 @@ class FavoriteController extends GetxController with StateMixin {
 
   filterProduct(
       String rating, RangeValues rangeCostValues, List<String> category) {
+    _ratingGroup.value = rating;
+    _minCost.value = rangeCostValues.start;
+    _maxCost.value = rangeCostValues.end;
+    _listCategorySelected.clear();
+    _listCategorySelected.addAll(category);
     double maxRating = 0;
     double minRating = 0;
     if (rating == kListRating[0]) {
