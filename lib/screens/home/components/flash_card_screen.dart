@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:interior_design_and_ar/screens/home/components/list_product_category.dart';
+import 'package:interior_design_and_ar/screens/home/components/list_product_category_screen.dart';
 import 'package:splashscreen/splashscreen.dart';
 
 class LoadingSplashScreen extends StatelessWidget {

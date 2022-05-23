@@ -9,6 +9,7 @@ class Product {
   String description;
   String linkAr;
   String linkImage;
+  String cost;
   var rating;
   var numVote;
   Product(
@@ -19,6 +20,7 @@ class Product {
       required this.idImage,
       required this.idCategory,
       required this.numVote,
+      required this.cost,
       required this.linkAr,
       required this.linkImage,
       required this.nameCategory});
@@ -34,6 +36,7 @@ class Product {
       'linkAr': linkAr,
       'numVote': numVote,
       'idImage': idImage,
+      'cost': cost,
       'linkImage': linkImage,
     };
   }
@@ -44,6 +47,7 @@ class Product {
         name: data['name'],
         description: data['description'],
         rating: data['rating'],
+        cost: data['cost'],
         idCategory: data['idCategory'],
         nameCategory: data['nameCategory'],
         linkImage: data['linkImage'],

@@ -92,6 +92,17 @@ class _FavoriteProductCardState extends State<FavoriteProductCard> {
                                               getProportionateScreenWidth(12),
                                           color: kTextColor1,
                                           fontWeight: FontWeight.w700),
+                                    ),
+                                    SizedBox(
+                                      width: getProportionateScreenWidth(30),
+                                    ),
+                                    Text(
+                                      "\$" + widget.product.cost,
+                                      style: TextStyle(
+                                          fontSize:
+                                              getProportionateScreenWidth(12),
+                                          color: kTextColor1,
+                                          fontWeight: FontWeight.w700),
                                     )
                                   ],
                                 ),
@@ -123,7 +134,12 @@ class _FavoriteProductCardState extends State<FavoriteProductCard> {
                                       height: getProportionateScreenWidth(
                                           getProportionateScreenWidth(32)),
                                       child: TextButton(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          mainController.deleteInFavoriteList(
+                                              widget.product.id);
+                                          favoriteController.deleteItemsInList(
+                                              widget.product);
+                                        },
                                         child: Row(
                                           mainAxisSize: MainAxisSize.min,
                                           mainAxisAlignment:

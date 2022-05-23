@@ -74,7 +74,7 @@ class _NewProductCardState extends State<NewProductCard> {
                                     widget.product.name,
                                     style: TextStyle(
                                         fontSize:
-                                            getProportionateScreenWidth(12),
+                                            getProportionateScreenWidth(13),
                                         color: kTextColor1,
                                         fontWeight: FontWeight.w700),
                                     overflow: TextOverflow.clip,
@@ -83,7 +83,7 @@ class _NewProductCardState extends State<NewProductCard> {
                                   ),
                                 ),
                                 SizedBox(
-                                  height: getProportionateScreenWidth(4),
+                                  height: getProportionateScreenWidth(2),
                                 ),
                                 Row(
                                   mainAxisSize: MainAxisSize.min,
@@ -103,6 +103,16 @@ class _NewProductCardState extends State<NewProductCard> {
                                           fontWeight: FontWeight.w700),
                                     )
                                   ],
+                                ),
+                                SizedBox(
+                                  height: getProportionateScreenWidth(2),
+                                ),
+                                Text(
+                                  "   \$   " + widget.product.cost,
+                                  style: TextStyle(
+                                      fontSize: getProportionateScreenWidth(12),
+                                      color: kTextColor1,
+                                      fontWeight: FontWeight.w700),
                                 )
                               ],
                             ),

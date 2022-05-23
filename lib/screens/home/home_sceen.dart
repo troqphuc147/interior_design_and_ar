@@ -174,7 +174,7 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                         SizedBox(
-                          height: getProportionateScreenWidth(190),
+                          height: getProportionateScreenWidth(198),
                           child: SingleChildScrollView(
                             physics: const BouncingScrollPhysics(),
                             scrollDirection: Axis.horizontal,

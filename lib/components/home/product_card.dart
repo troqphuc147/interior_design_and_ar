@@ -107,10 +107,10 @@ class _PopularProductCardState extends State<PopularProductCard> {
                         Text(
                           widget.product.name,
                           style: TextStyle(
-                              fontSize: getProportionateScreenWidth(12),
+                              fontSize: getProportionateScreenWidth(13),
                               color: kTextColor1,
                               fontWeight: FontWeight.w700),
-                          overflow: TextOverflow.clip,
+                          overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                           softWrap: false,
                         ),
@@ -119,7 +119,6 @@ class _PopularProductCardState extends State<PopularProductCard> {
                         ),
                         Row(
                           mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Icon(
                               Icons.star,
@@ -160,7 +159,7 @@ class _PopularProductCardState extends State<PopularProductCard> {
               ),
             ),
             SizedBox(
-              height: getProportionateScreenWidth(3),
+              height: getProportionateScreenWidth(8),
             )
           ],
         ),

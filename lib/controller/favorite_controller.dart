@@ -88,6 +88,8 @@ class FavoriteController extends GetxController with StateMixin {
     for (int i = 0; i < listFavorite.length; i++) {
       if (double.parse(listFavorite[i].rating) >= minRating &&
           double.parse(listFavorite[i].rating) <= maxRating &&
+          double.parse(listFavorite[i].cost) >= rangeCostValues.start &&
+          double.parse(listFavorite[i].cost) <= rangeCostValues.end &&
           category.contains(listFavorite[i].nameCategory)) {
         listShowedProduct.add(listFavorite[i]);
       }
