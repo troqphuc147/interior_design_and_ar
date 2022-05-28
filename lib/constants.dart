@@ -33,3 +33,10 @@ final List<String> kListRating = [
   "Satisfactory",
   "Bad"
 ];
+final List<String> kListSort = [
+  'Default',
+  'Cost ascending',
+  'Cost descending',
+  'Rating ascending',
+  'Rating descending',
+];

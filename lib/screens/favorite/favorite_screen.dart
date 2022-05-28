@@ -119,14 +119,14 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                         return GestureDetector(
                           onTap: () => {
                             setState(() {
-                              rating = favoriteController.ratingGroup.value;
+                              rating = favoriteController.rating.value;
                               fakeValues = RangeValues(
                                   favoriteController.minCost.value,
                                   favoriteController.maxCost.value);
                               fakeListCategory.addAll(
                                   favoriteController.listCategorySelected);
                             }),
-                            Scaffold.of(context).openDrawer(),
+                            Scaffold.of(context).openEndDrawer(),
                           },
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -148,7 +148,9 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                       }),
                       Builder(builder: (context) {
                         return GestureDetector(
-                          onTap: () => Scaffold.of(context).openEndDrawer(),
+                          onTap: () {
+                            showSortDialog(context, favoriteController);
+                          },
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             children: [
@@ -156,11 +158,15 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                 "assets/icons/sort.svg",
                                 color: kTextColor1,
                               ),
-                              Text(
-                                "Sort: Default",
-                                style: TextStyle(
-                                  color: kTextColor1,
-                                  fontSize: getProportionateScreenWidth(14),
+                              Obx(
+                                () => Text(
+                                  "Sort: " +
+                                      favoriteController
+                                          .sortMethodSelected.value,
+                                  style: TextStyle(
+                                    color: kTextColor1,
+                                    fontSize: getProportionateScreenWidth(14),
+                                  ),
                                 ),
                               )
                             ],
@@ -217,7 +223,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
             ],
           ),
         ),
-        drawer: Drawer(
+        endDrawer: Drawer(
           child: Padding(
             padding: EdgeInsets.symmetric(
               horizontal: getProportionateScreenWidth(20),
@@ -405,10 +411,98 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
             ),
           ),
         ),
-        endDrawer: Drawer(
-          child: Container(),
-        ),
       );
     }, onLoading: const LoadingScreen());
+  }
+
+  showSortDialog(BuildContext context, FavoriteController favoriteController) {
+    return showModalBottomSheet(
+        backgroundColor: Colors.transparent,
+        context: context,
+        builder: (BuildContext context) {
+          return Container(
+              height: getProportionateScreenWidth(300),
+              padding: EdgeInsets.all(getProportionateScreenWidth(20)),
+              decoration: const BoxDecoration(
+                  color: Color(0xfff5f4f4),
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(50),
+                      topRight: Radius.circular(50))),
+              child: ButtonTheme(
+                  height: getProportionateScreenWidth(280),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Center(
+                          child: Container(
+                            width: getProportionateScreenWidth(60),
+                            height: getProportionateScreenWidth(6),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(50),
+                              color: kSelectedButtonColor,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: getProportionateScreenWidth(15),
+                        ),
+                        Center(
+                          child: Text(
+                            "Sort by",
+                            style: TextStyle(
+                                fontSize: getProportionateScreenWidth(18),
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                        SizedBox(
+                          height: getProportionateScreenWidth(8),
+                        ),
+                        ...List.generate(
+                            kListSort.length,
+                            (index) => Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Container(
+                                      width: double.infinity,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5),
+                                        color: kListSort[index] ==
+                                                favoriteController
+                                                    .sortMethodSelected.value
+                                            ? kSelectedButtonColor
+                                            : Colors.transparent,
+                                      ),
+                                      padding: EdgeInsets.symmetric(
+                                          vertical:
+                                              getProportionateScreenWidth(8),
+                                          horizontal:
+                                              getProportionateScreenWidth(10)),
+                                      child: GestureDetector(
+                                        onTap: () async {
+                                          await favoriteController
+                                              .sort(kListSort[index]);
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text(
+                                          kListSort[index],
+                                          style: TextStyle(
+                                            fontSize:
+                                                getProportionateScreenWidth(18),
+                                            fontWeight: FontWeight.w600,
+                                            color: kListSort[index] ==
+                                                    favoriteController
+                                                        .sortMethodSelected
+                                                        .value
+                                                ? Colors.white
+                                                : kTextColor1,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                )),
+                      ])));
+        });
   }
 }

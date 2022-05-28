@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:interior_design_and_ar/constants.dart';
-import 'package:interior_design_and_ar/core/models/category.dart';
 import 'package:interior_design_and_ar/core/models/product.dart';
 import 'package:interior_design_and_ar/core/service/database.dart';
 import '../core/service/auth.dart';
@@ -17,14 +16,18 @@ class FavoriteController extends GetxController with StateMixin {
   late DatabaseService database;
   DatabaseService get firebase => database;
 
-  final RxString _ratingGroup = "".obs;
-  RxString get ratingGroup => _ratingGroup;
+  final RxString _rating = "All".obs;
+  RxString get rating => _rating;
+  double _minRating = 1;
+  double _maxRating = 5;
   final RxDouble _minCost = 1.0.obs;
   RxDouble get minCost => _minCost;
   final RxDouble _maxCost = 1.0.obs;
   RxDouble get maxCost => _maxCost;
   final RxList<String> _listCategorySelected = <String>[].obs;
   RxList<String> get listCategorySelected => _listCategorySelected;
+  final RxString _sortMethodSelected = "".obs;
+  RxString get sortMethodSelected => _sortMethodSelected;
 
   @override
   Future<void> onInit() async {
@@ -32,10 +35,10 @@ class FavoriteController extends GetxController with StateMixin {
     database = DatabaseService(uid: authService.getCurrentUser?.uid ?? "");
     _listFavorite.value = [];
     _listShowedProduct.value = [];
-    _ratingGroup.value = "All";
     _minCost.value = 0;
     _maxCost.value = 500;
     _listCategorySelected.value = [];
+    _sortMethodSelected.value = kListSort[0];
     listCategorySelected.addAll(kListCategory);
     await loadProduct();
   }
@@ -52,12 +55,14 @@ class FavoriteController extends GetxController with StateMixin {
 
   deleteItemsInList(Product product) {
     _listFavorite.removeWhere((element) => element.id == product.id);
-    _listShowedProduct.removeWhere((element) => element.id == product.id);
+    filterProduct(_rating.value, RangeValues(_minCost.value, maxCost.value),
+        _listCategorySelected);
   }
 
   addItemsIntoList(Product product) {
     _listFavorite.add(product);
-    _listShowedProduct.add(product);
+    filterProduct(_rating.value, RangeValues(_minCost.value, maxCost.value),
+        _listCategorySelected);
   }
 
   showWithCategory(String category) {
@@ -75,42 +80,94 @@ class FavoriteController extends GetxController with StateMixin {
 
   filterProduct(
       String rating, RangeValues rangeCostValues, List<String> category) {
-    _ratingGroup.value = rating;
     _minCost.value = rangeCostValues.start;
     _maxCost.value = rangeCostValues.end;
+    _rating.value = rating;
+    List<String> ctgr = [];
+    ctgr.addAll(category);
     _listCategorySelected.clear();
-    _listCategorySelected.addAll(category);
-    double maxRating = 0;
-    double minRating = 0;
-    if (rating == kListRating[0]) {
-      maxRating = 5;
-      minRating = 1;
-    } else if (rating == kListRating[1]) {
-      maxRating = 5;
-      minRating = 4.5;
-    } else if (rating == kListRating[2]) {
-      maxRating = 4.4;
-      minRating = 3.6;
-    } else if (rating == kListRating[1]) {
-      maxRating = 3.5;
-      minRating = 2.6;
-    } else if (rating == kListRating[1]) {
-      maxRating = 2.5;
-      minRating = 2.0;
-    } else if (rating == kListRating[1]) {
-      maxRating = 2.0;
-      minRating = 1.0;
-    }
-
-    listShowedProduct.clear();
+    _listCategorySelected.addAll(ctgr);
+    _listShowedProduct.clear();
+    setRatingValue(rating);
     for (int i = 0; i < listFavorite.length; i++) {
-      if (double.parse(listFavorite[i].rating) >= minRating &&
-          double.parse(listFavorite[i].rating) <= maxRating &&
-          double.parse(listFavorite[i].cost) >= rangeCostValues.start &&
-          double.parse(listFavorite[i].cost) <= rangeCostValues.end &&
-          category.contains(listFavorite[i].nameCategory)) {
-        listShowedProduct.add(listFavorite[i]);
+      if (double.parse(listFavorite[i].rating) >= _minRating &&
+          double.parse(listFavorite[i].rating) <= _maxRating &&
+          double.parse(listFavorite[i].cost) >= _minCost.value &&
+          double.parse(listFavorite[i].cost) <= _maxCost.value &&
+          _listCategorySelected.contains(listFavorite[i].nameCategory)) {
+        _listShowedProduct.add(listFavorite[i]);
       }
+    }
+    sort(_sortMethodSelected.value);
+  }
+
+  void setRatingValue(String rating) {
+    if (rating == kListRating[0]) {
+      _maxRating = 5;
+      _minRating = 1;
+    } else if (rating == kListRating[1]) {
+      _maxRating = 5;
+      _minRating = 4.5;
+    } else if (rating == kListRating[2]) {
+      _maxRating = 4.4;
+      _minRating = 3.6;
+    } else if (rating == kListRating[1]) {
+      _maxRating = 3.5;
+      _minRating = 2.6;
+    } else if (rating == kListRating[1]) {
+      _maxRating = 2.5;
+      _minRating = 2.0;
+    } else if (rating == kListRating[1]) {
+      _maxRating = 2.0;
+      _minRating = 1.0;
+    }
+  }
+
+  sortDefault() {
+    _listShowedProduct.clear();
+    for (int i = 0; i < listFavorite.length; i++) {
+      if (double.parse(listFavorite[i].rating) >= _minRating &&
+          double.parse(listFavorite[i].rating) <= _maxRating &&
+          double.parse(listFavorite[i].cost) >= _minCost.value &&
+          double.parse(listFavorite[i].cost) <= _maxCost.value &&
+          _listCategorySelected.contains(listFavorite[i].nameCategory)) {
+        _listShowedProduct.add(listFavorite[i]);
+      }
+    }
+  }
+
+  sortByCostAscending() {
+    _listShowedProduct
+        .sort((a, b) => double.parse(a.cost).compareTo(double.parse(b.cost)));
+  }
+
+  sortByCostDescending() {
+    _listShowedProduct
+        .sort((a, b) => double.parse(b.cost).compareTo(double.parse(a.cost)));
+  }
+
+  sortByRatingAscending() {
+    _listShowedProduct.sort(
+        (a, b) => double.parse(a.rating).compareTo(double.parse(b.rating)));
+  }
+
+  sortByRatingDescending() {
+    _listShowedProduct.sort(
+        (a, b) => double.parse(b.rating).compareTo(double.parse(a.rating)));
+  }
+
+  sort(String method) {
+    _sortMethodSelected.value = method;
+    if (method == kListSort[1]) {
+      sortByCostAscending();
+    } else if (method == kListSort[2]) {
+      sortByCostDescending();
+    } else if (method == kListSort[3]) {
+      sortByRatingAscending();
+    } else if (method == kListSort[4]) {
+      sortByRatingDescending();
+    } else {
+      sortDefault();
     }
   }
 }
