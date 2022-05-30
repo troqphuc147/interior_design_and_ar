@@ -12,6 +12,8 @@ class MainController extends GetxController with StateMixin {
   final RxList<Product> _listNew = <Product>[].obs;
   RxList get listPopular => _listPopular;
   RxList get listNew => _listNew;
+  final RxList<String> _listOption = <String>[].obs;
+  RxList<String> get listOption => _listOption;
 
   AuthService authService = AuthService();
   late DatabaseService database;
@@ -42,6 +44,7 @@ class MainController extends GetxController with StateMixin {
     _listFavoriteId.value = [];
     _listManyShowedNew.value = [];
     _listManyShowedPopular.value = [];
+    _listOption.value = [];
     await getListFavoriteId();
     await loadProduct("All");
   }
@@ -56,6 +59,16 @@ class MainController extends GetxController with StateMixin {
     await database
         .getListNewProduct(category)
         .then((value) => _listNew.value = value);
+    for (var element in _listNew) {
+      if (!_listOption.contains(element.name.toLowerCase())) {
+        _listOption.add(element.name.toLowerCase());
+      }
+    }
+    for (var element in _listPopular) {
+      if (!_listOption.contains(element.name.toLowerCase())) {
+        _listOption.add(element.name.toLowerCase());
+      }
+    }
     change(null, status: RxStatus.success());
   }
 
@@ -70,6 +83,11 @@ class MainController extends GetxController with StateMixin {
     _listManyShowedPopular.addAll(_listManyPopular);
 
     change(null, status: RxStatus.success());
+    for (var element in _listManyPopular) {
+      if (!_listOption.contains(element.name.toLowerCase())) {
+        _listOption.add(element.name.toLowerCase());
+      }
+    }
   }
 
   loadNewProducts(String category) async {
@@ -80,8 +98,13 @@ class MainController extends GetxController with StateMixin {
         .loadNewProducts(category)
         .then((v) => _listManyNew.value = v);
     _listManyShowedNew.addAll(_listManyNew);
-
     change(null, status: RxStatus.success());
+    change(null, status: RxStatus.success());
+    for (var element in _listManyNew) {
+      if (!_listOption.contains(element.name.toLowerCase())) {
+        _listOption.add(element.name.toLowerCase());
+      }
+    }
   }
 
   ratingProduct(Product product, int rate) async {

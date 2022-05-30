@@ -20,7 +20,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
   @override
   void initState() {
     super.initState();
-    listScreen.add(const HomeScreen());
+    listScreen.add(HomeScreen());
     listScreen.add(const FavoriteScreen());
     listScreen.add(const ProfileScreen());
   }
