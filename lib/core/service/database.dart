@@ -189,9 +189,16 @@ class DatabaseService {
 
   Future<List<String>> getListFavoriteProductId() async {
     List<dynamic> listFavoriteID = [];
-    await users.doc(uid).get().then((value) => {
-          listFavoriteID = value.get('favoriteList'),
-        });
+    await users
+        .doc(uid)
+        .get()
+        .then((value) => listFavoriteID = value.get('favoriteList'))
+        .onError((error, stackTrace) async => {
+              await users
+                  .doc(uid)
+                  .set({'favoriteList': listFavoriteID}).onError(
+                      (error, stackTrace) => print(error)),
+            });
     List<String> rs = [];
     for (var element in listFavoriteID) {
       rs.add(element.toString());

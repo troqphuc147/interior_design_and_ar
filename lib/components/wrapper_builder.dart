@@ -9,7 +9,7 @@ class WrapperBuilder extends StatelessWidget {
   const WrapperBuilder({Key? key, required this.builder}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final auth = Provider.of<AuthService>(context, listen: false);
+    final auth = Provider.of<AuthService>(context, listen: true);
     return StreamBuilder<User?>(
         stream: auth.userStream,
         builder: (context, snapshot) {

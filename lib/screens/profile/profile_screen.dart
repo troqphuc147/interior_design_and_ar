@@ -2,6 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:interior_design_and_ar/constants.dart';
+import 'package:interior_design_and_ar/controller/favorite_controller.dart';
+import 'package:interior_design_and_ar/controller/main_controller.dart';
 import 'package:interior_design_and_ar/core/service/auth.dart';
 import 'package:interior_design_and_ar/screens/authentication/login_screen.dart';
 import 'package:interior_design_and_ar/size_config.dart';
@@ -36,17 +38,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     color: kTextColor1,
                     fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: getProportionateScreenWidth(32),),
+              SizedBox(
+                height: getProportionateScreenWidth(32),
+              ),
               Row(
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CircleAvatar(
                     radius: getProportionateScreenWidth(32),
-                    backgroundImage: AssetImage("assets/images/default_user_avatar.jpg"),
+                    backgroundImage:
+                        AssetImage("assets/images/default_user_avatar.jpg"),
                     // backgroundImage: NetworkImage(""),
                   ),
-                  SizedBox(width: getProportionateScreenWidth(16),),
+                  SizedBox(
+                    width: getProportionateScreenWidth(16),
+                  ),
                   SizedBox(
                     width: getProportionateScreenWidth(230),
                     child: Column(
@@ -79,14 +86,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   )
                 ],
               ),
-              SizedBox(height: getProportionateScreenWidth(32),),
+              SizedBox(
+                height: getProportionateScreenWidth(32),
+              ),
 
               ListTile(
-                onTap: () {
-
-                },
+                onTap: () {},
                 title: Padding(
-                  padding: EdgeInsets.only(left: getProportionateScreenWidth(8)),
+                  padding:
+                      EdgeInsets.only(left: getProportionateScreenWidth(8)),
                   child: Text(
                     'Your information',
                     style: TextStyle(
@@ -99,7 +107,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
                 subtitle: Padding(
-                  padding: EdgeInsets.only(left: getProportionateScreenWidth(8)),
+                  padding:
+                      EdgeInsets.only(left: getProportionateScreenWidth(8)),
                   child: Text(
                     'Your name and email',
                     style: TextStyle(
@@ -111,16 +120,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     maxLines: 1,
                   ),
                 ),
-                trailing: Icon(Icons.arrow_forward_ios, size: getProportionateScreenWidth(16),),
+                trailing: Icon(
+                  Icons.arrow_forward_ios,
+                  size: getProportionateScreenWidth(16),
+                ),
               ),
-              Divider(height: getProportionateScreenWidth(0), thickness: getProportionateScreenWidth(1),),
+              Divider(
+                height: getProportionateScreenWidth(0),
+                thickness: getProportionateScreenWidth(1),
+              ),
 
               ListTile(
-                onTap: () {
-
-                },
+                onTap: () {},
                 title: Padding(
-                  padding: EdgeInsets.only(left: getProportionateScreenWidth(8)),
+                  padding:
+                      EdgeInsets.only(left: getProportionateScreenWidth(8)),
                   child: Text(
                     'Your rating',
                     style: TextStyle(
@@ -133,7 +147,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
                 subtitle: Padding(
-                  padding: EdgeInsets.only(left: getProportionateScreenWidth(8)),
+                  padding:
+                      EdgeInsets.only(left: getProportionateScreenWidth(8)),
                   child: Text(
                     'You rated for 15 products',
                     style: TextStyle(
@@ -145,16 +160,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     maxLines: 1,
                   ),
                 ),
-                trailing: Icon(Icons.arrow_forward_ios, size: getProportionateScreenWidth(16),),
+                trailing: Icon(
+                  Icons.arrow_forward_ios,
+                  size: getProportionateScreenWidth(16),
+                ),
               ),
-              Divider(height: getProportionateScreenWidth(0), thickness: getProportionateScreenWidth(1),),
+              Divider(
+                height: getProportionateScreenWidth(0),
+                thickness: getProportionateScreenWidth(1),
+              ),
 
               ListTile(
-                onTap: () {
-
-                },
+                onTap: () {},
                 title: Padding(
-                  padding: EdgeInsets.only(left: getProportionateScreenWidth(8)),
+                  padding:
+                      EdgeInsets.only(left: getProportionateScreenWidth(8)),
                   child: Text(
                     'Help',
                     style: TextStyle(
@@ -167,7 +187,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
                 subtitle: Padding(
-                  padding: EdgeInsets.only(left: getProportionateScreenWidth(8)),
+                  padding:
+                      EdgeInsets.only(left: getProportionateScreenWidth(8)),
                   child: Text(
                     'Frequently asked questions',
                     style: TextStyle(
@@ -179,16 +200,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     maxLines: 1,
                   ),
                 ),
-                trailing: Icon(Icons.arrow_forward_ios, size: getProportionateScreenWidth(16),),
+                trailing: Icon(
+                  Icons.arrow_forward_ios,
+                  size: getProportionateScreenWidth(16),
+                ),
               ),
-              Divider(height: getProportionateScreenWidth(0), thickness: getProportionateScreenWidth(1),),
+              Divider(
+                height: getProportionateScreenWidth(0),
+                thickness: getProportionateScreenWidth(1),
+              ),
 
               ListTile(
-                onTap: () {
-
-                },
+                onTap: () {},
                 title: Padding(
-                  padding: EdgeInsets.only(left: getProportionateScreenWidth(8)),
+                  padding:
+                      EdgeInsets.only(left: getProportionateScreenWidth(8)),
                   child: Text(
                     'About',
                     style: TextStyle(
@@ -201,7 +227,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
                 subtitle: Padding(
-                  padding: EdgeInsets.only(left: getProportionateScreenWidth(8)),
+                  padding:
+                      EdgeInsets.only(left: getProportionateScreenWidth(8)),
                   child: Text(
                     'App introduction',
                     style: TextStyle(
@@ -213,18 +240,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     maxLines: 1,
                   ),
                 ),
-                trailing: Icon(Icons.arrow_forward_ios, size: getProportionateScreenWidth(16),),
+                trailing: Icon(
+                  Icons.arrow_forward_ios,
+                  size: getProportionateScreenWidth(16),
+                ),
               ),
-              Divider(height: getProportionateScreenWidth(0), thickness: getProportionateScreenWidth(1),),
+              Divider(
+                height: getProportionateScreenWidth(0),
+                thickness: getProportionateScreenWidth(1),
+              ),
 
               ListTile(
-                onTap: () {
-                  authService.signout();
-                  Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => LoginScreen()));
+                onTap: () async {
+                  await authService.signout();
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const LoginScreen()));
                 },
                 title: Padding(
-                  padding: EdgeInsets.only(left: getProportionateScreenWidth(8)),
+                  padding:
+                      EdgeInsets.only(left: getProportionateScreenWidth(8)),
                   child: Text(
                     'Sign out',
                     style: TextStyle(
@@ -237,7 +273,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
                 subtitle: Padding(
-                  padding: EdgeInsets.only(left: getProportionateScreenWidth(8)),
+                  padding:
+                      EdgeInsets.only(left: getProportionateScreenWidth(8)),
                   child: Text(
                     'You can sign in with another account',
                     style: TextStyle(
@@ -249,7 +286,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     maxLines: 1,
                   ),
                 ),
-                trailing: Icon(Icons.arrow_forward_ios, size: getProportionateScreenWidth(16),),
+                trailing: Icon(
+                  Icons.arrow_forward_ios,
+                  size: getProportionateScreenWidth(16),
+                ),
               ),
               // Divider(height: getProportionateScreenWidth(0), thickness: getProportionateScreenWidth(1),),
 

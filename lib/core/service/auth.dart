@@ -5,8 +5,8 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final GoogleSignIn googleSignIn = GoogleSignIn();
   Stream<User?> get userStream {
-
     _auth.authStateChanges().listen((user) {
       if (user == null) {
         print('User is currently signed out!');
@@ -16,6 +16,7 @@ class AuthService {
     });
     return _auth.authStateChanges();
   }
+
   User? get getCurrentUser => _auth.currentUser;
   Future signUpWithEmailAndPass(
       String email, String password, String name) async {
@@ -67,22 +68,25 @@ class AuthService {
       return e.code;
     }
   }
+
   Future changeName(String displayName) async {
-    try{
+    try {
       await _auth.currentUser!.updateDisplayName(displayName);
-    }
-    catch(e){
+    } catch (e) {
       print('error' + e.toString());
     }
   }
+
   Future signInWithGoogleAccount() async {
     try {
-      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      await googleSignIn.signOut();
+
+      final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
 
       if (googleUser == null) return null;
 
       final GoogleSignInAuthentication googleAuth =
-      await googleUser.authentication;
+          await googleUser.authentication;
 
       final OAuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
@@ -96,7 +100,7 @@ class AuthService {
       switch (e.code) {
         case 'account-exists-with-different-credential':
           error =
-          "This account is linked with another provider! Try another provider!";
+              "This account is linked with another provider! Try another provider!";
           break;
         case 'email-already-in-use':
           error = "Your email address has been registered.";
