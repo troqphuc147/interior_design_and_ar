@@ -134,6 +134,7 @@ class HomeScreen extends StatelessWidget {
                                 },
                                 onSelected: (String selection) {
                                   debugPrint('You just selected $selection');
+                                  FocusScope.of(context).unfocus();
                                 },
                                 optionsViewBuilder:
                                     (context, onSelected, options) {
@@ -185,12 +186,14 @@ class HomeScreen extends StatelessWidget {
                                               return GestureDetector(
                                                 onTap: () {
                                                   onSelected(option);
-                                                  FocusScope.of(context)
-                                                      .unfocus();
+
                                                   Product product =
                                                       homeController
                                                           .getSeachedProduct(
                                                               option);
+                                                  if (product.id == "") {
+                                                    return;
+                                                  }
                                                   Navigator.push(
                                                       context,
                                                       MaterialPageRoute(
@@ -205,6 +208,8 @@ class HomeScreen extends StatelessWidget {
                                                                       .contains(
                                                                           product
                                                                               .id))));
+                                                  FocusScope.of(context)
+                                                      .unfocus();
                                                 },
                                                 child: ListTile(
                                                   title: Text(option,
