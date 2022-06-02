@@ -221,4 +221,37 @@ class MainController extends GetxController with StateMixin {
       }
     }
   }
+
+  Product getSeachedProduct(String name) {
+    Product rs = Product(
+        id: "",
+        idCategory: "",
+        name: "",
+        nameCategory: "",
+        description: "",
+        rating: "",
+        idImage: 0,
+        linkAr: "",
+        linkImage: "",
+        numVote: "",
+        cost: "");
+    rs = _listNew.firstWhere((element) => element.name.toLowerCase() == name,
+        orElse: () => rs);
+    if (rs.id == "") {
+      rs = _listPopular.firstWhere(
+          (element) => element.name.toLowerCase() == name,
+          orElse: () => rs);
+    }
+    if (rs.id == "") {
+      rs = _listManyNew.firstWhere(
+          (element) => element.name.toLowerCase() == name,
+          orElse: () => rs);
+    }
+    if (rs.id == "") {
+      rs = _listManyPopular.firstWhere(
+          (element) => element.name.toLowerCase() == name,
+          orElse: () => rs);
+    }
+    return rs;
+  }
 }

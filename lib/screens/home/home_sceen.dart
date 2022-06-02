@@ -4,6 +4,7 @@ import 'package:interior_design_and_ar/components/home/new_product_card.dart';
 import 'package:interior_design_and_ar/constants.dart';
 import 'package:interior_design_and_ar/controller/favorite_controller.dart';
 import 'package:interior_design_and_ar/controller/main_controller.dart';
+import 'package:interior_design_and_ar/core/models/product.dart';
 import 'package:interior_design_and_ar/screens/home/components/category_line.dart';
 import 'package:interior_design_and_ar/screens/home/components/home_loading_screen.dart';
 import 'package:interior_design_and_ar/screens/product/loading_plash_screen.dart';
@@ -186,6 +187,24 @@ class HomeScreen extends StatelessWidget {
                                                   onSelected(option);
                                                   FocusScope.of(context)
                                                       .unfocus();
+                                                  Product product =
+                                                      homeController
+                                                          .getSeachedProduct(
+                                                              option);
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              ProductDetail(
+                                                                  product:
+                                                                      product,
+                                                                  category:
+                                                                      "non",
+                                                                  isFavorite: homeController
+                                                                      .listFavoriteId
+                                                                      .contains(
+                                                                          product
+                                                                              .id))));
                                                 },
                                                 child: ListTile(
                                                   title: Text(option,

@@ -62,7 +62,8 @@ class _ARView extends State<ARViewScreen> {
                   size: getProportionateScreenWidth(20),
                 ),
                 style: TextButton.styleFrom(
-                  padding: EdgeInsets.only(left: getProportionateScreenWidth(8)),
+                  padding:
+                      EdgeInsets.only(left: getProportionateScreenWidth(8)),
                   shape: const CircleBorder(),
                   primary: kPrimaryColor,
                   backgroundColor: const Color(0xFFEBECF1),
@@ -73,7 +74,8 @@ class _ARView extends State<ARViewScreen> {
         ),
         Align(
           alignment: FractionalOffset.bottomCenter,
-          child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+          child:
+              Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
             Container(
               height: getProportionateScreenWidth(40),
               width: getProportionateScreenWidth(180),
