@@ -7,10 +7,10 @@ import '../core/service/auth.dart';
 
 class FavoriteController extends GetxController with StateMixin {
   final RxList<Product> _listFavorite = <Product>[].obs;
-  RxList get listFavorite => _listFavorite;
+  RxList<Product> get listFavorite => _listFavorite;
 
   final RxList<Product> _listShowedProduct = <Product>[].obs;
-  RxList get listShowedProduct => _listShowedProduct;
+  RxList<Product> get listShowedProduct => _listShowedProduct;
 
   late DatabaseService database;
   DatabaseService get firebase => database;
@@ -169,5 +169,13 @@ class FavoriteController extends GetxController with StateMixin {
     } else {
       sortDefault();
     }
+  }
+
+  List<String> getListOption(List<Product> listProduct) {
+    List<String> listOptions = [];
+    for (int i = 0; i < listProduct.length; i++) {
+      listOptions.add(listProduct[i].name);
+    }
+    return listOptions;
   }
 }

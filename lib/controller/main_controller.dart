@@ -23,10 +23,10 @@ class MainController extends GetxController with StateMixin {
   final RxList<Product> _listManyNew = <Product>[].obs;
   final RxList<Product> _listManyShowedPopular = <Product>[].obs;
   final RxList<Product> _listManyShowedNew = <Product>[].obs;
-  RxList get listManyPopular => _listManyPopular;
-  RxList get listManyNew => _listManyNew;
-  RxList get listManyShowedPopular => _listManyShowedPopular;
-  RxList get listManyShowedNew => _listManyShowedNew;
+  RxList<Product> get listManyPopular => _listManyPopular;
+  RxList<Product> get listManyNew => _listManyNew;
+  RxList<Product> get listManyShowedPopular => _listManyShowedPopular;
+  RxList<Product> get listManyShowedNew => _listManyShowedNew;
 
   final RxList<String> _listFavoriteId = <String>[].obs;
   RxList get listFavoriteId => _listFavoriteId;
@@ -253,5 +253,13 @@ class MainController extends GetxController with StateMixin {
           orElse: () => rs);
     }
     return rs;
+  }
+
+  List<String> getListOption(List<Product> listProduct) {
+    List<String> listOptions = [];
+    for (int i = 0; i < listProduct.length; i++) {
+      listOptions.add(listProduct[i].name);
+    }
+    return listOptions;
   }
 }

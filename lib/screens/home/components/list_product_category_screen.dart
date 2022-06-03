@@ -1,9 +1,7 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:group_radio_button/group_radio_button.dart';
-import 'package:interior_design_and_ar/controller/favorite_controller.dart';
+import 'package:interior_design_and_ar/components/search_bar.dart';
 import 'package:interior_design_and_ar/controller/main_controller.dart';
 import 'package:interior_design_and_ar/screens/home/components/list_product_category_loading_screen.dart';
 import 'package:interior_design_and_ar/screens/product/product_detail.dart';
@@ -53,39 +51,15 @@ class _ListProductCategoryScreenState extends State<ListProductCategoryScreen> {
                 top: getProportionateScreenWidth(5),
                 bottom: getProportionateScreenWidth(3)),
             child: Card(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12)),
-              color: Colors.white,
-              elevation: 3.5,
-              child: Theme(
-                data: ThemeData(
-                  colorScheme: ThemeData()
-                      .colorScheme
-                      .copyWith(primary: kSelectedButtonColor),
-                ),
-                child: TextFormField(
-                  style: TextStyle(
-                    fontSize: getProportionateScreenWidth(18),
-                    fontWeight: FontWeight.w400,
-                  ),
-                  decoration: const InputDecoration(
-                    hintStyle: TextStyle(
-                      fontSize: 16,
-                    ),
-                    hintText: 'Search furniture',
-                    contentPadding: EdgeInsets.fromLTRB(24, 16, 12, 16),
-                    border: InputBorder.none,
-                    focusedBorder: InputBorder.none,
-                    enabledBorder: InputBorder.none,
-                    errorBorder: InputBorder.none,
-                    disabledBorder: InputBorder.none,
-                    suffixIcon: Icon(
-                      Icons.search,
-                    ),
-                  ),
-                ),
-              ),
-            ),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12)),
+                color: Colors.white,
+                elevation: 3.5,
+                child: SearchBar(
+                  width: 240,
+                  listOptions: [],
+                  listProduct: homeController.listManyShowedNew,
+                )),
           ),
           leading: IconButton(
             icon: Icon(

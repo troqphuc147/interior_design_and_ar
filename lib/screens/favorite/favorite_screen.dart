@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:group_radio_button/group_radio_button.dart';
+import 'package:interior_design_and_ar/components/search_bar.dart';
 import 'package:interior_design_and_ar/screens/favorite/components/favorite_product_card.dart';
 import 'package:interior_design_and_ar/components/loading_screen.dart';
 import 'package:interior_design_and_ar/constants.dart';
@@ -59,45 +60,22 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                     width: getProportionateScreenWidth(315),
                     height: getProportionateScreenWidth(48),
                     child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(12),
-                          boxShadow: [
-                            BoxShadow(
-                              offset: const Offset(-1, 1),
-                              color: Colors.grey.withOpacity(0.24),
-                              spreadRadius: 2.0,
-                              blurRadius: 1.5,
-                            )
-                          ]),
-                      child: Theme(
-                        data: ThemeData(
-                          colorScheme: ThemeData()
-                              .colorScheme
-                              .copyWith(primary: kSelectedButtonColor),
-                        ),
-                        child: TextFormField(
-                          style: TextStyle(
-                            fontSize: getProportionateScreenWidth(16),
-                          ),
-                          decoration: const InputDecoration(
-                            hintStyle: TextStyle(
-                              fontSize: 16,
-                            ),
-                            hintText: 'Search furniture',
-                            contentPadding: EdgeInsets.fromLTRB(24, 16, 12, 16),
-                            border: InputBorder.none,
-                            focusedBorder: InputBorder.none,
-                            enabledBorder: InputBorder.none,
-                            errorBorder: InputBorder.none,
-                            disabledBorder: InputBorder.none,
-                            prefixIcon: Icon(
-                              Icons.search,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12),
+                            boxShadow: [
+                              BoxShadow(
+                                offset: const Offset(-1, 1),
+                                color: Colors.grey.withOpacity(0.24),
+                                spreadRadius: 2.0,
+                                blurRadius: 1.5,
+                              )
+                            ]),
+                        child: SearchBar(
+                          listOptions: const [],
+                          listProduct: favoriteController.listFavorite,
+                          width: 315,
+                        )),
                   ),
                 ],
               ),
