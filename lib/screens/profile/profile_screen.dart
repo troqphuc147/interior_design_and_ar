@@ -1,10 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:interior_design_and_ar/constants.dart';
 import 'package:interior_design_and_ar/controller/favorite_controller.dart';
 import 'package:interior_design_and_ar/controller/main_controller.dart';
 import 'package:interior_design_and_ar/core/service/auth.dart';
+import 'package:interior_design_and_ar/main.dart';
 import 'package:interior_design_and_ar/screens/authentication/login_screen.dart';
 import 'package:interior_design_and_ar/size_config.dart';
 
@@ -16,7 +18,9 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  AuthService authService = new AuthService();
+  final MainController mainController = Get.find<MainController>();
+  final FavoriteController favoriteController = Get.find<FavoriteController>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -252,11 +256,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
               ListTile(
                 onTap: () async {
-                  await authService.signout();
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const LoginScreen()));
+                  await AuthService.instance.signout();
+                  Get.delete<MainController>();
+                  Get.delete<FavoriteController>();
+
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(builder: (context) => LoginScreen()),
+                      (Route<dynamic> route) => false);
+                  print(mainController.listPopular);
                 },
                 title: Padding(
                   padding:

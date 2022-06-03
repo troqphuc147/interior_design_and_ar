@@ -19,9 +19,9 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    MainController homeController = Get.put(MainController(), permanent: true);
+    MainController homeController = Get.put(MainController(), permanent: false);
     FavoriteController favoriteController =
-        Get.put(FavoriteController(), permanent: true);
+        Get.put(FavoriteController(), permanent: false);
     return homeController.obx((state) {
       return GestureDetector(
         onTap: () {

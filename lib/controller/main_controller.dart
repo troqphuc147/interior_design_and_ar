@@ -15,7 +15,6 @@ class MainController extends GetxController with StateMixin {
   final RxList<String> _listOption = <String>[].obs;
   RxList<String> get listOption => _listOption;
 
-  AuthService authService = AuthService();
   late DatabaseService database;
   DatabaseService get firebase => database;
   Storage storage = Storage();
@@ -36,7 +35,8 @@ class MainController extends GetxController with StateMixin {
   Future<void> onInit() async {
     // TODO: implement onInit
     super.onInit();
-    database = DatabaseService(uid: authService.getCurrentUser?.uid ?? "");
+    database =
+        DatabaseService(uid: AuthService.instance.getCurrentUser?.uid ?? "");
     _listNew.value = [];
     _listPopular.value = [];
     _listManyPopular.value = [];

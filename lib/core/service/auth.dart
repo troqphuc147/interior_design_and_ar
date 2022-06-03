@@ -4,6 +4,9 @@ import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthService {
+  AuthService._privateConstructor();
+  static final AuthService instance = AuthService._privateConstructor();
+
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn googleSignIn = GoogleSignIn();
   Stream<User?> get userStream {

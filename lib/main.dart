@@ -131,7 +131,7 @@ class _AppState extends State<App> {
       child: MultiProvider(
         providers: [
           Provider(create: (_) {
-            return AuthService();
+            return AuthService.instance;
           }),
         ],
         child: WrapperBuilder(

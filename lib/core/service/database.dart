@@ -28,6 +28,7 @@ class DatabaseService {
 
   //TODO implement getListPopularProduct
   Future<List<Product>> getListPopularProduct(String category) async {
+    print(uid);
     List<Product> listProduct = [];
     if (category == "All") {
       await products

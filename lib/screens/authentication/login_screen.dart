@@ -11,7 +11,6 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final authService = AuthService();
   String email = "";
   String password = "";
   bool isLoading = false;
@@ -20,7 +19,7 @@ class _LoginScreenState extends State<LoginScreen> {
     setState(() {
       isLoading = true;
     });
-    var res = await authService.signInWithGoogleAccount();
+    var res = await AuthService.instance.signInWithGoogleAccount();
     // giá trị trả về code của lỗi khi xuất hiện lỗi khi đăng nhập
     // trả về login-success khi đăng nhập thành công
     if (res != null && res != 'login-success') {

@@ -12,7 +12,6 @@ class FavoriteController extends GetxController with StateMixin {
   final RxList<Product> _listShowedProduct = <Product>[].obs;
   RxList get listShowedProduct => _listShowedProduct;
 
-  AuthService authService = AuthService();
   late DatabaseService database;
   DatabaseService get firebase => database;
 
@@ -32,7 +31,8 @@ class FavoriteController extends GetxController with StateMixin {
   @override
   Future<void> onInit() async {
     super.onInit();
-    database = DatabaseService(uid: authService.getCurrentUser?.uid ?? "");
+    database =
+        DatabaseService(uid: AuthService.instance.getCurrentUser?.uid ?? "");
     _listFavorite.value = [];
     _listShowedProduct.value = [];
     _minCost.value = 0;
