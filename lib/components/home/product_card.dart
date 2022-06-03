@@ -34,8 +34,9 @@ class _PopularProductCardState extends State<PopularProductCard> {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         color: kBackgroundChipColor,
         elevation: 5.0,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
+        child: ListView(
+          physics: const NeverScrollableScrollPhysics(),
+          padding: EdgeInsets.zero,
           children: [
             Stack(
               children: [

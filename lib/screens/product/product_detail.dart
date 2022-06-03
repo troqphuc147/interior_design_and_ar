@@ -43,6 +43,7 @@ class _ProductDetailState extends State<ProductDetail> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           padding: EdgeInsets.only(top: getProportionateScreenWidth(15)),
           child: Stack(
             children: [
@@ -85,9 +86,10 @@ class _ProductDetailState extends State<ProductDetail> {
                             child: Padding(
                               padding: EdgeInsets.symmetric(
                                   horizontal: getProportionateScreenWidth(28)),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                              child: ListView(
+                                physics: const NeverScrollableScrollPhysics(),
+                                padding: EdgeInsets.only(
+                                    top: getProportionateScreenHeight(7)),
                                 children: [
                                   SizedBox(
                                     height: getProportionateScreenWidth(18),
