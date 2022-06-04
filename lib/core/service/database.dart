@@ -126,7 +126,7 @@ class DatabaseService {
     if (category == "All") {
       await products
           .orderBy('numVote', descending: true)
-          .limit(16)
+          .limit(30)
           .get()
           .then((value) => value.docs.toList().forEach((element) {
                 listProduct.add(
@@ -136,7 +136,7 @@ class DatabaseService {
       await products
           .where("nameCategory", isEqualTo: category)
           .orderBy("numVote", descending: true)
-          .limit(10)
+          .limit(30)
           .get()
           .then((value) => value.docs.toList().forEach((element) {
                 listProduct.add(
@@ -151,7 +151,7 @@ class DatabaseService {
     if (category == "All") {
       await products
           .orderBy("idImage", descending: true)
-          .limit(16)
+          .limit(30)
           .get()
           .then((value) => value.docs.toList().forEach((element) {
                 listProduct.add(
@@ -161,7 +161,7 @@ class DatabaseService {
       await products
           .where("nameCategory", isEqualTo: category)
           .orderBy("idImage", descending: true)
-          .limit(10)
+          .limit(30)
           .get()
           .then((value) => value.docs.toList().forEach((element) {
                 listProduct.add(

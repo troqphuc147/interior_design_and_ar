@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:interior_design_and_ar/size_config.dart';
 
-import '../../constants.dart';
+import '../constants.dart';
 
 class ProductCategoryButton extends StatefulWidget {
   final IconData iconData;

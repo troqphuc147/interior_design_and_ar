@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:interior_design_and_ar/controller/main_controller.dart';
 import 'package:interior_design_and_ar/screens/product/product_detail.dart';
 import 'package:interior_design_and_ar/size_config.dart';
-import '../../components/home/product_card.dart';
+import '../../components/product_card.dart';
 import '../../constants.dart';
 
 class PopularProductScreen extends StatefulWidget {
@@ -66,15 +66,18 @@ class _PopularProductScreenState extends State<PopularProductScreen> {
                                   builder: (context) => ProductDetail(
                                     product:
                                         homeController.listManyPopular[index],
-                                    category: "popular",
+                                    category: "popularMuch",
                                     isFavorite: false,
                                   ),
                                 ));
                           },
-                          child: PopularProductCard(
-                            category: "popular",
-                            product: homeController.listManyPopular[index],
-                            isFavorite: false,
+                          child: SizedBox(
+                            height: getProportionateScreenWidth(198),
+                            child: PopularProductCard(
+                              category: "popularMuch",
+                              product: homeController.listManyPopular[index],
+                              isFavorite: false,
+                            ),
                           ),
                         );
                       }),

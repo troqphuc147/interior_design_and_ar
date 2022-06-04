@@ -50,11 +50,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CircleAvatar(
-                    radius: getProportionateScreenWidth(32),
-                    backgroundImage:
-                        AssetImage("assets/images/default_user_avatar.jpg"),
-                    // backgroundImage: NetworkImage(""),
-                  ),
+                      radius: getProportionateScreenWidth(32),
+                      backgroundImage: NetworkImage(AuthService
+                          .instance.getCurrentUser!.photoURL
+                          .toString())
+                      // backgroundImage: NetworkImage(""),
+                      ),
                   SizedBox(
                     width: getProportionateScreenWidth(16),
                   ),
@@ -66,7 +67,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Hoang Dan Quang',
+                          AuthService.instance.getCurrentUser!.displayName
+                              .toString(),
                           style: TextStyle(
                             fontSize: getProportionateScreenWidth(18),
                             color: kTextColor1,
@@ -76,7 +78,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           maxLines: 1,
                         ),
                         Text(
-                          'hoangdanquang@gmail.com',
+                          AuthService.instance.getCurrentUser!.email.toString(),
                           style: TextStyle(
                             fontSize: getProportionateScreenWidth(16),
                             color: kTextColor2,

@@ -7,7 +7,7 @@ import 'package:interior_design_and_ar/screens/home/components/list_product_cate
 import 'package:interior_design_and_ar/screens/product/product_detail.dart';
 import 'package:interior_design_and_ar/size_config.dart';
 
-import '../../../components/home/product_card.dart';
+import '../../../components/product_card.dart';
 import '../../../constants.dart';
 
 class ListProductCategoryScreen extends StatefulWidget {
@@ -152,15 +152,19 @@ class _ListProductCategoryScreenState extends State<ListProductCategoryScreen> {
                                           ),
                                         ));
                                   },
-                                  child: PopularProductCard(
-                                      product: homeController
-                                          .listManyShowedNew[index],
-                                      category: "category",
-                                      isFavorite: homeController.listFavoriteId
-                                          .contains(
-                                        homeController
-                                            .listManyShowedNew[index].id,
-                                      )),
+                                  child: SizedBox(
+                                    height: getProportionateScreenWidth(198),
+                                    child: PopularProductCard(
+                                        product: homeController
+                                            .listManyShowedNew[index],
+                                        category: "non",
+                                        isFavorite: homeController
+                                            .listFavoriteId
+                                            .contains(
+                                          homeController
+                                              .listManyShowedNew[index].id,
+                                        )),
+                                  ),
                                 ),
                               );
                             }),

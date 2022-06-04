@@ -4,7 +4,7 @@ import 'package:interior_design_and_ar/constants.dart';
 import 'package:interior_design_and_ar/controller/favorite_controller.dart';
 import 'package:interior_design_and_ar/controller/main_controller.dart';
 import 'package:interior_design_and_ar/size_config.dart';
-import '../../core/models/product.dart';
+import '../core/models/product.dart';
 
 // ignore: must_be_immutable
 class NewProductCard extends StatefulWidget {

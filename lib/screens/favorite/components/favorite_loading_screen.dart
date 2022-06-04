@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:interior_design_and_ar/components/home/product_category_button.dart';
+import 'package:interior_design_and_ar/components/product_category_button.dart';
 import 'package:interior_design_and_ar/constants.dart';
 import 'package:interior_design_and_ar/size_config.dart';
 

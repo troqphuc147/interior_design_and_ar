@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:interior_design_and_ar/components/home/new_product_card.dart';
+import 'package:interior_design_and_ar/components/new_product_card.dart';
 import 'package:interior_design_and_ar/components/search_bar.dart';
 import 'package:interior_design_and_ar/constants.dart';
 import 'package:interior_design_and_ar/controller/favorite_controller.dart';
@@ -9,7 +9,7 @@ import 'package:interior_design_and_ar/screens/home/components/category_line.dar
 import 'package:interior_design_and_ar/screens/home/components/home_loading_screen.dart';
 import 'package:interior_design_and_ar/screens/product/loading_plash_screen.dart';
 import 'package:interior_design_and_ar/screens/product/product_detail.dart';
-import '../../components/home/product_card.dart';
+import '../../components/product_card.dart';
 import '../../size_config.dart';
 
 class HomeScreen extends StatelessWidget {

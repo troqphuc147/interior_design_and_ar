@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:interior_design_and_ar/controller/main_controller.dart';
 import 'package:interior_design_and_ar/screens/product/product_detail.dart';
 import 'package:interior_design_and_ar/size_config.dart';
-import '../../components/home/product_card.dart';
+import '../../components/product_card.dart';
 import '../../constants.dart';
 import '../../core/models/product.dart';
 
@@ -62,15 +62,18 @@ class NewProductScreen extends StatelessWidget {
                                 MaterialPageRoute(
                                   builder: (context) => ProductDetail(
                                     product: product,
-                                    category: "new",
+                                    category: "newMuch",
                                     isFavorite: false,
                                   ),
                                 ));
                           },
-                          child: PopularProductCard(
-                            category: "new",
-                            product: product,
-                            isFavorite: false,
+                          child: SizedBox(
+                            height: getProportionateScreenWidth(198),
+                            child: PopularProductCard(
+                              category: "newMuch",
+                              product: product,
+                              isFavorite: false,
+                            ),
                           ),
                         );
                       }),
