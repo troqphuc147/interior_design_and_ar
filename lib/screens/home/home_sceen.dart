@@ -5,6 +5,7 @@ import 'package:interior_design_and_ar/components/search_bar.dart';
 import 'package:interior_design_and_ar/constants.dart';
 import 'package:interior_design_and_ar/controller/favorite_controller.dart';
 import 'package:interior_design_and_ar/controller/main_controller.dart';
+import 'package:interior_design_and_ar/controller/profile_controller.dart';
 import 'package:interior_design_and_ar/screens/home/components/category_line.dart';
 import 'package:interior_design_and_ar/screens/home/components/home_loading_screen.dart';
 import 'package:interior_design_and_ar/screens/product/loading_plash_screen.dart';
@@ -22,6 +23,8 @@ class HomeScreen extends StatelessWidget {
     MainController homeController = Get.put(MainController(), permanent: false);
     FavoriteController favoriteController =
         Get.put(FavoriteController(), permanent: false);
+    ProfileController profileController =
+        Get.put(ProfileController(), permanent: false);
     return homeController.obx((state) {
       return GestureDetector(
         onTap: () {

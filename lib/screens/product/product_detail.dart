@@ -11,6 +11,7 @@ import 'package:interior_design_and_ar/core/models/product.dart';
 import 'package:interior_design_and_ar/controller/main_controller.dart';
 import 'package:interior_design_and_ar/screens/product/ar_view/ar_view_screen.dart';
 import 'package:interior_design_and_ar/size_config.dart';
+import '../../controller/profile_controller.dart';
 import '../../core/models/rating.dart';
 
 class ProductDetail extends StatefulWidget {
@@ -31,6 +32,7 @@ class ProductDetail extends StatefulWidget {
 class _ProductDetailState extends State<ProductDetail> {
   MainController mainController = Get.find<MainController>();
   FavoriteController favoriteController = Get.find<FavoriteController>();
+  ProfileController profileController = Get.find<ProfileController>();
 
   @override
   void initState() {
@@ -440,6 +442,8 @@ class _ProductDetailState extends State<ProductDetail> {
                                             widget.product, rate);
                                         favoriteController
                                             .updateItemInList(widget.product);
+                                        profileController.addRating(
+                                            widget.product, rate);
                                       });
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(const SnackBar(

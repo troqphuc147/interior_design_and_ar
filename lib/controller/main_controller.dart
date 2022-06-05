@@ -169,7 +169,7 @@ class MainController extends GetxController with StateMixin {
   }
 
   getListFavoriteId() {
-    firebase
+    database
         .getListFavoriteProductId()
         .then((value) => value.toList().forEach((element) {
               _listFavoriteId.add(element);
@@ -178,12 +178,12 @@ class MainController extends GetxController with StateMixin {
 
   addToFavoriteList(String productId) async {
     _listFavoriteId.add(productId);
-    await firebase.likeProduct(productId);
+    await database.likeProduct(productId);
   }
 
   deleteInFavoriteList(String productId) async {
     _listFavoriteId.remove(productId);
-    await firebase.unLikeProduct(productId);
+    await database.unLikeProduct(productId);
   }
 
   filterNewProduct(

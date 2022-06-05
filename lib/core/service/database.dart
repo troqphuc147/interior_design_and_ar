@@ -115,6 +115,19 @@ class DatabaseService {
     return voted;
   }
 
+  Future<List<Rating>> getListRating() async {
+    List<Rating> listRating = [];
+    await users
+        .doc(uid)
+        .collection("Voted")
+        .get()
+        .then((value) => value.docs.toList().forEach((element) {
+              Rating rating = Rating.fromMap(element.data());
+              listRating.add(rating);
+            }));
+    return listRating;
+  }
+
   Future<void> rating(Product product, int star) async {
     Rating rating = Rating(idProduct: product.id, star: star);
     await users.doc(uid).collection("Voted").add(rating.toMap());
@@ -143,6 +156,18 @@ class DatabaseService {
                     Product.fromMap(element.data() as Map<String, dynamic>));
               }));
     }
+    return listProduct;
+  }
+
+  Future<List<Product>> getListProductById(List<String> listId) async {
+    List<Product> listProduct = [];
+    await products
+        .where("id", whereIn: listId)
+        .get()
+        .then((value) => value.docs.toList().forEach((element) {
+              listProduct
+                  .add(Product.fromMap(element.data() as Map<String, dynamic>));
+            }));
     return listProduct;
   }
 
