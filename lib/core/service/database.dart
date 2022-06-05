@@ -161,13 +161,19 @@ class DatabaseService {
 
   Future<List<Product>> getListProductById(List<String> listId) async {
     List<Product> listProduct = [];
-    await products
-        .where("id", whereIn: listId)
-        .get()
-        .then((value) => value.docs.toList().forEach((element) {
-              listProduct
-                  .add(Product.fromMap(element.data() as Map<String, dynamic>));
-            }));
+    int t = 0;
+    while (listProduct.length < listId.length) {
+      int start = t;
+      int end = start + 9 > listId.length ? listId.length : start + 9;
+      await products
+          .where("id", whereIn: listId.sublist(start, end))
+          .get()
+          .then((value) => value.docs.toList().forEach((element) {
+                listProduct.add(
+                    Product.fromMap(element.data() as Map<String, dynamic>));
+              }));
+      t += 9;
+    }
     return listProduct;
   }
 

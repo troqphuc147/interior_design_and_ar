@@ -112,19 +112,23 @@ class MainController extends GetxController with StateMixin {
         .where((element) => element.id == product.id)
         .toList()
         .isNotEmpty) {
-      _listPopular.firstWhere((element) => element.id == product.id).rating =
-          product.rating;
-      _listPopular.firstWhere((element) => element.id == product.id).numVote =
-          product.numVote;
+      _listManyShowedPopular
+          .firstWhere((element) => element.id == product.id)
+          .rating = product.rating;
+      _listManyShowedPopular
+          .firstWhere((element) => element.id == product.id)
+          .numVote = product.numVote;
     }
     if (_listManyShowedNew
         .where((element) => element.id == product.id)
         .toList()
         .isNotEmpty) {
-      _listPopular.firstWhere((element) => element.id == product.id).rating =
-          product.rating;
-      _listPopular.firstWhere((element) => element.id == product.id).numVote =
-          product.numVote;
+      _listManyShowedNew
+          .firstWhere((element) => element.id == product.id)
+          .rating = product.rating;
+      _listManyShowedNew
+          .firstWhere((element) => element.id == product.id)
+          .numVote = product.numVote;
     }
     if (_listPopular
         .where((element) => element.id == product.id)

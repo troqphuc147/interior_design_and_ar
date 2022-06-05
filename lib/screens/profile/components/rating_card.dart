@@ -70,17 +70,19 @@ class RatingCard extends StatelessWidget {
                         Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Icon(
-                              Icons.star,
-                              color: Colors.amber,
-                              size: getProportionateScreenWidth(14),
-                            ),
-                            Text(
-                              '  ' + product.rating.toString(),
-                              style: TextStyle(
-                                  fontSize: getProportionateScreenWidth(12),
-                                  color: kTextColor1,
-                                  fontWeight: FontWeight.w700),
+                            ...List.generate(
+                              5,
+                              (index) => index < star
+                                  ? Icon(
+                                      Icons.star,
+                                      color: Colors.amber,
+                                      size: getProportionateScreenWidth(14),
+                                    )
+                                  : Icon(
+                                      Icons.star_border_outlined,
+                                      color: Colors.amber,
+                                      size: getProportionateScreenWidth(14),
+                                    ),
                             )
                           ],
                         )

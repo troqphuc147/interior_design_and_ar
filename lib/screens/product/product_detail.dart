@@ -7,11 +7,11 @@ import 'package:interior_design_and_ar/components/default_color_button.dart';
 import 'package:interior_design_and_ar/components/selected_color_button.dart';
 import 'package:interior_design_and_ar/constants.dart';
 import 'package:interior_design_and_ar/controller/favorite_controller.dart';
+import 'package:interior_design_and_ar/controller/profile_controller.dart';
 import 'package:interior_design_and_ar/core/models/product.dart';
 import 'package:interior_design_and_ar/controller/main_controller.dart';
 import 'package:interior_design_and_ar/screens/product/ar_view/ar_view_screen.dart';
 import 'package:interior_design_and_ar/size_config.dart';
-import '../../controller/profile_controller.dart';
 import '../../core/models/rating.dart';
 
 class ProductDetail extends StatefulWidget {
@@ -88,14 +88,12 @@ class _ProductDetailState extends State<ProductDetail> {
                             child: Padding(
                               padding: EdgeInsets.symmetric(
                                   horizontal: getProportionateScreenWidth(28)),
-                              child: ListView(
-                                physics: const NeverScrollableScrollPhysics(),
-                                padding: EdgeInsets.only(
-                                    top: getProportionateScreenHeight(7)),
+                              child: Column(
                                 children: [
                                   SizedBox(
-                                    height: getProportionateScreenWidth(18),
+                                    height: getProportionateScreenWidth(10),
                                   ),
+                                  const Spacer(),
                                   Row(
                                     mainAxisSize: MainAxisSize.max,
                                     mainAxisAlignment:
@@ -299,9 +297,10 @@ class _ProductDetailState extends State<ProductDetail> {
                                       ),
                                     ),
                                   ),
+                                  const Spacer(),
                                   SizedBox(
-                                    height: getProportionateScreenWidth(20),
-                                  )
+                                    height: getProportionateScreenWidth(1),
+                                  ),
                                 ],
                               ),
                             ),

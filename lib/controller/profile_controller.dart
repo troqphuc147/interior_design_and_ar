@@ -39,5 +39,6 @@ class ProfileController extends GetxController with StateMixin {
   void addRating(Product product, int star) {
     _listRating.add(Rating(idProduct: product.id, star: star));
     _listRatingProduct.add(product);
+    print(_listRating[6]);
   }
 }

@@ -74,8 +74,11 @@ class FavoriteController extends GetxController with StateMixin {
 
   updateItemInList(Product product) {
     int index = _listFavorite.indexWhere((element) => element.id == product.id);
-    _listFavorite.removeAt(index);
-    _listFavorite.insert(index, product);
+    if (index < 0) {
+      return;
+    }
+    List<Product> list = [product];
+    _listFavorite.replaceRange(index - 1, index, list);
   }
 
   filterProduct(
