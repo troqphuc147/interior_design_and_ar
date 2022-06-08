@@ -11,6 +11,7 @@ import 'package:interior_design_and_ar/main.dart';
 import 'package:interior_design_and_ar/screens/authentication/login_screen.dart';
 import 'package:interior_design_and_ar/screens/profile/components/button_data.dart';
 import 'package:interior_design_and_ar/size_config.dart';
+import 'package:page_transition/page_transition.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -99,6 +100,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   (int index) => Column(
                         children: [
                           ListTile(
+                            dense: true,
                             onTap: () async {
                               if (index == listButtonData.length - 1) {
                                 await AuthService.instance.signout();
@@ -114,9 +116,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               }
                               Navigator.push(
                                   context,
-                                  MaterialPageRoute(
-                                      builder: (contex) =>
-                                          listButtonData[index].forcusScreen));
+                                  PageTransition(
+                                      child: listButtonData[index].forcusScreen,
+                                      type: PageTransitionType.rightToLeft));
                             },
                             title: Padding(
                               padding: EdgeInsets.only(

@@ -55,6 +55,10 @@ dependencies:
   bottom_navy_bar: ^6.0.0
   group_radio_button: ^1.2.0
   grouped_buttons: ^1.0.4
+  page_transition: ^2.0.5
+  mailer: ^5.1.1
+  flutter_email_sender: ^5.1.0
+  http: ^0.13.4
 
 dev_dependencies:
   flutter_test:

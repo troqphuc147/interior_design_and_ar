@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:interior_design_and_ar/screens/profile/components/contact_screen.dart';
 import 'package:interior_design_and_ar/screens/profile/components/rating_product_screen.dart';
 
 import '../../authentication/login_screen.dart';
@@ -22,7 +23,7 @@ List<ButtonData> listButtonData = [
   ButtonData(
       subScription: "If you want to buy something",
       title: "Contact us",
-      forcusScreen: const ListRatedProductsScreen()),
+      forcusScreen: const SendQuestionScreen()),
   ButtonData(
       subScription: "Frequently asked questions",
       title: "Help",
