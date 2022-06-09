@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:interior_design_and_ar/size_config.dart';
 
 class SelectedColorButton extends StatefulWidget {
-  Color color;
+  final Color color;
 
-  SelectedColorButton({Key? key, required this.color}) : super(key: key);
+  const SelectedColorButton({Key? key, required this.color}) : super(key: key);
 
   @override
   State<SelectedColorButton> createState() => _SelectedColorButtonState();
@@ -16,9 +16,7 @@ class _SelectedColorButtonState extends State<SelectedColorButton> {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(8)),
       child: GestureDetector(
-        onTap: () {
-          print("color button tapped");
-        },
+        onTap: () {},
         child: SizedBox(
           width: getProportionateScreenWidth(24),
           height: getProportionateScreenWidth(24),
@@ -27,7 +25,7 @@ class _SelectedColorButtonState extends State<SelectedColorButton> {
               Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.all( Radius.circular(50.0)),
+                  borderRadius: const BorderRadius.all(Radius.circular(50.0)),
                   border: Border.all(
                     color: Colors.grey,
                     width: 1.5,

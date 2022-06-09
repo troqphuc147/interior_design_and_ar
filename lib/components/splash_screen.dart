@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:interior_design_and_ar/custom_nav_bar.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:splashscreen/splashscreen.dart';
 import '../size_config.dart';
 

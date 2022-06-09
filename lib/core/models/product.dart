@@ -10,8 +10,8 @@ class Product {
   String linkAr;
   String linkImage;
   String cost;
-  var rating;
-  var numVote;
+  String rating;
+  String numVote;
   Product(
       {required this.id,
       required this.name,

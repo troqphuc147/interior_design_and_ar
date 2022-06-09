@@ -6,6 +6,7 @@ import '../core/models/product.dart';
 import '../screens/product/product_detail.dart';
 import '../size_config.dart';
 
+// ignore: must_be_immutable
 class SearchBar extends StatelessWidget {
   final List<Product>? listProduct;
   List<String>? listOptions;

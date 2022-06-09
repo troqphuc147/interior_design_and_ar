@@ -33,7 +33,6 @@ class MainController extends GetxController with StateMixin {
 
   @override
   Future<void> onInit() async {
-    // TODO: implement onInit
     super.onInit();
     database =
         DatabaseService(uid: AuthService.instance.getCurrentUser?.uid ?? "");

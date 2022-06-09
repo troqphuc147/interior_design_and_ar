@@ -6,9 +6,9 @@ import '../size_config.dart';
 
 // Dialog hiển thị cảnh báo
 class CustomAlert extends StatefulWidget {
-  final iconPath; // path(đường dẫn) của icon cảnh báo
-  final title; // tiêu đề của icon cảnh báo
-  final content; // nội dung của icon cảnh báo
+  final String iconPath; // path(đường dẫn) của icon cảnh báo
+  final String title; // tiêu đề của icon cảnh báo
+  final String content; // nội dung của icon cảnh báo
 
   //Khởi tạo các thuộc tính mặc định của class
   const CustomAlert({
@@ -55,11 +55,11 @@ class _CustomAlertState extends State<CustomAlert>
           borderRadius: BorderRadius.circular(20.0),
         ),
         child: Container(
-            margin: EdgeInsets.only(top: 20, left: 20, right: 20.0),
+            margin: const EdgeInsets.only(top: 20, left: 20, right: 20.0),
             width: 315,
-            decoration: BoxDecoration(),
+            decoration: const BoxDecoration(),
             child: ListView(
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -71,7 +71,7 @@ class _CustomAlertState extends State<CustomAlert>
                         width: 50.0,
                         alignment: Alignment.center,
                       ),
-                      SizedBox(height: 15.0),
+                      const SizedBox(height: 15.0),
                       Text(
                         widget.title,
                         style: TextStyle(
@@ -81,7 +81,7 @@ class _CustomAlertState extends State<CustomAlert>
                         ),
                         textAlign: TextAlign.center,
                       ),
-                      SizedBox(height: 5.0),
+                      const SizedBox(height: 5.0),
                       Text(
                         widget.content,
                         style: TextStyle(
@@ -96,7 +96,7 @@ class _CustomAlertState extends State<CustomAlert>
                   //SizedBox(height: 10.0),
                   Container(
                     //height: 150.0,
-                    margin: EdgeInsets.only(top: 10.0),
+                    margin: const EdgeInsets.only(top: 10.0),
                     decoration: BoxDecoration(
                         border: Border(
                             top: BorderSide(

@@ -11,6 +11,7 @@ const kTextColor1 = Color(0xFF555555);
 const kTextColor2 = Color(0xFFAFAFAF);
 const kTextColor3 = Color(0xFFFFFFFF);
 const kTextColor4 = Color(0xFF222222);
+const kButtonColors = Color(0xFFADADAD);
 const kBackgroundColor = Color(0xFFF9FAFC);
 const kBackgroundChipColor = Color(0xFFFFFFFF);
 const kAnimationDuration = Duration(milliseconds: 200);

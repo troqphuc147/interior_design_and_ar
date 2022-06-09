@@ -48,7 +48,7 @@ class FavoriteController extends GetxController with StateMixin {
     _listFavorite.clear();
     await firebase.getListFavoriteProduct().then((value) => {
           _listFavorite.value = value,
-          _listShowedProduct.value.addAll(value),
+          _listShowedProduct.addAll(value),
         });
     change(null, status: RxStatus.success());
   }

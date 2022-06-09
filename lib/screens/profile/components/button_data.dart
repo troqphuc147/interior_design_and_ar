@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:interior_design_and_ar/screens/profile/components/about_us_screen.dart';
 import 'package:interior_design_and_ar/screens/profile/components/contact_screen.dart';
 import 'package:interior_design_and_ar/screens/profile/components/help_guide_screen.dart';
 import 'package:interior_design_and_ar/screens/profile/components/rating_product_screen.dart';
@@ -32,7 +33,7 @@ List<ButtonData> listButtonData = [
   ButtonData(
       subScription: "App introduction",
       title: "About us",
-      forcusScreen: const ListRatedProductsScreen()),
+      forcusScreen: const AboutScreen()),
   ButtonData(
       subScription: "All data of you will be deleted",
       title: "Delete account",

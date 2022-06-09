@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:interior_design_and_ar/core/models/product.dart';
 import 'package:interior_design_and_ar/core/models/rating.dart';
@@ -15,7 +14,6 @@ class ProfileController extends GetxController with StateMixin {
 
   @override
   void onInit() {
-    // TODO: implement onInit
     super.onInit();
 
     database =
@@ -39,6 +37,5 @@ class ProfileController extends GetxController with StateMixin {
   void addRating(Product product, int star) {
     _listRating.add(Rating(idProduct: product.id, star: star));
     _listRatingProduct.add(product);
-    print(_listRating[6]);
   }
 }

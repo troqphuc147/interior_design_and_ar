@@ -2,8 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:interior_design_and_ar/core/models/product.dart';
 import 'package:interior_design_and_ar/core/models/rating.dart';
 
-import '../models/vote.dart';
-
 class DatabaseService {
   final String uid;
   DatabaseService({
