@@ -7,7 +7,7 @@
     <uses-feature android:name="android.hardware.camera.ar" />
 
     <application
-        android:label="interior_design_and_ar"
+        android:label="ARFurni"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
