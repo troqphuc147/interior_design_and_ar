@@ -249,13 +249,13 @@ class _ListProductCategoryScreenState extends State<ListProductCategoryScreen> {
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Text(
-                              "Min: \$" + min.toInt().toString(),
+                              "Min: \$" + fakeValues.start.toInt().toString(),
                               style: TextStyle(
                                   fontSize: getProportionateScreenWidth(14),
                                   color: kTextColor1),
                             ),
                             Text(
-                              "Max: \$" + max.toInt().toString(),
+                              "Max: \$" + fakeValues.end.toInt().toString(),
                               style: TextStyle(
                                   fontSize: getProportionateScreenWidth(14),
                                   color: kTextColor1),
