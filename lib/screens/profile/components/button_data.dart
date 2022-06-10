@@ -35,10 +35,6 @@ List<ButtonData> listButtonData = [
       title: "About us",
       forcusScreen: const AboutScreen()),
   ButtonData(
-      subScription: "All data of you will be deleted",
-      title: "Delete account",
-      forcusScreen: const ListRatedProductsScreen()),
-  ButtonData(
       subScription: "Your can sign in with other account",
       title: "Sign out",
       forcusScreen: const LoginScreen())

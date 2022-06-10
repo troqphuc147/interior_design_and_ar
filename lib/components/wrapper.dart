@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:interior_design_and_ar/components/splash_screen.dart';
 import 'package:interior_design_and_ar/screens/authentication/login_screen.dart';
 import 'package:interior_design_and_ar/components/loading_screen.dart';
+import 'package:interior_design_and_ar/screens/introduction/introduction_screen.dart';
 
 class Wrapper extends StatelessWidget {
   // biến lấy thông tin user từ wrapper_builder
@@ -23,7 +24,7 @@ class Wrapper extends StatelessWidget {
           return const CustomSplashScreen();
         }
       } else {
-        return const LoginScreen();
+        return const IntroductionScreen();
       }
     }
     // thông tin đang được lấy về
