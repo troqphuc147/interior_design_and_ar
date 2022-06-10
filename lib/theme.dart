@@ -26,26 +26,27 @@ InputDecorationTheme inputDecorationTheme() {
     border: outlineInputBorder,
   );
 }
-TextTheme lightTextTheme(){
+
+TextTheme lightTextTheme() {
   return const TextTheme(
-    bodyText1:  TextStyle(
+    bodyText1: TextStyle(
       fontFamily: "Reem Kufi",
       color: Color(0xff555555),
     ),
-    bodyText2:  TextStyle(
+    bodyText2: TextStyle(
       fontFamily: "Reem Kufi",
       color: Color(0xffafafaf),
     ),
   );
 }
-AppBarTheme lightAppbarTheme(){
+
+AppBarTheme lightAppbarTheme() {
   return const AppBarTheme(
-      centerTitle: true,
-      color: Colors.white,
-      elevation: 7.0,
-      titleTextStyle: TextStyle(
-        color: Color(0xff555555),
-        fontSize: 18,
-      ),
+    color: Colors.white,
+    elevation: 7.0,
+    titleTextStyle: TextStyle(
+      color: Color(0xff555555),
+      fontSize: 18,
+    ),
   );
 }

@@ -41,6 +41,7 @@ class _PopularProductScreenState extends State<PopularProductScreen> {
                 Navigator.pop(context);
               },
             ),
+            elevation: 0,
           ),
           body: SingleChildScrollView(
               padding: EdgeInsets.symmetric(

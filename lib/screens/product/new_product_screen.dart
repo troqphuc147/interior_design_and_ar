@@ -37,6 +37,7 @@ class NewProductScreen extends StatelessWidget {
                 Navigator.pop(context);
               },
             ),
+            elevation: 0.0,
           ),
           body: SingleChildScrollView(
               padding: EdgeInsets.symmetric(

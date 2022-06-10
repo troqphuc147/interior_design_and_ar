@@ -3,6 +3,8 @@ import 'package:interior_design_and_ar/screens/product/new_product_screen.dart';
 import 'package:interior_design_and_ar/screens/product/popular_product_screen.dart';
 import 'package:splashscreen/splashscreen.dart';
 
+import '../../size_config.dart';
+
 class LoadingSplashScreen extends StatelessWidget {
   final String newOrPoplar;
   const LoadingSplashScreen({Key? key, required this.newOrPoplar})
@@ -10,17 +12,21 @@ class LoadingSplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SplashScreen(
-      backgroundColor: const Color(0xfff2b533),
-      useLoader: true,
-      seconds: 5,
-      image: Image.asset(
-        "assets/images/loading.gif",
+    return Container(
+      color: const Color(0xffffffff),
+      padding: EdgeInsets.only(top: getProportionateScreenWidth(160)),
+      child: SplashScreen(
+        backgroundColor: const Color(0xffffffff),
+        useLoader: false,
+        seconds: 5,
+        image: Image.asset(
+          "assets/images/loading.gif",
+        ),
+        photoSize: getProportionateScreenWidth(180),
+        navigateAfterSeconds: newOrPoplar == "popular"
+            ? const PopularProductScreen()
+            : NewProductScreen(),
       ),
-      photoSize: 200,
-      navigateAfterSeconds: newOrPoplar == "popular"
-          ? PopularProductScreen()
-          : NewProductScreen(),
     );
   }
 }
