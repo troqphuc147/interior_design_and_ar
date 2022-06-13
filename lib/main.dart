@@ -18,10 +18,12 @@ void main() {
     statusBarColor: Colors.transparent,
   ));
 
-  runApp(App());
+  runApp(const App());
 }
 
 class App extends StatefulWidget {
+  const App({Key? key}) : super(key: key);
+
   static void restartApp(BuildContext context) {
     context.findAncestorStateOfType<_AppState>()!.restartApp();
   }
@@ -123,7 +125,7 @@ class _AppState extends State<App> {
 
     // hiển thị màn hình loading trong lúc init chưa xong
     if (!initialized) {
-      return MaterialApp(home: const LoadingScreen());
+      return const MaterialApp(home: LoadingScreen());
     }
 
     return KeyedSubtree(

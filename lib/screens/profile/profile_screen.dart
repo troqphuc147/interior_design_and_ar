@@ -119,44 +119,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     (Route<dynamic> route) => false);
                                 return;
                               }
-                              // if index == chat
-                              if (index == 1) {
-                                checkUserChat();
-                                // if user is admin
-                                if (AuthService.instance.getCurrentUser!.uid.toString() == 'SwjRT7M1V1MZJ7OO5ovsmSdvmt73') {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => ChatHomeScreen()
-                                    ),
-                                  );
-                                }
-                                // if user is normal user
-                                else {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            Chat(currentUserChat:
-                                              UserChat(
-                                                id: AuthService.instance.getCurrentUser!.uid.toString(),
-                                                name: AuthService.instance.getCurrentUser!.displayName.toString(),
-                                                email: AuthService.instance.getCurrentUser!.email.toString(),
-                                                photoUrl: AuthService.instance.getCurrentUser!.photoURL.toString(),),
-                                              isUserNormalCustomer: true,
-                                            )
-                                    ),
-                                  );
-                                }
-                              }
-                              else {
-                                Navigator.push(
-                                    context,
-                                    PageTransition(
-                                        child: listButtonData[index].forcusScreen,
-                                        type: PageTransitionType.rightToLeft));
-                              }
 
+                              Navigator.push(
+                                  context,
+                                  PageTransition(
+                                      child: listButtonData[index].forcusScreen,
+                                      type: PageTransitionType.rightToLeft));
                             },
                             title: Padding(
                               padding: EdgeInsets.only(
@@ -208,20 +176,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
     bool isExist = false;
 
     try {
-      CollectionReference collectionRef2 = FirebaseFirestore.instance.collection('messages');
-      var doc2 = await collectionRef2.doc(AuthService.instance.getCurrentUser!.uid.toString()).get()
+      CollectionReference collectionRef2 =
+          FirebaseFirestore.instance.collection('messages');
+      var doc2 = await collectionRef2
+          .doc(AuthService.instance.getCurrentUser!.uid.toString())
+          .get()
           .then((value) async => {
-            isExist = value.exists,
-            if (value.exists == false) {
-              await collectionRef2.doc(AuthService.instance.getCurrentUser!.uid.toString())
-                  .set({
+                isExist = value.exists,
+                if (value.exists == false)
+                  {
+                    await collectionRef2
+                        .doc(
+                            AuthService.instance.getCurrentUser!.uid.toString())
+                        .set({
                       'id': AuthService.instance.getCurrentUser!.uid.toString(),
-                      'name': AuthService.instance.getCurrentUser!.displayName.toString(),
-                      'email': AuthService.instance.getCurrentUser!.email.toString(),
-                      'photoUrl': AuthService.instance.getCurrentUser!.photoURL.toString(),
-              }),
-            }
-      });
+                      'name': AuthService.instance.getCurrentUser!.displayName
+                          .toString(),
+                      'email':
+                          AuthService.instance.getCurrentUser!.email.toString(),
+                      'photoUrl': AuthService.instance.getCurrentUser!.photoURL
+                          .toString(),
+                    }),
+                  }
+              });
     } catch (e) {
       print(e.toString());
     }
@@ -257,5 +234,4 @@ class _ProfileScreenState extends State<ProfileScreen> {
       });
     }
   }
-
 }

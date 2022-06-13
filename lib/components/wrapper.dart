@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:interior_design_and_ar/components/splash_screen.dart';
-import 'package:interior_design_and_ar/screens/authentication/login_screen.dart';
 import 'package:interior_design_and_ar/components/loading_screen.dart';
 import 'package:interior_design_and_ar/screens/introduction/introduction_screen.dart';
 

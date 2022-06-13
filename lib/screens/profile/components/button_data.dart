@@ -26,17 +26,6 @@ List<ButtonData> listButtonData = [
       title: "Your rating",
       forcusScreen: const ListRatedProductsScreen()),
   ButtonData(
-      subScription: "Chat with our support team",
-      title: "Chat",
-      forcusScreen: Chat(
-        currentUserChat: UserChat(
-          id: AuthService.instance.getCurrentUser!.uid.toString(),
-          name: AuthService.instance.getCurrentUser!.displayName.toString(),
-          email: AuthService.instance.getCurrentUser!.email.toString(),
-          photoUrl: AuthService.instance.getCurrentUser!.photoURL.toString(),),
-        isUserNormalCustomer: true,
-      )),
-  ButtonData(
       subScription: "If you want to buy something",
       title: "Contact us",
       forcusScreen: const SendQuestionScreen()),

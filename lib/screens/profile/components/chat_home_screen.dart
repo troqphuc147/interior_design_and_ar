@@ -29,7 +29,8 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
   }
 
   void scrollListener() {
-    if (listScrollController.offset >= listScrollController.position.maxScrollExtent &&
+    if (listScrollController.offset >=
+            listScrollController.position.maxScrollExtent &&
         !listScrollController.position.outOfRange) {
       setState(() {
         _limit += _limitIncrement;
@@ -53,30 +54,28 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
         backgroundColor: kBackgroundColor,
         centerTitle: true,
         elevation: 8,
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back_ios,
-            color: kTextColor1,
-            size: getProportionateScreenWidth(24),
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
       ),
       body: Stack(
         children: <Widget>[
-          Positioned(child: isLoading
-              ?CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Colors.grey),)
-              :Container()),
+          Positioned(
+              child: isLoading
+                  ? CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(Colors.grey),
+                    )
+                  : Container()),
           Container(
             child: StreamBuilder<QuerySnapshot>(
-              stream: FirebaseFirestore.instance.collection('messages').limit(_limit).snapshots(),
-              builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+              stream: FirebaseFirestore.instance
+                  .collection('messages')
+                  .limit(_limit)
+                  .snapshots(),
+              builder: (BuildContext context,
+                  AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (snapshot.hasData) {
                   return ListView.builder(
                     padding: EdgeInsets.all(10.0),
-                    itemBuilder: (context, index) => buildItem(context, snapshot.data!.docs[index]),
+                    itemBuilder: (context, index) =>
+                        buildItem(context, snapshot.data!.docs[index]),
                     itemCount: snapshot.data!.docs.length,
                     controller: listScrollController,
                   );
@@ -108,35 +107,37 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
                 Material(
                   child: userChat.photoUrl.isNotEmpty
                       ? Image.network(
-                    userChat.photoUrl,
-                    fit: BoxFit.cover,
-                    width: 50.0,
-                    height: 50.0,
-                    loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
-                      if (loadingProgress == null) return child;
-                      return Container(
-                        width: 50,
-                        height: 50,
-                        child: Center(
-                          child: CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation<Color>(Colors.grey),
-                          ),
-                        ),
-                      );
-                    },
-                    errorBuilder: (context, object, stackTrace) {
-                      return Icon(
-                        Icons.account_circle,
-                        size: 50.0,
-                        color: Colors.grey[200],
-                      );
-                    },
-                  )
+                          userChat.photoUrl,
+                          fit: BoxFit.cover,
+                          width: 50.0,
+                          height: 50.0,
+                          loadingBuilder: (BuildContext context, Widget child,
+                              ImageChunkEvent? loadingProgress) {
+                            if (loadingProgress == null) return child;
+                            return Container(
+                              width: 50,
+                              height: 50,
+                              child: Center(
+                                child: CircularProgressIndicator(
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                      Colors.grey),
+                                ),
+                              ),
+                            );
+                          },
+                          errorBuilder: (context, object, stackTrace) {
+                            return Icon(
+                              Icons.account_circle,
+                              size: 50.0,
+                              color: Colors.grey[200],
+                            );
+                          },
+                        )
                       : Icon(
-                    Icons.account_circle,
-                    size: 50.0,
-                    color: Colors.grey,
-                  ),
+                          Icons.account_circle,
+                          size: 50.0,
+                          color: Colors.grey,
+                        ),
                   borderRadius: BorderRadius.all(Radius.circular(25.0)),
                   clipBehavior: Clip.hardEdge,
                 ),
@@ -175,12 +176,16 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => Chat(currentUserChat: userChat, isUserNormalCustomer: false,),
+                  builder: (context) => Chat(
+                    currentUserChat: userChat,
+                    isUserNormalCustomer: false,
+                  ),
                 ),
               );
             },
             style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all<Color>((Colors.grey[200])!),
+              backgroundColor:
+                  MaterialStateProperty.all<Color>((Colors.grey[200])!),
               shape: MaterialStateProperty.all<OutlinedBorder>(
                 RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(10)),

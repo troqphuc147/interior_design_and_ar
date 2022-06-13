@@ -226,6 +226,7 @@ class MainController extends GetxController with StateMixin {
   }
 
   Product getSeachedProduct(String name) {
+    name = name.toLowerCase();
     Product rs = Product(
         id: "",
         idCategory: "",

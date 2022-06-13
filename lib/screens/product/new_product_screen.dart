@@ -4,6 +4,7 @@ import 'package:interior_design_and_ar/controller/main_controller.dart';
 import 'package:interior_design_and_ar/screens/product/product_detail.dart';
 import 'package:interior_design_and_ar/size_config.dart';
 import '../../components/product_card.dart';
+import '../../components/search_bar.dart';
 import '../../constants.dart';
 import '../../core/models/product.dart';
 
@@ -16,28 +17,42 @@ class NewProductScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return homeController.obx(
       (state) {
-        return SafeArea(
-            child: Scaffold(
+        return Scaffold(
           appBar: AppBar(
             backgroundColor: kBackgroundColor,
-            title: Text(
-              "List New Product",
-              style: TextStyle(
-                  color: kTextColor1,
-                  fontWeight: FontWeight.w600,
-                  fontSize: getProportionateScreenWidth(18)),
-            ),
-            leading: IconButton(
-              icon: Icon(
-                Icons.arrow_back_ios,
-                color: kTextColor1,
-                size: getProportionateScreenWidth(24),
+            title: Center(
+              child: Container(
+                width: getProportionateScreenWidth(375),
+                height: getProportionateScreenWidth(58),
+                padding: EdgeInsets.only(
+                    top: getProportionateScreenWidth(5),
+                    bottom: getProportionateScreenWidth(3)),
+                child: Card(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12)),
+                    color: Colors.white,
+                    elevation: 3.5,
+                    child: SearchBar(
+                      width: 240,
+                      listOptions: [],
+                      listProduct: homeController.listManyNew,
+                    )),
               ),
-              onPressed: () {
-                Navigator.pop(context);
-              },
             ),
-            elevation: 0.0,
+            leading: Padding(
+              padding: const EdgeInsets.only(left: 20),
+              child: IconButton(
+                icon: Icon(
+                  Icons.arrow_back_ios,
+                  color: kTextColor1,
+                  size: getProportionateScreenWidth(24),
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ),
+            elevation: 0,
           ),
           body: SingleChildScrollView(
               padding: EdgeInsets.symmetric(
@@ -46,6 +61,26 @@ class NewProductScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Row(
+                      children: [
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Text(
+                            "New Products",
+                            style: TextStyle(
+                                color: kTextColor1,
+                                fontSize: getProportionateScreenWidth(34),
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: getProportionateScreenWidth(18),
+                  ),
                   Wrap(
                     crossAxisAlignment: WrapCrossAlignment.center,
                     alignment: WrapAlignment.spaceAround,
@@ -82,7 +117,7 @@ class NewProductScreen extends StatelessWidget {
                   ),
                 ],
               )),
-        ));
+        );
       },
     );
   }

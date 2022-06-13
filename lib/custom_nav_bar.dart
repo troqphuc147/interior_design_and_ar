@@ -7,6 +7,11 @@ import 'package:interior_design_and_ar/screens/home/home_sceen.dart';
 import 'package:interior_design_and_ar/screens/profile/profile_screen.dart';
 import 'package:interior_design_and_ar/size_config.dart';
 
+import 'core/service/auth.dart';
+import 'screens/profile/components/chat_home_screen.dart';
+import 'screens/profile/components/chat_screen.dart';
+import 'screens/profile/components/user_chat.dart';
+
 class CustomNavBar extends StatefulWidget {
   const CustomNavBar({Key? key}) : super(key: key);
 
@@ -22,6 +27,19 @@ class _CustomNavBarState extends State<CustomNavBar> {
     super.initState();
     listScreen.add(HomeScreen());
     listScreen.add(const FavoriteScreen());
+    listScreen.add((AuthService.instance.getCurrentUser!.uid.toString() ==
+            'SwjRT7M1V1MZJ7OO5ovsmSdvmt73')
+        ? ChatHomeScreen()
+        : Chat(
+            currentUserChat: UserChat(
+              id: AuthService.instance.getCurrentUser!.uid.toString(),
+              name: AuthService.instance.getCurrentUser!.displayName.toString(),
+              email: AuthService.instance.getCurrentUser!.email.toString(),
+              photoUrl:
+                  AuthService.instance.getCurrentUser!.photoURL.toString(),
+            ),
+            isUserNormalCustomer: true,
+          ));
     listScreen.add(const ProfileScreen());
   }
 
@@ -65,8 +83,21 @@ class _CustomNavBarState extends State<CustomNavBar> {
           BottomNavyBarItem(
               textAlign: TextAlign.center,
               icon: SvgPicture.asset(
-                "assets/icons/profile.svg",
+                "assets/icons/chat_icon.svg",
                 color: currentScreen == 2 ? kSelectedButtonColor : kTextColor1,
+                width: 30,
+              ),
+              title: const Text(
+                "Message",
+                style: TextStyle(fontSize: 18),
+              ),
+              activeColor: kSelectedButtonColor,
+              inactiveColor: kTextColor1),
+          BottomNavyBarItem(
+              textAlign: TextAlign.center,
+              icon: SvgPicture.asset(
+                "assets/icons/profile.svg",
+                color: currentScreen == 3 ? kSelectedButtonColor : kTextColor1,
               ),
               title: const Text(
                 "Profile",
@@ -80,6 +111,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
             currentScreen = value;
           });
         },
+        curve: Curves.linear,
       ),
     );
   }
