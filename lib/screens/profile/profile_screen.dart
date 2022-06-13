@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,6 +11,9 @@ import 'package:interior_design_and_ar/core/service/auth.dart';
 import 'package:interior_design_and_ar/main.dart';
 import 'package:interior_design_and_ar/screens/authentication/login_screen.dart';
 import 'package:interior_design_and_ar/screens/profile/components/button_data.dart';
+import 'package:interior_design_and_ar/screens/profile/components/chat_home_screen.dart';
+import 'package:interior_design_and_ar/screens/profile/components/chat_screen.dart';
+import 'package:interior_design_and_ar/screens/profile/components/user_chat.dart';
 import 'package:interior_design_and_ar/size_config.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -51,6 +55,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 children: [
                   CircleAvatar(
                       radius: getProportionateScreenWidth(32),
+                      backgroundColor: Colors.white,
                       backgroundImage: NetworkImage(AuthService
                           .instance.getCurrentUser!.photoURL
                           .toString())
@@ -114,11 +119,44 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     (Route<dynamic> route) => false);
                                 return;
                               }
-                              Navigator.push(
-                                  context,
-                                  PageTransition(
-                                      child: listButtonData[index].forcusScreen,
-                                      type: PageTransitionType.rightToLeft));
+                              // if index == chat
+                              if (index == 1) {
+                                checkUserChat();
+                                // if user is admin
+                                if (AuthService.instance.getCurrentUser!.uid.toString() == 'SwjRT7M1V1MZJ7OO5ovsmSdvmt73') {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ChatHomeScreen()
+                                    ),
+                                  );
+                                }
+                                // if user is normal user
+                                else {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            Chat(currentUserChat:
+                                              UserChat(
+                                                id: AuthService.instance.getCurrentUser!.uid.toString(),
+                                                name: AuthService.instance.getCurrentUser!.displayName.toString(),
+                                                email: AuthService.instance.getCurrentUser!.email.toString(),
+                                                photoUrl: AuthService.instance.getCurrentUser!.photoURL.toString(),),
+                                              isUserNormalCustomer: true,
+                                            )
+                                    ),
+                                  );
+                                }
+                              }
+                              else {
+                                Navigator.push(
+                                    context,
+                                    PageTransition(
+                                        child: listButtonData[index].forcusScreen,
+                                        type: PageTransitionType.rightToLeft));
+                              }
+
                             },
                             title: Padding(
                               padding: EdgeInsets.only(
@@ -165,4 +203,59 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
     );
   }
+
+  Future<bool> checkIfDocExists(String docId) async {
+    bool isExist = false;
+
+    try {
+      CollectionReference collectionRef2 = FirebaseFirestore.instance.collection('messages');
+      var doc2 = await collectionRef2.doc(AuthService.instance.getCurrentUser!.uid.toString()).get()
+          .then((value) async => {
+            isExist = value.exists,
+            if (value.exists == false) {
+              await collectionRef2.doc(AuthService.instance.getCurrentUser!.uid.toString())
+                  .set({
+                      'id': AuthService.instance.getCurrentUser!.uid.toString(),
+                      'name': AuthService.instance.getCurrentUser!.displayName.toString(),
+                      'email': AuthService.instance.getCurrentUser!.email.toString(),
+                      'photoUrl': AuthService.instance.getCurrentUser!.photoURL.toString(),
+              }),
+            }
+      });
+    } catch (e) {
+      print(e.toString());
+    }
+
+    return isExist;
+  }
+
+  void checkUserChat() async {
+    String currentUserId = AuthService.instance.getCurrentUser!.uid.toString();
+
+    String groupChatId = currentUserId;
+
+    final bool isChatExist = await checkIfDocExists(groupChatId);
+
+    if (isChatExist == false) {
+      var documentReference = FirebaseFirestore.instance
+          .collection('messages')
+          .doc(groupChatId)
+          .collection(adminUserChat.id)
+          .doc(DateTime.now().millisecondsSinceEpoch.toString());
+
+      FirebaseFirestore.instance.runTransaction((transaction) async {
+        await transaction.set(
+          documentReference,
+          {
+            'idFrom': adminUserChat.id,
+            'idTo': currentUserId,
+            'timestamp': DateTime.now().millisecondsSinceEpoch.toString(),
+            'content': 'Hi, what can we help you with?',
+            'type': 0
+          },
+        );
+      });
+    }
+  }
+
 }

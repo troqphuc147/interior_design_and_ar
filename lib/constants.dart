@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:interior_design_and_ar/screens/profile/components/user_chat.dart';
 import 'package:interior_design_and_ar/size_config.dart';
+
+final UserChat adminUserChat = UserChat(id: 'SwjRT7M1V1MZJ7OO5ovsmSdvmt73', name: 'ARFurni', email: 'arfurni101@gmail.com', photoUrl: 'https://lh3.googleusercontent.com/a-/AOh14Gjn8lS0mOhJ_oYu3HPAIy0_kHD0QoVPykARsnJw=s96-c');
 
 const kEmailNullError = "Email can't empty";
 const kPasswordNullError = "Password can't empty";
