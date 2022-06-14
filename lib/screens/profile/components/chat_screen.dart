@@ -100,9 +100,73 @@ class ChatScreenState extends State<ChatScreen> {
     }
   }
 
+  Future<bool> checkIfDocExists(String docId) async {
+    bool isExist = false;
+
+    try {
+      CollectionReference collectionRef2 =
+          FirebaseFirestore.instance.collection('messages');
+      var doc2 = await collectionRef2
+          .doc(AuthService.instance.getCurrentUser!.uid.toString())
+          .get()
+          .then((value) async => {
+                isExist = value.exists,
+                if (value.exists == false)
+                  {
+                    await collectionRef2
+                        .doc(
+                            AuthService.instance.getCurrentUser!.uid.toString())
+                        .set({
+                      'id': AuthService.instance.getCurrentUser!.uid.toString(),
+                      'name': AuthService.instance.getCurrentUser!.displayName
+                          .toString(),
+                      'email':
+                          AuthService.instance.getCurrentUser!.email.toString(),
+                      'photoUrl': AuthService.instance.getCurrentUser!.photoURL
+                          .toString(),
+                    }),
+                  }
+              });
+    } catch (e) {
+      print(e.toString());
+    }
+
+    return isExist;
+  }
+
+  void checkUserChat() async {
+    String currentUserId = AuthService.instance.getCurrentUser!.uid.toString();
+
+    String groupChatId = currentUserId;
+
+    final bool isChatExist = await checkIfDocExists(groupChatId);
+
+    if (isChatExist == false) {
+      var documentReference = FirebaseFirestore.instance
+          .collection('messages')
+          .doc(groupChatId)
+          .collection(adminUserChat.id)
+          .doc(DateTime.now().millisecondsSinceEpoch.toString());
+
+      FirebaseFirestore.instance.runTransaction((transaction) async {
+        await transaction.set(
+          documentReference,
+          {
+            'idFrom': adminUserChat.id,
+            'idTo': currentUserId,
+            'timestamp': DateTime.now().millisecondsSinceEpoch.toString(),
+            'content': 'Hi, what can we help you with?',
+            'type': 0
+          },
+        );
+      });
+    }
+  }
+
   @override
   void initState() {
     super.initState();
+    checkUserChat();
     focusNode.addListener(onFocusChange);
     listScrollController.addListener(_scrollListener);
     readLocal();

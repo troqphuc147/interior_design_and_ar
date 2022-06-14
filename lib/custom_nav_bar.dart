@@ -111,7 +111,6 @@ class _CustomNavBarState extends State<CustomNavBar> {
             currentScreen = value;
           });
         },
-        curve: Curves.linear,
       ),
     );
   }
