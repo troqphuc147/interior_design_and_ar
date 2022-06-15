@@ -449,7 +449,7 @@ class _ProductDetailState extends State<ProductDetail> {
                                         //width: MediaQuery.of(context).size.width ,
                                         backgroundColor: kSelectedButtonColor,
                                         content: Text(
-                                          "Thank you for your rating !",
+                                          "Thank you for rating !",
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontSize: 18,
@@ -507,7 +507,7 @@ class _ProductDetailState extends State<ProductDetail> {
                                 ),
                                 const Spacer(),
                                 DefaultButton(
-                                    content: "Oke",
+                                    content: "Back",
                                     onPressed: () {
                                       Navigator.pop(context);
                                     }),
