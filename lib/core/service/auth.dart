@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthService {
@@ -121,6 +122,50 @@ class AuthService {
       return e.code;
     } on NoSuchMethodError catch (e) {
       return e;
+    }
+  }
+
+  Future signInWithFacebookVer2() async {
+    try {
+      final facebookLogin = FacebookLogin();
+      facebookLogin.loginBehavior = FacebookLoginBehavior.webViewOnly;
+      final result = await facebookLogin.logIn(['email']);
+
+      switch (result.status) {
+        case FacebookLoginStatus.loggedIn:
+          final credential =
+              FacebookAuthProvider.credential(result.accessToken.token);
+          await _auth.signInWithCredential(credential);
+          break;
+        case FacebookLoginStatus.cancelledByUser:
+          break;
+        case FacebookLoginStatus.error:
+          break;
+      }
+
+      return 'login-success';
+    } on FirebaseAuthException catch (e) {
+      String error = '';
+      switch (e.code) {
+        case 'account-exists-with-different-credential':
+          error =
+              "This account is linked with another provider! Try another provider!";
+          break;
+        case 'email-already-in-use':
+          error = "Your email address has been registered.";
+          break;
+        case 'invalid-credential':
+          error = "Your credential is malformed or has expired.";
+          break;
+        case 'user-disabled':
+          error = "This user has been disable.";
+          break;
+        default:
+          error = e.code;
+      }
+      return error;
+    } on PlatformException catch (e) {
+      return e.code;
     }
   }
 }

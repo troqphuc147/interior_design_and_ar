@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:interior_design_and_ar/core/service/auth.dart';
 import 'package:interior_design_and_ar/size_config.dart';
 
+import '../../components/custom_alert.dart';
 import '../../constants.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -20,6 +21,25 @@ class _LoginScreenState extends State<LoginScreen> {
       isLoading = true;
     });
     var res = await AuthService.instance.signInWithGoogleAccount();
+    // giá trị trả về code của lỗi khi xuất hiện lỗi khi đăng nhập
+    // trả về login-success khi đăng nhập thành công
+    if (res != null && res != 'login-success') {
+      print("error");
+    }
+    // tắt màn hình loading
+    if (mounted) {
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
+
+  Future signInWithFacebookAccount() async {
+    // hiển thị màn hình loading
+    setState(() {
+      isLoading = true;
+    });
+    var res = await AuthService.instance.signInWithFacebookVer2();
     // giá trị trả về code của lỗi khi xuất hiện lỗi khi đăng nhập
     // trả về login-success khi đăng nhập thành công
     if (res != null && res != 'login-success') {
@@ -110,7 +130,24 @@ class _LoginScreenState extends State<LoginScreen> {
                       width: getProportionateScreenWidth(90),
                       height: getProportionateScreenWidth(72),
                       child: TextButton(
-                        onPressed: () {},
+                        onPressed: () async {
+                          try {
+                            await signInWithFacebookAccount();
+                          } catch (e) {
+                            showDialog(
+                              context: context,
+                              barrierDismissible:
+                                  false, // user must tap button!
+                              barrierColor: Colors.redAccent.withOpacity(0.45),
+                              builder: (BuildContext context) {
+                                return const CustomAlert(
+                                  title: "Error",
+                                  content: "Somthinge wrong",
+                                );
+                              },
+                            );
+                          }
+                        },
                         style: TextButton.styleFrom(
                           backgroundColor: kBackgroundChipColor,
                           shape: RoundedRectangleBorder(

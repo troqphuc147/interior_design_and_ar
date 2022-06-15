@@ -74,7 +74,7 @@ dependencies {
     implementation 'com.google.ar.sceneform.ux:sceneform-ux:1.8.0'
     // Alternatively, use ArSceneView without the UX dependency.
     implementation 'com.google.ar.sceneform:core:1.8.0'
-    //implementation 'com.facebook.android:facebook-login:[8.1)'
+    implementation 'com.facebook.android:facebook-login:latest.release'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.google.firebase:firebase-appcheck-safetynet:16.0.0-beta06'
 
