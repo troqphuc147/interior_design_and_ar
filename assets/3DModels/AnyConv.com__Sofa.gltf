@@ -1,0 +1,271 @@
+{
+    "asset": {
+        "version": "2.0",
+        "generator": "Open Asset Import Library (assimp v5.0.5eb040c7)"
+    },
+    "accessors": [
+        {
+            "bufferView": 0,
+            "byteOffset": 0,
+            "componentType": 5126,
+            "count": 1033,
+            "type": "VEC3",
+            "max": [
+                103.25430297851563,
+                12.708600044250489,
+                41.60609817504883
+            ],
+            "min": [
+                -102.57769775390625,
+                2.5195000171661379,
+                -22.827600479125978
+            ]
+        },
+        {
+            "bufferView": 1,
+            "byteOffset": 0,
+            "componentType": 5126,
+            "count": 1033,
+            "type": "VEC3",
+            "max": [
+                1.0,
+                1.0,
+                0.9899675250053406
+            ],
+            "min": [
+                -0.9899675250053406,
+                -1.0,
+                -0.9899675250053406
+            ]
+        },
+        {
+            "bufferView": 2,
+            "byteOffset": 0,
+            "componentType": 5125,
+            "count": 6144,
+            "type": "SCALAR",
+            "max": [
+                1032
+            ],
+            "min": [
+                0
+            ]
+        },
+        {
+            "bufferView": 3,
+            "byteOffset": 0,
+            "componentType": 5126,
+            "count": 303660,
+            "type": "VEC3",
+            "max": [
+                119.57620239257813,
+                96.04949951171875,
+                45.39830017089844
+            ],
+            "min": [
+                -119.28389739990235,
+                12.191800117492676,
+                -49.58300018310547
+            ]
+        },
+        {
+            "bufferView": 4,
+            "byteOffset": 0,
+            "componentType": 5126,
+            "count": 303660,
+            "type": "VEC3",
+            "max": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "min": [
+                -1.0,
+                -1.0,
+                -1.0
+            ]
+        },
+        {
+            "bufferView": 5,
+            "byteOffset": 0,
+            "componentType": 5126,
+            "count": 303660,
+            "type": "VEC3",
+            "max": [
+                0.9980000257492065,
+                0.9980000257492065,
+                786.385986328125
+            ],
+            "min": [
+                0.0020000000949949028,
+                0.0020999908447265627,
+                -786.385986328125
+            ]
+        },
+        {
+            "bufferView": 6,
+            "byteOffset": 0,
+            "componentType": 5125,
+            "count": 1514148,
+            "type": "SCALAR",
+            "max": [
+                303659
+            ],
+            "min": [
+                0
+            ]
+        }
+    ],
+    "buffers": [
+        {
+            "byteLength": 17037720,
+            "uri": "result.bin"
+        }
+    ],
+    "bufferViews": [
+        {
+            "buffer": 0,
+            "byteOffset": 0,
+            "byteLength": 12396,
+            "target": 34962
+        },
+        {
+            "buffer": 0,
+            "byteOffset": 12396,
+            "byteLength": 12396,
+            "target": 34962
+        },
+        {
+            "buffer": 0,
+            "byteOffset": 24792,
+            "byteLength": 24576,
+            "target": 34963
+        },
+        {
+            "buffer": 0,
+            "byteOffset": 49368,
+            "byteLength": 3643920,
+            "target": 34962
+        },
+        {
+            "buffer": 0,
+            "byteOffset": 3693288,
+            "byteLength": 3643920,
+            "target": 34962
+        },
+        {
+            "buffer": 0,
+            "byteOffset": 7337208,
+            "byteLength": 3643920,
+            "target": 34962
+        },
+        {
+            "buffer": 0,
+            "byteOffset": 10981128,
+            "byteLength": 6056592,
+            "target": 34963
+        }
+    ],
+    "materials": [
+        {
+            "name": "DefaultMaterial",
+            "pbrMetallicRoughness": {
+                "baseColorFactor": [
+                    0.6000000238418579,
+                    0.6000000238418579,
+                    0.6000000238418579,
+                    1.0
+                ],
+                "metallicFactor": 0.0
+            }
+        },
+        {
+            "name": "03___Default",
+            "pbrMetallicRoughness": {
+                "baseColorFactor": [
+                    0.6000000238418579,
+                    0.6000000238418579,
+                    0.6000000238418579,
+                    1.0
+                ],
+                "metallicFactor": 0.0
+            }
+        },
+        {
+            "name": "02___Default",
+            "pbrMetallicRoughness": {
+                "baseColorFactor": [
+                    0.6000000238418579,
+                    0.6000000238418579,
+                    0.6000000238418579,
+                    1.0
+                ],
+                "metallicFactor": 0.0
+            }
+        }
+    ],
+    "meshes": [
+        {
+            "name": "LEGS",
+            "primitives": [
+                {
+                    "mode": 4,
+                    "material": 1,
+                    "indices": 2,
+                    "attributes": {
+                        "POSITION": 0,
+                        "NORMAL": 1
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Object008",
+            "primitives": [
+                {
+                    "mode": 4,
+                    "material": 2,
+                    "indices": 6,
+                    "attributes": {
+                        "POSITION": 3,
+                        "NORMAL": 4,
+                        "TEXCOORD_0": 5
+                    }
+                }
+            ]
+        }
+    ],
+    "nodes": [
+        {
+            "name": "input.obj",
+            "children": [
+                1,
+                2,
+                3,
+                4
+            ]
+        },
+        {
+            "name": "LEGS"
+        },
+        {
+            "name": "LEGS_node",
+            "mesh": 0
+        },
+        {
+            "name": "Object008"
+        },
+        {
+            "name": "Object008_node",
+            "mesh": 1
+        }
+    ],
+    "scenes": [
+        {
+            "nodes": [
+                0
+            ]
+        }
+    ],
+    "scene": 0
+}
