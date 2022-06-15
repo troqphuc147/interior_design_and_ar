@@ -34,14 +34,14 @@
 - [Giao diện](#giao-diện)
 - [Tính năng](#tính-năng)
     - [Xác thực người dùng](#xác-thực-người-dùng)
-    - [Xem danh sách các sản phẩm](#xem-danh-sach-cac-san-pham)
-    - [Xem thông tin chi tiết của sản phẩm](#xem-thong-tin-chi-tiet-cua-san-pham)
-    - [Đánh giá sản phẩm](#danh-gia-san-pham)
-    - [Thêm sản phẩm vào danh sách yêu thích của bạn](#them-san-pham-vao-danh-sach-yeu-thich-cua-ban)
-    - [Xem sản phẩm qua camera](#xem-san-pham-qua-camera)
-    - [Nhắn tin với nhân viên tư vấn](#nhan-tin-voi-nhan-vien-tu-van)
-    - [Xem danh sách các sản phẩm đã rating](#xem-danh-sach-cac-san-pham-da-rating)
-    - [Phản hồi về sản phẩm với nhà phát hành](#phan-hoi-ve-san-pham-voi-nha-phat-trien)
+    - [Xem danh sách các sản phẩm](#xem-danh-sách-các-sản-phẩm)
+    - [Xem thông tin chi tiết của sản phẩm](#xem-thông-tin-chi-tiết-của-sản-phẩm)
+    - [Đánh giá sản phẩm](#đánh-giá-sản-phẩm)
+    - [Thêm sản phẩm vào danh sách yêu thích của bạn](#thêm-sản-phẩm-vào-danh-sách-yêu-thích-của-bạn)
+    - [Xem sản phẩm qua camera](#xem-sản-phẩm-qua-camera)
+    - [Nhắn tin với nhân viên tư vấn](#nhắn-tin-với-nhân-viên-tư-vấn)
+    - [Xem danh sách các sản phẩm đã đánh giá](#xem-danh-sách-các-sản-phẩm-đã-đánh-giá)
+    - [Phản hồi về sản phẩm với nhà phát hành](#phản-hồi-về-sản-phẩm-với-nhà-phát-hành)
 - [Công nghệ](#công-nghệ)
 - [Nhóm](#nhóm)
 - [Đóng góp](#đóng-góp)
@@ -126,7 +126,7 @@ Sau đó mở công cụ phát triển (development tool) và chạy ứng dụn
 * Khi người dùng ở giao diện thông tin chi tiết của sản phẩm, hãy bấm vào "View on camera" và sau đó làm theo hướng dẫn để xm được sản phẩm.
 ### Nhắn tin với nhân viên tư vấn.
 * Người dùng có thể nhắn tin hỏi trực tiếp nhân viên tư vấn để nhận đươc sự giúp đỡ kịp thời và hợp lý, rút ngắn thời gian tìm kiếm sản phẩm.
-### Xem danh sách đã rating 
+### Xem danh sách các sản phẩm đã đánh giá
 * Người dùng có thể xem lại danh sách các sản phẩm mình đã rating 
 ### Phản hồi về sản phẩm với nhà phát hành
 * Người dùng có thể gửi mail với người quản lý sản phẩm thông qua "Contact us".
