@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:interior_design_and_ar/controller/main_controller.dart';
+import 'package:interior_design_and_ar/screens/product/loading_product_screen.dart';
 import 'package:interior_design_and_ar/screens/product/product_detail.dart';
 import 'package:interior_design_and_ar/size_config.dart';
 import '../../components/product_card.dart';
@@ -123,6 +124,7 @@ class _PopularProductScreenState extends State<PopularProductScreen> {
               )),
         );
       },
+      onLoading: const LoadingProductScreen(category: "Popular Products"),
     );
   }
 }

@@ -7,6 +7,7 @@ import '../../components/product_card.dart';
 import '../../components/search_bar.dart';
 import '../../constants.dart';
 import '../../core/models/product.dart';
+import 'loading_product_screen.dart';
 
 class NewProductScreen extends StatelessWidget {
   NewProductScreen({Key? key}) : super(key: key);
@@ -119,6 +120,7 @@ class NewProductScreen extends StatelessWidget {
               )),
         );
       },
+      onLoading: const LoadingProductScreen(category: "New Products"),
     );
   }
 }
