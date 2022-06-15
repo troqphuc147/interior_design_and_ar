@@ -58,7 +58,7 @@ class ListRatedProductsScreen extends StatelessWidget {
                     0,
                     getProportionateScreenWidth(20)),
                 child: Text(
-                  'Your All Ratings',
+                  'All Your Ratings',
                   style: TextStyle(
                       fontSize: getProportionateScreenWidth(34),
                       color: kTextColor1,

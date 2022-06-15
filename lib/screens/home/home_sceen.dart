@@ -60,7 +60,7 @@ class HomeScreen extends StatelessWidget {
                         height: getProportionateScreenWidth(15),
                       ),
                       Text(
-                        'Best Furniture',
+                        'Modern Furniture',
                         style: TextStyle(
                             fontSize: getProportionateScreenWidth(34),
                             color: kTextColor1,

@@ -22,8 +22,8 @@ class ButtonData {
 
 List<ButtonData> listButtonData = [
   ButtonData(
-      subScription: "Your rating for a lot of product",
-      title: "Your rating",
+      subScription: "Products you have rated",
+      title: "Your ratings",
       forcusScreen: const ListRatedProductsScreen()),
   ButtonData(
       subScription: "If you want to buy something",
@@ -38,7 +38,7 @@ List<ButtonData> listButtonData = [
       title: "About us",
       forcusScreen: const AboutScreen()),
   ButtonData(
-      subScription: "Your can sign in with other account",
+      subScription: "Your can sign in with another account",
       title: "Sign out",
       forcusScreen: const LoginScreen())
 ];

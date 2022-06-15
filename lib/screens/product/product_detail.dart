@@ -287,7 +287,7 @@ class _ProductDetailState extends State<ProductDetail> {
                                         show(context);
                                       },
                                       child: Text(
-                                        'Rating for product',
+                                        'Rate this product',
                                         style: TextStyle(
                                           color: kTextColor2,
                                           fontSize:
@@ -418,7 +418,7 @@ class _ProductDetailState extends State<ProductDetail> {
                                 ),
                                 const Spacer(),
                                 DefaultButton(
-                                    content: "Rating",
+                                    content: "Rate Product",
                                     onPressed: () async {
                                       setState(() {
                                         widget.product.rating = (((double.parse(
@@ -449,7 +449,7 @@ class _ProductDetailState extends State<ProductDetail> {
                                         //width: MediaQuery.of(context).size.width ,
                                         backgroundColor: kSelectedButtonColor,
                                         content: Text(
-                                          "Cảm ơn bạn đã đánh giá sản phẩm",
+                                          "Thank you for your rating !",
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontSize: 18,

@@ -69,7 +69,7 @@ class _SendQuestionScreenState extends State<SendQuestionScreen> {
               } else {
                 var result = await sendMail();
                 if (result == 200) {
-                  _showAlertDialog('Sent email!', 'Success');
+                  _showAlertDialog('Email sent successfully!', 'Success');
                 }
               }
               setState(() {

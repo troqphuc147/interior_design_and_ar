@@ -8,14 +8,14 @@ class Slide {
 List<Slide> listSlide = [
   Slide(
       title: "ARFurni",
-      content: "We will help you choose\nthe best furniture for your house",
+      content: "We help you choose\nthe best furniture for your house",
       imagePath: "assets/images/white_logo.png"),
   Slide(
       title: "Visually",
-      content: "View products with your camera\n",
+      content: "Easily view products on your camera\n",
       imagePath: "assets/images/view_ar.png"),
   Slide(
       title: "Quality",
-      content: "Decoration your house with them\n",
+      content: "Choose your favorite top quality products\n",
       imagePath: "assets/images/after_buy.jpg")
 ];
