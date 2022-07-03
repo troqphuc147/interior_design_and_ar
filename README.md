@@ -46,6 +46,7 @@
 - [Nhóm](#nhóm)
 - [Đóng góp](#đóng-góp)
 - [Hướng phát triển](#hướng-phát-triển)
+- [Demo](#demo)
 - [Giấy phép](#giấy-phép)
 
 ## Giới thiệu
@@ -182,6 +183,10 @@ git push origin feature/super-feature
 -	Tối ưu hóa code để tăng tốc độ xử lý
 -	Sưu tầm, thiết kế thêm các mô hình sản phẩm nội thất
 
+## Demo
+
+Xem demo tại [đây](https://drive.google.com/file/d/1tFW7lVzM7XJXccYmztcFnHc4IqHO-sI7/view?usp=sharing)
+ 
 ## Giấy phép
 
 ```
